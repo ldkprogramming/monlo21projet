@@ -29,7 +29,7 @@ Pile::Pile(PileType type){
     }
     json data = json::parse(f);
     for(auto card : data["cards"]){
-
+        int id = card["card_id"].template get<int>();
         int points = card["points"].template get<int>();
         int crowns = card["crowns"].template get<int>();
 
@@ -54,7 +54,7 @@ Pile::Pile(PileType type){
         Skill skill1 = toSkill(card["skill1"].template get<std::string>());
         Skill skill2 = toSkill(card["skill1"].template get<std::string>());
 
-        cards.emplace_back(points, crowns, costs, bonuses, skill1, skill2);
+        cards.emplace_back(id, points, crowns, costs, bonuses, skill1, skill2);
     }
     // penser a rajouter le cas des cartes royales ?
     // rajouter les shuffle !!

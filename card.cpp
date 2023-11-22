@@ -40,7 +40,9 @@ Skill toSkill(std::string s){
 }
 
 std::ostream& operator<<(std::ostream& f, const Card& c){
-    f << c.crowns << " " << c.points;
+    f << "card : " << c.cardId << '\n';
+    f << "skill1 : " << toString(c.skill1) << '\n';
+    f << "skill2 : " << toString(c.skill2) << '\n';
     return f;
 }
 

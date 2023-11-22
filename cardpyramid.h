@@ -41,6 +41,10 @@ public:
     const std::vector<Card> &getRoyalCards() const;
 
     int getMaxNumberOfRoyalCards() const;
+
+    const Card& distributeCard(int pileNumber, int cardNumber);
+
+    friend std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid);
 };
 
 

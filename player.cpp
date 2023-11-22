@@ -84,3 +84,38 @@ const std::map<CoinColor, int> &Player::getBonusesPerColor() const {
 const std::map<CoinColor, int> &Player::getPointsPerColor() const {
     return pointsPerColor;
 }
+
+void Player::addCoin(const Coin &c) {
+    coins.push_back(c);
+    coinsPerColor[c.getColor()] += 1;
+}
+
+void Player::reserveCard(const Card &c) {
+    reservedCards.push_back(c);
+}
+
+const std::string &Player::getName() const {
+    return name;
+}
+
+std::ostream& operator<<(std::ostream &f, const Player& p){
+    f << "Player \n";
+    f << "name : " << p.getName() << "\n";
+    f << "---- hand ----- \n";
+    for (auto card : p.hand){
+        f << card;
+    }
+    f << "--------\n";
+    f << "---- reserved ----- \n";
+    for (auto card : p.reservedCards){
+        f << card;
+    }
+    f << "--------\n";
+    f << "---- coins ----- \n";
+    for (auto coin : p.coins){
+        f << coin << " ";
+    }
+
+    f << "\n--------\n";
+    return f;
+}

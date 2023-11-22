@@ -44,7 +44,14 @@ public:
     const std::map<CoinColor, int> &getBonusesPerColor() const;
 
     const std::map<CoinColor, int> &getPointsPerColor() const;
+
+    void addCoin(const Coin& c);
+    void reserveCard(const Card& c);
+
+    const std::string &getName() const;
+    friend std::ostream& operator<<(std::ostream &f, const Player& p);
 };
+
 
 
 #endif //MONLO21PROJET_PLAYER_H

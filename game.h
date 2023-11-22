@@ -36,10 +36,17 @@ public:
     const Coinboard &getCoinBoard() const;
     int getPrivileges() const;
     void setPrivileges(int privileges);
+    friend class Controller;
 
     Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name){}
 
     WinConditions getWinConditions(){ return winConditions; }
+
+    const Player &getPlayer1() const;
+
+    const Player &getPlayer2() const;
+
+    const Pile &getRoyalPile() const;
 
     const Pile &getPile1() const;
 

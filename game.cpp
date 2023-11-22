@@ -35,3 +35,15 @@ const Pile &Game::getPile2() const {
 const Pile &Game::getPile3() const {
     return pile3;
 }
+
+const Player &Game::getPlayer1() const {
+    return player1;
+}
+
+const Player &Game::getPlayer2() const {
+    return player2;
+}
+
+const Pile &Game::getRoyalPile() const {
+    return royalPile;
+}

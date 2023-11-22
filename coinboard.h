@@ -40,6 +40,15 @@ public:
     bool isEmpty() const;
     bool containsOnly(CoinColor color) const;
     bool containsAtLeastOne(CoinColor color) const;
+    Coin getCoin(int x, int y) const {
+        /*
+         * ajouter les verifs de validite
+         */
+        return board[x][y];
+    }
+    void setCoin(int x, int y, CoinColor c){
+        board[x][y] = Coin(c);
+    }
 
 };
 

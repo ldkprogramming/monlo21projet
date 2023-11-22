@@ -5,6 +5,7 @@
 #include "controller.h"
 #include "coin.h"
 #include "algorithm"
+#include <cstdlib>
 
 bool Controller::checkIfPlayerWins(Game &game, Player &player) {
     int winTotalPoints = game.getWinConditions().getTotalPoints();
@@ -42,22 +43,31 @@ std::vector<CompulsoryActions> Controller::getValidCompulsoryActions(const Game 
     }
 
     // On verifie si le joueur peut acheter au moins une carte
+    bool hasBeenAdded = false;
     for (auto card : game.getPyramid().getLevel1Cards()){
         if (player.canBuy(card)){
             result.push_back(CompulsoryActions::BuyCard);
+            hasBeenAdded = true;
             break;
         }
     }
-    for (auto card : game.getPyramid().getLevel2Cards()){
-        if (player.canBuy(card)){
-            result.push_back(CompulsoryActions::BuyCard);
-            break;
+    if (not hasBeenAdded){
+        for (auto card : game.getPyramid().getLevel2Cards()){
+            if (player.canBuy(card)){
+                result.push_back(CompulsoryActions::BuyCard);
+                hasBeenAdded = true;
+                break;
+            }
         }
     }
-    for (auto card : game.getPyramid().getLevel3Cards()){
-        if (player.canBuy(card)){
-            result.push_back(CompulsoryActions::BuyCard);
-            break;
+
+    if (not hasBeenAdded) {
+        for (auto card: game.getPyramid().getLevel3Cards()) {
+            if (player.canBuy(card)) {
+                result.push_back(CompulsoryActions::BuyCard);
+
+                break;
+            }
         }
     }
     return result;
@@ -72,10 +82,12 @@ bool Controller::applyCardSkills(Game &game, Player &cardOwner, Player& opponent
 
     // PlayAgain, Bonus, TakeCoin, TakePrivilege, RobCoin, Empty
     switch (skill1){
-        case Skill::PlayAgain:
-            playAgain = true;
-            break;
-        case Skill::Bonus:
+        case Skill::PlayAgain: {
+            return true;
+        }
+
+
+        case Skill::Bonus: {
             // obtenir les choix valides de couleur
             std::vector<CoinColor> validColorChoices;
             for (auto pair : cardOwner.getBonusesPerColor()){
@@ -94,10 +106,66 @@ bool Controller::applyCardSkills(Game &game, Player &cardOwner, Player& opponent
             }
             card.incrementBonus(toCoinColor(choice), 1);
             break;
-
-
+        }
     }
-
-
-
 }
+
+void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryActions action) {
+    // renvoie true si le joueur doit jouer un autre tour
+    switch(action){
+        case CompulsoryActions::TakeCoins:{
+            int coinNumber = 0;
+            std::vector<std::pair<int, int>> coinChoices;
+            while (true) {
+                std::cout << "Combien de Jetons ?";
+                std::cin >> coinNumber;
+
+                /* faudra bien sur ajouter les verifications
+                 * => si le jeton est empty, si c'est un or
+                 * les privileges pour 2 perle ou 3 memes jetons, etc.
+                 */
+
+
+                for (int i = 0; i< coinNumber; i++) {
+                    int x,y;
+                    std::cout << "X ?";
+                    std::cin >> x;
+                    std::cout << "Y ?";
+                    std::cin >> y;
+                    coinChoices.push_back(std::pair<int, int>(x, y));
+                }
+
+                /*
+                 * faudra verifier si c'est aligne !
+                 */
+
+                for (auto coordinates : coinChoices) {
+                    player.addCoin(game.getCoinBoard().getCoin(coordinates.first, coordinates.second));
+                    game.coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+                }
+
+                break;
+            }
+
+
+        }
+        case CompulsoryActions::ReserveCard:{
+            /* ajouter les verifs
+             *
+             */
+            int pileNumber = 0;
+            std::cout << "Quelle pioche ?";
+            std::cin >> pileNumber;
+
+            int cardNumber = 0;
+            std::cout << "Quelle carte ?";
+            std::cin >> cardNumber;
+
+            player.reserveCard(game.pyramid.distributeCard(pileNumber, cardNumber));
+        }
+        case CompulsoryActions::BuyCard:{
+            // faire vrm attention pour le fait de rejouer un tour
+        }
+    }
+}
+

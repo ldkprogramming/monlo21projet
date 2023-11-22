@@ -59,3 +59,53 @@ const std::vector<Card> &CardPyramid::getRoyalCards() const {
 int CardPyramid::getMaxNumberOfRoyalCards() const {
     return maxNumberOfRoyalCards;
 }
+
+const Card& CardPyramid::distributeCard(int pileNumber, int cardNumber){
+    /*
+     * ajouter les verifs!
+     */
+    switch (pileNumber){
+        case 1:{
+            Card result = level1Cards[cardNumber];
+            level1Cards.erase(level1Cards.begin()+cardNumber-1);
+            return result;
+        }
+        case 2:{
+            Card result = level2Cards[cardNumber];
+            level2Cards.erase(level2Cards.begin()+cardNumber-1);
+            return result;
+        }
+        case 3:{
+            Card result = level3Cards[cardNumber];
+            level3Cards.erase(level3Cards.begin()+cardNumber-1);
+            return result;
+        }
+    }
+}
+
+std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid){
+    f << "----- Pile1 ------\n";
+    for (auto card : cardPyramid.level1Cards){
+        f << card << '\n';
+    }
+    f << "----------\n";
+
+    f << "----- Pile2 ------\n";
+    for (auto card : cardPyramid.level2Cards){
+        f << card << '\n';
+    }
+    f << "----------\n";
+
+    f << "----- Pile3 ------\n";
+    for (auto card : cardPyramid.level3Cards){
+        f << card << '\n';
+    }
+    f << "----------\n";
+
+    f << "----- RoyalPile ------\n";
+    for (auto card : cardPyramid.royalCards){
+        f << card << '\n';
+    }
+    f << "----------\n";
+    return f;
+}

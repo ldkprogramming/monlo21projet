@@ -21,6 +21,7 @@ Skill toSkill(std::string s);
 
 class Card {
 private:
+    int cardId = 0;
     int points = 0;
     int crowns = 0;
     std::map<CoinColor, int> costs;
@@ -31,7 +32,8 @@ private:
 
 public:
 
-    Card(int p, int c, std::map<CoinColor, int> co, std::map<CoinColor, int> b, Skill s1, Skill s2){
+    Card(int cId, int p, int c, std::map<CoinColor, int> co, std::map<CoinColor, int> b, Skill s1, Skill s2){
+        cardId = cId;
         points = p;
         crowns = c;
         costs = co;
@@ -53,8 +55,6 @@ public:
     void incrementBonus(CoinColor c, int amount);
 
 };
-
-
 
 
 #endif //MONLO21PROJET_CARD_H
