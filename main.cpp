@@ -7,8 +7,7 @@ using json = nlohmann::json;
 
 
 int main() {
-    Pile test = Pile(PileType::One);
-    std::cout << test;
+
 
     return 0;
 }

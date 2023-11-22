@@ -16,10 +16,10 @@ private:
     std::vector<Card> hand;
     std::vector<Card> reservedCards;
     std::vector<Coin> coins;
-
+    int privileges = 0;
 
 public:
-
+    Player(std::string name){name = name;}
 };
 
 

@@ -56,6 +56,7 @@ Coin Coinbag::distributeCoin(){
     if (coins.empty()){
         return Coin(CoinColor::Empty);
     }
+    shuffle();
     Coin coin = coins.back();
     coins.pop_back();
     return coin;
