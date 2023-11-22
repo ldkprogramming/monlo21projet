@@ -3,19 +3,27 @@
 //
 
 #include "cardpyramid.h"
+#include "pile.h"
 
-const Pile &CardPyramid::getPile1() const {
-    return pile1;
-}
-
-const Pile &CardPyramid::getPile2() const {
-    return pile2;
-}
-
-const Pile &CardPyramid::getPile3() const {
-    return pile3;
-}
-
-const Pile &CardPyramid::getRoyalPile() const {
-    return royalPile;
+CardPyramid::CardPyramid(Pile &pile1, Pile &pile2, Pile &pile3, Pile &royalPile) {
+    for (int i = 0; i < maxNumberOfLevel1Cards; i++){
+        if (not (pile1.isEmpty())) {
+            level1Cards.push_back(pile1.distributeCard());
+        }
+    }
+    for (int i = 0; i < maxNumberOfLevel2Cards; i++){
+        if (not (pile2.isEmpty())) {
+            level2Cards.push_back(pile2.distributeCard());
+        }
+    }
+    for (int i = 0; i < maxNumberOfLevel3Cards; i++){
+        if (not (pile3.isEmpty())) {
+            level3Cards.push_back(pile3.distributeCard());
+        }
+    }
+    for (int i = 0; i < maxNumberOfRoyalCards; i++){
+        if (not (royalPile.isEmpty())) {
+            royalCards.push_back(royalPile.distributeCard());
+        }
+    }
 }

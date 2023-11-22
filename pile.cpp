@@ -57,6 +57,7 @@ Pile::Pile(PileType type){
         cards.emplace_back(points, crowns, costs, bonuses, skill1, skill2);
     }
     // penser a rajouter le cas des cartes royales ?
+    // rajouter les shuffle !!
 }
 
 std::ostream& operator<<(std::ostream& f, const Pile& p){
@@ -64,4 +65,14 @@ std::ostream& operator<<(std::ostream& f, const Pile& p){
         f << card << " => ";
     }
     return f;
+}
+
+Card Pile::distributeCard(){
+    // faudra modifier ca
+    if (isEmpty()){
+        throw MATH_ERREXCEPT;
+    }
+    Card card = cards.back();
+    cards.pop_back();
+    return card;
 }

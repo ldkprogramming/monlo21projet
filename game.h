@@ -12,12 +12,20 @@
 
 
 class Game {
-    CardPyramid pyramid = CardPyramid();
+
     Coinbag coinBag = Coinbag();
     Coinboard coinBoard = Coinboard(coinBag);
     int privileges = 3;
     Player player1;
     Player player2;
+
+    Pile pile1 = Pile(PileType::One);
+    Pile pile2 = Pile(PileType::Two);
+    Pile pile3 = Pile(PileType::Three);
+    Pile royalPile = Pile(PileType::Royal);
+
+    CardPyramid pyramid = CardPyramid(pile1, pile2, pile3, royalPile);
+
 
 
 public:

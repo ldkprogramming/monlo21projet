@@ -9,24 +9,22 @@
 class CardPyramid {
 
 private:
-    Pile pile1 = Pile(PileType::One);
-    Pile pile2 = Pile(PileType::Two);
-    Pile pile3 = Pile(PileType::Three);
-    Pile royalPile = Pile(PileType::Royal);
+
+    std::vector<Card> level1Cards;
+    int maxNumberOfLevel1Cards = 3;
+
+    std::vector<Card> level2Cards;
+    int maxNumberOfLevel2Cards = 4;
+
+    std::vector<Card> level3Cards;
+    int maxNumberOfLevel3Cards = 5;
+
+    std::vector<Card> royalCards;
+    int maxNumberOfRoyalCards = 4;
 
 
 public:
-    const Pile &getPile1() const;
-
-    const Pile &getPile2() const;
-
-    const Pile &getPile3() const;
-
-    const Pile &getRoyalPile() const;
-
-
-
-
+    CardPyramid(Pile& pile1, Pile& pile2, Pile& pile3, Pile& royalPile);
 };
 
 

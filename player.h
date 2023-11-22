@@ -9,6 +9,14 @@
 #include "card.h"
 #include "coin.h"
 
+enum class OptionalActions{
+    UsePrivileges, FillBoard, Empty
+};
+
+enum class CompulsoryActions{
+    TakeCoins, ReserveCard, BuyCard
+};
+
 
 class Player {
 private:

@@ -19,8 +19,9 @@ public:
     Pile(const Pile& p) = delete;
     Pile& operator=(const Pile& p) = delete;
     Pile(PileType type);
-
-
+    int getRemainingCards(){return cards.size();}
+    bool isEmpty(){return cards.empty();}
+    Card distributeCard();
 };
 
 

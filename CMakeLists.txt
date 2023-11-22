@@ -19,5 +19,7 @@ add_executable(monlo21projet main.cpp
         pile.cpp
         pile.h
         cardpyramid.cpp
-        cardpyramid.h)
+        cardpyramid.h
+        controller.cpp
+        controller.h)
 
