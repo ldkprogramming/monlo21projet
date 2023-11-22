@@ -32,7 +32,7 @@ class Game {
 
 public:
     const CardPyramid &getPyramid() const;
-    const Coinbag &getCoinBag() const;
+    const Coinbag& getCoinBag() const;
     const Coinboard &getCoinBoard() const;
     int getPrivileges() const;
     void setPrivileges(int privileges);
@@ -40,6 +40,12 @@ public:
     Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name){}
 
     WinConditions getWinConditions(){ return winConditions; }
+
+    const Pile &getPile1() const;
+
+    const Pile &getPile2() const;
+
+    const Pile &getPile3() const;
 };
 
 

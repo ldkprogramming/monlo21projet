@@ -44,6 +44,8 @@ public:
 
     CoinColor getCardColor();
 
+    const std::map<CoinColor, int> &getCosts() const;
+
 };
 
 

@@ -37,6 +37,9 @@ private:
 public:
     Coinboard(Coinbag& coinbag);
     void fill(Coinbag& coinbag);
+    bool isEmpty() const;
+    bool containsOnly(CoinColor color) const;
+    bool containsAtLeastOne(CoinColor color) const;
 
 };
 

@@ -27,3 +27,35 @@ CardPyramid::CardPyramid(Pile &pile1, Pile &pile2, Pile &pile3, Pile &royalPile)
         }
     }
 }
+
+const std::vector<Card> &CardPyramid::getLevel1Cards() const {
+    return level1Cards;
+}
+
+int CardPyramid::getMaxNumberOfLevel1Cards() const {
+    return maxNumberOfLevel1Cards;
+}
+
+const std::vector<Card> &CardPyramid::getLevel2Cards() const {
+    return level2Cards;
+}
+
+int CardPyramid::getMaxNumberOfLevel2Cards() const {
+    return maxNumberOfLevel2Cards;
+}
+
+const std::vector<Card> &CardPyramid::getLevel3Cards() const {
+    return level3Cards;
+}
+
+int CardPyramid::getMaxNumberOfLevel3Cards() const {
+    return maxNumberOfLevel3Cards;
+}
+
+const std::vector<Card> &CardPyramid::getRoyalCards() const {
+    return royalCards;
+}
+
+int CardPyramid::getMaxNumberOfRoyalCards() const {
+    return maxNumberOfRoyalCards;
+}

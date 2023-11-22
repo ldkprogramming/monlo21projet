@@ -9,17 +9,17 @@
 
 class Controller {
 public:
-    // Retourne les actions optionnelles possibles
-    std::vector<OptionalActions> getValidOptionalActions(const Game& game);
+    // Retourne les actions optionnelles possibles pour un joueur
+    std::vector<OptionalActions> getValidOptionalActions(const Game& game, Player& player) const;
 
-    // Retourne les actions obbligatoires possibles
-    std::vector<CompulsoryActions> getValidCompulsoryActions (const Game& game);
+    // Retourne les actions obbligatoires possibles pour un joueur
+    std::vector<CompulsoryActions> getValidCompulsoryActions (const Game& game, Player& player) const;
 
     // appliquer une action optionnelle
-    void applyOptionalAction(Game& game, OptionalActions action);
+    void applyOptionalAction(Game& game, Player& player,  OptionalActions action);
 
     // appliquer une action obbligatoire
-    void applyCompulsoryAction(Game& game, CompulsoryActions action);
+    void applyCompulsoryAction(Game& game, Player& player,  CompulsoryActions action);
 
     // appliquer la capacite d'une carte
     void applyCardSkill(Game& game, Player& cardOwner, Card& card);

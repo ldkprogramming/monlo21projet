@@ -36,6 +36,8 @@ public:
     int getTotalPoints();
     int getTotalCrowns();
     int getMaxPointsPerColor();
+    int getPrivileges() {return privileges;}
+    bool canBuy(const Card& card);
 };
 
 

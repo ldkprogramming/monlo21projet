@@ -24,6 +24,7 @@ public:
     int getNumberOfCoins();
     void addCoin(const Coin& coin);
     Coin distributeCoin();
+    bool isEmpty() const {return coins.empty();}
 
 };
 

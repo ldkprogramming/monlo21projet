@@ -53,3 +53,7 @@ CoinColor Card::getCardColor() {
     }
     return coinColor;
 }
+
+const std::map<CoinColor, int> &Card::getCosts() const {
+    return costs;
+}

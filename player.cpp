@@ -62,3 +62,12 @@ int Player::getMaxPointsPerColor() {
 
     return max;
 }
+
+bool Player::canBuy(const Card &card) {
+    for (auto cost : card.getCosts()){
+        if ( bonusesPerColor[cost.first] + coinsPerColor[cost.first] < cost.second ){
+            return false;
+        }
+    }
+    return true;
+}

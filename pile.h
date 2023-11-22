@@ -20,7 +20,7 @@ public:
     Pile& operator=(const Pile& p) = delete;
     Pile(PileType type);
     int getRemainingCards(){return cards.size();}
-    bool isEmpty(){return cards.empty();}
+    bool isEmpty() const {return cards.empty();}
     Card distributeCard();
 };
 

@@ -25,6 +25,22 @@ private:
 
 public:
     CardPyramid(Pile& pile1, Pile& pile2, Pile& pile3, Pile& royalPile);
+
+    const std::vector<Card> &getLevel1Cards() const;
+
+    int getMaxNumberOfLevel1Cards() const;
+
+    const std::vector<Card> &getLevel2Cards() const;
+
+    int getMaxNumberOfLevel2Cards() const;
+
+    const std::vector<Card> &getLevel3Cards() const;
+
+    int getMaxNumberOfLevel3Cards() const;
+
+    const std::vector<Card> &getRoyalCards() const;
+
+    int getMaxNumberOfRoyalCards() const;
 };
 
 

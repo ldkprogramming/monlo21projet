@@ -8,7 +8,7 @@ const CardPyramid &Game::getPyramid() const {
     return pyramid;
 }
 
-const Coinbag &Game::getCoinBag() const {
+const Coinbag & Game::getCoinBag() const {
     return coinBag;
 }
 
@@ -22,4 +22,16 @@ int Game::getPrivileges() const {
 
 void Game::setPrivileges(int privileges) {
     Game::privileges = privileges;
+}
+
+const Pile &Game::getPile1() const {
+    return pile1;
+}
+
+const Pile &Game::getPile2() const {
+    return pile2;
+}
+
+const Pile &Game::getPile3() const {
+    return pile3;
 }
