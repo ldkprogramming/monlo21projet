@@ -26,8 +26,16 @@ private:
     std::vector<Coin> coins;
     int privileges = 0;
 
+    std::map<CoinColor, int> coinsPerColor;
+    std::map<CoinColor, int> bonusesPerColor;
+    std::map<CoinColor,int> pointsPerColor;
+
+
 public:
-    Player(std::string name){name = name;}
+    Player(std::string name);
+    int getTotalPoints();
+    int getTotalCrowns();
+    int getMaxPointsPerColor();
 };
 
 

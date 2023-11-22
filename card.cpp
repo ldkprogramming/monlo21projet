@@ -43,3 +43,13 @@ std::ostream& operator<<(std::ostream& f, const Card& c){
     f << c.crowns << " " << c.points;
     return f;
 }
+
+CoinColor Card::getCardColor() {
+    CoinColor coinColor = CoinColor::Empty;
+    for (auto pair : bonuses){
+        if (pair.second > 0){
+            coinColor = pair.first;
+        }
+    }
+    return coinColor;
+}

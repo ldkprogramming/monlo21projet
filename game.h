@@ -9,7 +9,7 @@
 #include "coinboard.h"
 #include "player.h"
 #include <string>
-
+#include "winconditions.h"
 
 class Game {
 
@@ -26,6 +26,8 @@ class Game {
 
     CardPyramid pyramid = CardPyramid(pile1, pile2, pile3, royalPile);
 
+    WinConditions winConditions = WinConditions(20, 10, 10);
+
 
 
 public:
@@ -36,6 +38,8 @@ public:
     void setPrivileges(int privileges);
 
     Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name){}
+
+    WinConditions getWinConditions(){ return winConditions; }
 };
 
 

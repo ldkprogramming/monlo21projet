@@ -21,5 +21,7 @@ add_executable(monlo21projet main.cpp
         cardpyramid.cpp
         cardpyramid.h
         controller.cpp
-        controller.h)
+        controller.h
+        winconditions.cpp
+        winconditions.h)
 

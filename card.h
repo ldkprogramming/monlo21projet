@@ -42,6 +42,8 @@ public:
     int getCrowns(){return crowns;}
     int getPoints(){return points;}
 
+    CoinColor getCardColor();
+
 };
 
 

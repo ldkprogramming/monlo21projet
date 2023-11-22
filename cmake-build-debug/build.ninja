@@ -109,6 +109,12 @@ build CMakeFiles/monlo21projet.dir/controller.cpp.o: CXX_COMPILER__monlo21projet
   OBJECT_DIR = CMakeFiles/monlo21projet.dir
   OBJECT_FILE_DIR = CMakeFiles/monlo21projet.dir
 
+build CMakeFiles/monlo21projet.dir/winconditions.cpp.o: CXX_COMPILER__monlo21projet_unscanned_Debug /Users/leo/CLionProjects/monlo21projet/winconditions.cpp || cmake_object_order_depends_target_monlo21projet
+  DEP_FILE = CMakeFiles/monlo21projet.dir/winconditions.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/monlo21projet.dir
+  OBJECT_FILE_DIR = CMakeFiles/monlo21projet.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target monlo21projet
@@ -117,7 +123,7 @@ build CMakeFiles/monlo21projet.dir/controller.cpp.o: CXX_COMPILER__monlo21projet
 #############################################
 # Link the executable monlo21projet
 
-build monlo21projet: CXX_EXECUTABLE_LINKER__monlo21projet_Debug CMakeFiles/monlo21projet.dir/main.cpp.o CMakeFiles/monlo21projet.dir/game.cpp.o CMakeFiles/monlo21projet.dir/player.cpp.o CMakeFiles/monlo21projet.dir/coinboard.cpp.o CMakeFiles/monlo21projet.dir/coin.cpp.o CMakeFiles/monlo21projet.dir/coinbag.cpp.o CMakeFiles/monlo21projet.dir/card.cpp.o CMakeFiles/monlo21projet.dir/pile.cpp.o CMakeFiles/monlo21projet.dir/cardpyramid.cpp.o CMakeFiles/monlo21projet.dir/controller.cpp.o
+build monlo21projet: CXX_EXECUTABLE_LINKER__monlo21projet_Debug CMakeFiles/monlo21projet.dir/main.cpp.o CMakeFiles/monlo21projet.dir/game.cpp.o CMakeFiles/monlo21projet.dir/player.cpp.o CMakeFiles/monlo21projet.dir/coinboard.cpp.o CMakeFiles/monlo21projet.dir/coin.cpp.o CMakeFiles/monlo21projet.dir/coinbag.cpp.o CMakeFiles/monlo21projet.dir/card.cpp.o CMakeFiles/monlo21projet.dir/pile.cpp.o CMakeFiles/monlo21projet.dir/cardpyramid.cpp.o CMakeFiles/monlo21projet.dir/controller.cpp.o CMakeFiles/monlo21projet.dir/winconditions.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk
   OBJECT_DIR = CMakeFiles/monlo21projet.dir
   POST_BUILD = :
