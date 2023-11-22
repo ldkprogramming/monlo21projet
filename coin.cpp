@@ -33,11 +33,36 @@ std::string toString(CoinColor c){
             break;
 
         case CoinColor::Green:
-            return "White";
+            return "Green";
             break;
         default :
             return "Empty";
     }
+}
+
+CoinColor toCoinColor(std::string s){
+    if (s == "White"){
+        return CoinColor::White;
+    }
+    if (s == "Blue"){
+        return CoinColor::Blue;
+    }
+    if (s == "Red"){
+        return CoinColor::Red;
+    }
+    if (s == "Black"){
+        return CoinColor::Black;
+    }
+    if (s == "Green"){
+        return CoinColor::Green;
+    }
+    if (s == "Pearl"){
+        return CoinColor::Pearl;
+    }
+    if (s == "Gold"){
+        return CoinColor::Gold;
+    }
+    return CoinColor::Empty;
 }
 std::ostream& operator<<(std::ostream& f, Coin coin) {
     f <<  toString(coin.getColor()) << "Coin";

@@ -64,10 +64,23 @@ int Player::getMaxPointsPerColor() {
 }
 
 bool Player::canBuy(const Card &card) {
+    // ATTENTION faut ajouter la verification sur une carte contenant la capacite bonus
     for (auto cost : card.getCosts()){
         if ( bonusesPerColor[cost.first] + coinsPerColor[cost.first] < cost.second ){
             return false;
         }
     }
     return true;
+}
+
+const std::map<CoinColor, int> &Player::getCoinsPerColor() const {
+    return coinsPerColor;
+}
+
+const std::map<CoinColor, int> &Player::getBonusesPerColor() const {
+    return bonusesPerColor;
+}
+
+const std::map<CoinColor, int> &Player::getPointsPerColor() const {
+    return pointsPerColor;
 }

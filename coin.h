@@ -13,6 +13,7 @@ enum class CoinColor {
 };
 
 std::string toString(CoinColor c);
+CoinColor toCoinColor(std::string s);
 
 class Coin {
 private:

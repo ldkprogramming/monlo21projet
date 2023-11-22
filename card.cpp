@@ -57,3 +57,23 @@ CoinColor Card::getCardColor() {
 const std::map<CoinColor, int> &Card::getCosts() const {
     return costs;
 }
+
+Skill Card::getSkill1() const {
+    return skill1;
+}
+
+Skill Card::getSkill2() const {
+    return skill2;
+}
+
+void Card::incrementBonus(CoinColor c, int amount){
+    // ajouter la verification de la validite du coincolor
+
+    if (amount <= 0){
+        return;
+    }
+    if (c == CoinColor::Empty){
+        return;
+    }
+    bonuses[c] += amount;
+}

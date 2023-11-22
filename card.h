@@ -42,9 +42,15 @@ public:
     int getCrowns(){return crowns;}
     int getPoints(){return points;}
 
+    Skill getSkill1() const;
+
+    Skill getSkill2() const;
+
     CoinColor getCardColor();
 
     const std::map<CoinColor, int> &getCosts() const;
+
+    void incrementBonus(CoinColor c, int amount);
 
 };
 

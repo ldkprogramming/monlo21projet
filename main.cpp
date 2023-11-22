@@ -10,8 +10,7 @@ using json = nlohmann::json;
 
 
 int main() {
-    Game game = Game("joueur1", "joueur2");
-    Controller controller = Controller();
+
 
     return 0;
 }

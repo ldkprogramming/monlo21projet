@@ -21,8 +21,8 @@ public:
     // appliquer une action obbligatoire
     void applyCompulsoryAction(Game& game, Player& player,  CompulsoryActions action);
 
-    // appliquer la capacite d'une carte
-    void applyCardSkill(Game& game, Player& cardOwner, Card& card);
+    // appliquer les capacites d'une carte
+    bool applyCardSkills(Game& game, Player& cardOwner, Player& opponent, Card& card);
 
     // Jouer un jeu splendor duel
     void play(Game& game);

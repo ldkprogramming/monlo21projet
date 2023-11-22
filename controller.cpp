@@ -3,6 +3,9 @@
 //
 
 #include "controller.h"
+#include "coin.h"
+#include "algorithm"
+
 bool Controller::checkIfPlayerWins(Game &game, Player &player) {
     int winTotalPoints = game.getWinConditions().getTotalPoints();
     int winTotalCrowns = game.getWinConditions().getTotalCrowns();
@@ -57,7 +60,44 @@ std::vector<CompulsoryActions> Controller::getValidCompulsoryActions(const Game 
             break;
         }
     }
-
     return result;
+}
+
+bool Controller::applyCardSkills(Game &game, Player &cardOwner, Player& opponent, Card &card) {
+    //Renvoie true si le joueur doit jouer un autre tour
+    bool playAgain = false;
+
+    Skill skill1 = card.getSkill1();
+    Skill skill2 = card.getSkill2();
+
+    // PlayAgain, Bonus, TakeCoin, TakePrivilege, RobCoin, Empty
+    switch (skill1){
+        case Skill::PlayAgain:
+            playAgain = true;
+            break;
+        case Skill::Bonus:
+            // obtenir les choix valides de couleur
+            std::vector<CoinColor> validColorChoices;
+            for (auto pair : cardOwner.getBonusesPerColor()){
+                if (pair.second > 0){
+                    validColorChoices.push_back(pair.first);
+                }
+            }
+
+            bool isChoiceValid = false;
+            std::string choice;
+            while (not isChoiceValid){
+                std::cout << "Quelle couleur pour le bonus ? ";
+                std::cin >> choice;
+                isChoiceValid = std::find(validColorChoices.begin(), validColorChoices.end(), toCoinColor(choice)) != validColorChoices.end();
+
+            }
+            card.incrementBonus(toCoinColor(choice), 1);
+            break;
+
+
+    }
+
+
 
 }
