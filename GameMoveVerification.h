@@ -12,7 +12,6 @@
 #include "winconditions.h"
 
 class GameMoveVerification{
-
-
-
+    Game* GameChecked;
 };
+
