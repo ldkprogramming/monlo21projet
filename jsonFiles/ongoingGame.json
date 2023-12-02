@@ -1,0 +1,33 @@
+{
+  "game" : {
+    "coinBag" : [],
+    "coinBoard": [["EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin"],
+      ["EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin"],
+      ["EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin"],
+      ["EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin"],
+      ["EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin", "EmptyCoin"]
+    ],
+    "privileges": 3,
+    "player1" : {
+
+    },
+    "player2" : {
+
+    },
+    "playerTurn" : "Player1",
+    "pile1" : [],
+    "pile2" : [],
+    "pile3" : [],
+    "royalPile" : [],
+    "pyramid" : [
+      [],
+      [],
+      []
+    ],
+    "winConditions" : {
+      "totalPoints" : 10,
+      "totalCrowns" : 10,
+      "pointsInOneColor" : 10
+    }
+  }
+}

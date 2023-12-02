@@ -11,6 +11,10 @@
 #include <string>
 #include "winconditions.h"
 
+enum class PlayerTurn{
+    Player1, Player2
+};
+
 class Game {
 
     Coinbag coinBag = Coinbag();
@@ -18,6 +22,8 @@ class Game {
     int privileges = 3;
     Player player1;
     Player player2;
+
+    PlayerTurn turn = PlayerTurn::Player1;
 
     Pile pile1 = Pile(PileType::One);
     Pile pile2 = Pile(PileType::Two);

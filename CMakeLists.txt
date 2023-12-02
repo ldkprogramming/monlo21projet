@@ -23,5 +23,9 @@ add_executable(monlo21projet main.cpp
         controller.cpp
         controller.h
         winconditions.cpp
-        winconditions.h)
+        winconditions.h
+        GameMoveVerification.h
+        GameMoveVerification.cpp
+        gamesaver.cpp
+        gamesaver.h)
 
