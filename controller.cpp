@@ -146,7 +146,7 @@ void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryAct
 
                 break;
             }
-
+            break;
 
         }
         case CompulsoryActions::ReserveCard:{

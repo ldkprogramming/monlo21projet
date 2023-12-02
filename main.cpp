@@ -15,7 +15,10 @@ int main() {
     Game test = Game("haha", "hehe");
     Controller co = Controller();
 
-    std::cout <<test.getPyramid();
+    std::cout << test.getCoinBoard();
+    co.applyCompulsoryAction(test, test.getPlayer1(), CompulsoryActions::TakeCoins);
+    std::cout << test.getCoinBoard();
+    std::cout << test.getPlayer1();
 
     return 0;
 }

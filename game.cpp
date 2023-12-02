@@ -36,11 +36,11 @@ const Pile &Game::getPile3() const {
     return pile3;
 }
 
-const Player &Game::getPlayer1() const {
+Player &Game::getPlayer1() {
     return player1;
 }
 
-const Player &Game::getPlayer2() const {
+Player &Game::getPlayer2() {
     return player2;
 }
 

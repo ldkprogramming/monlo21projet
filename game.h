@@ -42,9 +42,9 @@ public:
 
     WinConditions getWinConditions(){ return winConditions; }
 
-    const Player &getPlayer1() const;
+    Player &getPlayer1();
 
-    const Player &getPlayer2() const;
+    Player &getPlayer2();
 
     const Pile &getRoyalPile() const;
 
