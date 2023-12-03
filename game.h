@@ -15,6 +15,10 @@ enum class PlayerTurn{
     Player1, Player2
 };
 
+std::string toString(PlayerTurn p);
+
+PlayerTurn toPlayerTurn(std::string s);
+
 class Game {
 
     Coinbag coinBag = Coinbag();
@@ -46,19 +50,18 @@ public:
 
     Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name){}
 
-    WinConditions getWinConditions(){ return winConditions; }
+    WinConditions getWinConditions() const{ return winConditions; }
 
-    Player &getPlayer1();
+    const Player &getPlayer1() const ;
 
-    Player &getPlayer2();
+    const Player &getPlayer2() const ;
 
     const Pile &getRoyalPile() const;
-
     const Pile &getPile1() const;
-
     const Pile &getPile2() const;
-
     const Pile &getPile3() const;
+
+    const PlayerTurn getPlayerTurn() const {return turn;}
 };
 
 

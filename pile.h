@@ -22,6 +22,8 @@ public:
     int getRemainingCards(){return cards.size();}
     bool isEmpty() const {return cards.empty();}
     Card distributeCard();
+    void shuffle();
+    const std::vector<Card>& getCards() const {return cards;}
 };
 
 

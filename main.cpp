@@ -5,20 +5,17 @@
 #include "pile.h"
 #include "game.h"
 #include "controller.h"
+#include "gamesaver.h"
 
 
 using json = nlohmann::json;
 
 
 int main() {
-
     Game test = Game("haha", "hehe");
-    Controller co = Controller();
-
+    GameSaver gs;
+    gs.saveGame(test);
     std::cout << test.getCoinBoard();
-    co.applyCompulsoryAction(test, test.getPlayer1(), CompulsoryActions::TakeCoins);
-    std::cout << test.getCoinBoard();
-    std::cout << test.getPlayer1();
 
     return 0;
 }

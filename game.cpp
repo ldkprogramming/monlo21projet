@@ -36,14 +36,36 @@ const Pile &Game::getPile3() const {
     return pile3;
 }
 
-Player &Game::getPlayer1() {
+const Player &Game::getPlayer1() const{
     return player1;
 }
 
-Player &Game::getPlayer2() {
+const Player &Game::getPlayer2() const {
     return player2;
 }
 
 const Pile &Game::getRoyalPile() const {
     return royalPile;
 }
+
+std::string toString(PlayerTurn p){
+    switch(p){
+        case PlayerTurn::Player1:
+            return "Player1";
+            break;
+        case PlayerTurn::Player2:
+            return "Player2";
+            break;
+    }
+}
+
+PlayerTurn toPlayerTurn(std::string s){
+    // faudra ajouter le traitement des erreurs
+    if (s == "Player1"){
+        return PlayerTurn::Player1;
+    }
+    if (s == "Player2"){
+        return PlayerTurn::Player2;
+    }
+}
+

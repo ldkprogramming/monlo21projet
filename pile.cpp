@@ -7,7 +7,7 @@
 #include "nlohmann/json.hpp"
 #include "coin.h"
 #include "card.h"
-
+#include <random>
 using json = nlohmann::json;
 
 Pile::Pile(PileType type){
@@ -57,7 +57,9 @@ Pile::Pile(PileType type){
         cards.emplace_back(id, points, crowns, costs, bonuses, skill1, skill2);
     }
     // penser a rajouter le cas des cartes royales ?
-    // rajouter les shuffle !!
+
+    // On melange la pioche
+    shuffle();
 }
 
 std::ostream& operator<<(std::ostream& f, const Pile& p){
@@ -75,4 +77,11 @@ Card Pile::distributeCard(){
     Card card = cards.back();
     cards.pop_back();
     return card;
+}
+
+void Pile::shuffle() {
+    unsigned seed = std::chrono::system_clock::now()
+            .time_since_epoch()
+            .count();
+    std::shuffle (cards.begin(), cards.end(), std::default_random_engine(seed));
 }

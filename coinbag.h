@@ -25,7 +25,8 @@ public:
     void addCoin(const Coin& coin);
     Coin distributeCoin();
     bool isEmpty() const {return coins.empty();}
-
+    const std::vector<Coin>& getCoins() const {return coins;}
+    //penser a ajouter un iterateur ?
 };
 
 std::ostream& operator<<(std::ostream& f, const Coinbag& coinbag);

@@ -43,6 +43,7 @@ public:
     }
     int getCrowns(){return crowns;}
     int getPoints(){return points;}
+    const int getId() const {return cardId;}
 
     Skill getSkill1() const;
 

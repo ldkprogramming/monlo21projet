@@ -36,7 +36,7 @@ public:
     int getTotalPoints();
     int getTotalCrowns();
     int getMaxPointsPerColor();
-    int getPrivileges() {return privileges;}
+    const int getPrivileges() const {return privileges;}
     bool canBuy(const Card& card);
 
     const std::map<CoinColor, int> &getCoinsPerColor() const;
@@ -50,6 +50,9 @@ public:
 
     const std::string &getName() const;
     friend std::ostream& operator<<(std::ostream &f, const Player& p);
+
+    const std::vector<Card> getHand() const {return hand;}
+    const std::vector<Card> getReservedCards() const {return reservedCards;}
 };
 
 

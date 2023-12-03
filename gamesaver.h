@@ -11,10 +11,10 @@
 class GameSaver {
 private:
     // On pourra modifier en std::filesystem::path si on a le temps
-    std::string path = "../jsonFiles/pile1.json";
+    std::string path;
 public:
     std::string getSavePath(){ return path; }
-    GameSaver(std::string path) : path(path) {}
+    GameSaver(std::string path = "../jsonFiles/ongoingGame.json") : path(path) {}
     bool saveGame(const Game& game) const;
 };
 
