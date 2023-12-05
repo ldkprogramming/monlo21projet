@@ -12,6 +12,8 @@
 #include "controller.h"
 #include "player.h"
 #include "winconditions.h"
+#include "gamesaver.h"
+#include "card.h"
 
 class GameMoveVerification{
     friend class Jeu;
@@ -26,13 +28,11 @@ public:
     GameMoveVerification& operator=(const &GameMoveVerification) = delete;
     ~GameMoveVerification(); //Potentiellement inutile étant donné qu'il y a uniquement un booléen et une référence
     
-    Game& get_game_checked() const {return GameChecked;}
-    int get_verificator_state() const {return verificator_state;}
+    inline Game& get_game_checked() const {return GameChecked;};
+    inline int get_verificator_state() const {return verificator_state;};
 
-    
+    void change_verificator_state(&GameMoveVerification);
+    void verify_coin_alignment(std::vector<std::pair<int,int>> coinchoices);
 
-
-
-    
 };
 
