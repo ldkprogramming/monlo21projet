@@ -6,6 +6,7 @@
 #define MONLO21PROJET_STATSAVER_H
 
 #include <string>
+#include "game.h"
 
 class StatSaver {
     // Cette classe a pour objectif de sauvegarder les statistiques
@@ -17,6 +18,7 @@ class StatSaver {
 
 public:
     StatSaver(std::string path = "../jsonFiles/stats.json") : path(path){}
+    void saveGame(const Game& game);
 };
 
 

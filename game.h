@@ -11,13 +11,13 @@
 #include <string>
 #include "winconditions.h"
 
-enum class PlayerTurn{
-    Player1, Player2
+enum class PlayerEnum{
+    Player1, Player2, Empty
 };
 
-std::string toString(PlayerTurn p);
+std::string toString(PlayerEnum p);
 
-PlayerTurn toPlayerTurn(std::string s);
+PlayerEnum toPlayerTurn(std::string s);
 
 class Game {
 
@@ -27,7 +27,8 @@ class Game {
     Player player1;
     Player player2;
 
-    PlayerTurn turn = PlayerTurn::Player1;
+    PlayerEnum winner = PlayerEnum::Empty;
+    PlayerEnum turn = PlayerEnum::Player1;
 
     Pile pile1 = Pile(PileType::One);
     Pile pile2 = Pile(PileType::Two);
@@ -61,8 +62,7 @@ public:
     const Pile &getPile2() const;
     const Pile &getPile3() const;
 
-    const PlayerTurn getPlayerTurn() const {return turn;}
-
+    const PlayerEnum getPlayerTurn() const {return turn;}
 
 };
 

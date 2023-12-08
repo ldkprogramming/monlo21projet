@@ -55,24 +55,24 @@ const Pile &Game::getRoyalPile() const {
 
 
 
-std::string toString(PlayerTurn p){
+std::string toString(PlayerEnum p){
     switch(p){
-        case PlayerTurn::Player1:
+        case PlayerEnum::Player1:
             return "Player1";
             break;
-        case PlayerTurn::Player2:
+        case PlayerEnum::Player2:
             return "Player2";
             break;
     }
 }
 
-PlayerTurn toPlayerTurn(std::string s){
+PlayerEnum toPlayerEnum(std::string s){
     // faudra ajouter le traitement des erreurs
     if (s == "Player1"){
-        return PlayerTurn::Player1;
+        return PlayerEnum::Player1;
     }
     if (s == "Player2"){
-        return PlayerTurn::Player2;
+        return PlayerEnum::Player2;
     }
 }
 
