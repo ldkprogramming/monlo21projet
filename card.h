@@ -41,12 +41,11 @@ public:
         skill1 = s1;
         skill2 = s2;
     }
-    int getCrowns(){return crowns;}
-    int getPoints(){return points;}
-    const int getId() const {return cardId;}
+    int getCrowns() const {return crowns;}
+    int getPoints() const {return points;}
+    int getId() const {return cardId;}
 
     Skill getSkill1() const;
-
     Skill getSkill2() const;
 
     CoinColor getCardColor();

@@ -80,6 +80,11 @@ const Card& CardPyramid::distributeCard(int pileNumber, int cardNumber){
             level3Cards.erase(level3Cards.begin()+cardNumber-1);
             return result;
         }
+        case 4:{
+            Card result = royalCards[cardNumber];
+            royalCards.erase(royalCards.begin()+cardNumber-1);
+            return result;
+        }
     }
 }
 
@@ -108,4 +113,36 @@ std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid){
     }
     f << "----------\n";
     return f;
+}
+
+void CardPyramid::refill(int pileNumber, Pile &pile) {
+    // c'est tres moche mais ca marche, on pourra modifier apres
+    int maxNumberOfCards;
+    switch (pileNumber){
+        case 1:
+            maxNumberOfCards = getMaxNumberOfLevel1Cards();
+            while ((level1Cards.size() < maxNumberOfCards) and (!pile.isEmpty())){
+                level1Cards.push_back(pile.distributeCard());
+            }
+            break;
+        case 2:
+            maxNumberOfCards = getMaxNumberOfLevel2Cards();
+            while ((level2Cards.size() < maxNumberOfCards) and (!pile.isEmpty())){
+                level2Cards.push_back(pile.distributeCard());
+            }
+            break;
+        case 3:
+            maxNumberOfCards = getMaxNumberOfLevel3Cards();
+            while ((level3Cards.size() < maxNumberOfCards) and (!pile.isEmpty())){
+                level3Cards.push_back(pile.distributeCard());
+            }
+            break;
+        case 4:
+            maxNumberOfCards = getMaxNumberOfRoyalCards();
+            while ((royalCards.size() < maxNumberOfCards) and (!pile.isEmpty())){
+                royalCards.push_back(pile.distributeCard());
+            }
+            break;
+    }
+
 }

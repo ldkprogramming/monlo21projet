@@ -27,5 +27,8 @@ add_executable(monlo21projet main.cpp
         GameMoveVerification.h
         GameMoveVerification.cpp
         gamesaver.cpp
-        gamesaver.h)
+        gamesaver.h
+        statsaver.cpp
+        statsaver.h
+)
 

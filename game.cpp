@@ -3,6 +3,11 @@
 //
 
 #include "game.h"
+#include <string>
+#include "nlohmann/json.hpp"
+#include <fstream>
+
+using json = nlohmann::json;
 
 const CardPyramid &Game::getPyramid() const {
     return pyramid;
@@ -48,6 +53,8 @@ const Pile &Game::getRoyalPile() const {
     return royalPile;
 }
 
+
+
 std::string toString(PlayerTurn p){
     switch(p){
         case PlayerTurn::Player1:
@@ -68,4 +75,6 @@ PlayerTurn toPlayerTurn(std::string s){
         return PlayerTurn::Player2;
     }
 }
+
+
 

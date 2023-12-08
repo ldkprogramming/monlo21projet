@@ -70,9 +70,8 @@ std::ostream& operator<<(std::ostream& f, const Pile& p){
 }
 
 Card Pile::distributeCard(){
-    // faudra modifier ca
     if (isEmpty()){
-        throw MATH_ERREXCEPT;
+        throw std::runtime_error("Empty pile, can't distribute card !");
     }
     Card card = cards.back();
     cards.pop_back();

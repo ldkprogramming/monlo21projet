@@ -40,9 +40,7 @@ public:
     bool canBuy(const Card& card);
 
     const std::map<CoinColor, int> &getCoinsPerColor() const;
-
     const std::map<CoinColor, int> &getBonusesPerColor() const;
-
     const std::map<CoinColor, int> &getPointsPerColor() const;
 
     void addCoin(const Coin& c);

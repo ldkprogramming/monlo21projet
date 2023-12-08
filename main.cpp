@@ -12,10 +12,9 @@ using json = nlohmann::json;
 
 
 int main() {
-    Game test = Game("haha", "hehe");
+    Game test("ha","hoe");
     GameSaver gs;
     gs.saveGame(test);
-    std::cout << test.getCoinBoard();
-
+    std::cout << test.getPyramid();
     return 0;
 }

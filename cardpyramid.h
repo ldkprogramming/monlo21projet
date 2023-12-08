@@ -9,7 +9,6 @@
 class CardPyramid {
 
 private:
-
     std::vector<Card> level1Cards;
     int maxNumberOfLevel1Cards = 3;
 
@@ -43,6 +42,8 @@ public:
     int getMaxNumberOfRoyalCards() const;
 
     const Card& distributeCard(int pileNumber, int cardNumber);
+
+    void refill(int pileNumber, Pile& pile);
 
     friend std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid);
 };
