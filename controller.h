@@ -9,6 +9,8 @@
 
 class Controller {
 public:
+    // faut completement refaire
+    /*
     // Retourne les actions optionnelles possibles pour un joueur
     std::vector<OptionalActions> getValidOptionalActions(const Game& game, Player& player) const;
 
@@ -32,6 +34,7 @@ public:
 
     // Verifier si un Joueur gagne
     bool checkIfPlayerWins(Game& game, Player& player);
+     */
 };
 
 

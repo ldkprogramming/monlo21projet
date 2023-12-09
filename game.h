@@ -17,7 +17,9 @@ enum class PlayerEnum{
 
 std::string toString(PlayerEnum p);
 
-PlayerEnum toPlayerTurn(std::string s);
+PlayerEnum toPlayerEnum(std::string s);
+PlayerEnum getOpponent(PlayerEnum p);
+
 
 class Game {
 
@@ -41,6 +43,27 @@ class Game {
     WinConditions winConditions = WinConditions(20, 10, 10);
 
 
+    bool playerUsePrivilege(std::pair<int, int> coordinates);
+
+    Player& getActivePlayer() {
+        // fonction privee de sorte a ce que slmt les fonctions
+        // autorisees puissent modifier les joueurs
+        if (turn == PlayerEnum::Player1){
+            return player1;
+        }
+        return player2;
+    }
+
+    Player& getOpponentPlayer() {
+        // fonction privee de sorte a ce que slmt les fonctions
+        // autorisees puissent modifier les joueurs
+        if (turn == PlayerEnum::Player1){
+            return player2;
+        }
+        return player1;
+    }
+
+    bool playerTakeCoin(std::pair<int, int> coordinates);
 
 public:
     const CardPyramid &getPyramid() const;
@@ -73,6 +96,19 @@ public:
     const PlayerEnum getPlayerTurn() const {return turn;}
     const PlayerEnum getWinner() const {return winner;}
     const PlayerEnum getLoser() const {return loser;}
+
+    bool playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pair<int, int>>& coordinates);
+    bool playerFillBoard();
+    bool playerTakeCoins(std::vector<std::pair<int, int>> coordinates);
+
+    void incrementPrivileges(){
+        privileges += 1;
+    }
+    void decrementPrivileges(){
+        if (privileges > 0){
+            privileges -= 1;
+        }
+    }
 
 };
 

@@ -14,11 +14,12 @@ using json = nlohmann::json;
 
 int main() {
     Game test("ha","hoe");
-    GameSaver gs;
-    gs.saveGame(test);
-    std::cout << test.getPyramid();
 
-    StatSaver statSaver;
-    statSaver.saveGameStats(test);
+    std::cout << test.getCoinBoard();
+    std::vector<std::pair<int, int>> c = {{1, 2}, {2,3}, {3, 3}};
+
+    test.playerUsePrivileges(3, c);
+    std::cout << test.getCoinBoard();
+
     return 0;
 }

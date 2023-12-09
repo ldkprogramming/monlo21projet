@@ -1,8 +1,8 @@
 {
     "players": {
         "ha": {
-            "gamesLost": 2,
-            "gamesWon": 3
+            "gamesLost": 4,
+            "gamesWon": 5
         },
         "hoe": {
             "gamesLost": 0,

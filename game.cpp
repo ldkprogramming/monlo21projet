@@ -80,5 +80,145 @@ PlayerEnum toPlayerEnum(std::string s){
     return PlayerEnum::Empty;
 }
 
+bool Game::playerUsePrivilege(std::pair<int, int> coordinates) {
+    // returns true if action has been done, false otherwise
 
 
+
+    // faut verifier si les coordonnees sont correctes, valides
+    // faudra ajouter un attribut largeur au coinboard, mais pour l'instant ca marche
+    if ((coordinates.first > 4 ) or (coordinates.first < 0) or (coordinates.second > 4 ) or (coordinates.second < 0)){
+        return false;
+    }
+    // faut verifier si ce n'est pas un jeton or
+    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) or (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)){
+        return false;
+    }
+    // faut verifier que le joueur a qui c le tour possede au moins un privilege
+    if (getPlayer(turn).getPrivileges() < 1){
+        return false;
+    }
+
+    getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
+
+    // on vide le jeton du plateau
+    coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+    return true;
+
+
+}
+
+PlayerEnum getOpponent(PlayerEnum p){
+    switch (p){
+        case (PlayerEnum::Player1) : {
+            return PlayerEnum::Player2;
+        }
+        case (PlayerEnum::Player2) : {
+            return PlayerEnum::Player1;
+        }
+        default : {
+            return PlayerEnum::Empty;
+        }
+    }
+}
+
+bool Game::playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pair<int, int>> &coordinates) {
+    // Returns true if action has been done correctly
+    // false otherwise
+
+    // faut verifier si le nombre de privileges et de coordonnees correspond
+    if (numberOfPrivileges != coordinates.size()){
+        return false;
+    }
+    // faut verifier si le joueeur a assez de privileges
+    if (getActivePlayer().getPrivileges() < numberOfPrivileges){
+        return false;
+    }
+    // faut verifier si les coordonnees sont valides
+    for (auto c : coordinates){
+        if ((c.first > 4 ) or (c.first < 0) or (c.second > 4 ) or (c.second < 0)){
+            return false;
+        }
+        // faut verifier si ce n'est pas un jeton or
+        if ((coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Gold) or (coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Empty)){
+            return false;
+        }
+    }
+    for (auto c : coordinates){
+        // faudra verifier si aucune coordonnee n'est pareil que l'autre
+        playerUsePrivilege(c);
+    }
+    return true;
+}
+
+bool Game::playerFillBoard() {
+    if (coinBag.isEmpty()){
+        return false;
+    }
+    // Si le jeu contient des privileges, l'adversaire le prend
+    // sinon , si le jeu n'en contient pas mais le joueur actif en a, l'adversaire le vole
+    // sinon, il en prend pas (ca vetu dire qu'il a deja les 3 privileges).
+    if (privileges > 0){
+        decrementPrivileges();
+        getOpponentPlayer().incrementPrivileges();
+    } else if (getActivePlayer().getPrivileges() > 0){
+        getActivePlayer().decrementPrivileges();
+        getOpponentPlayer().incrementPrivileges();
+    }
+    coinBoard.fill(coinBag);
+    return true;
+}
+
+bool Game::playerTakeCoin(std::pair<int, int> coordinates) {
+    // on doit verifier si les coordonnees sont valides
+    if ((coordinates.first > 4 ) or (coordinates.first < 0) or (coordinates.second > 4 ) or (coordinates.second < 0)){
+        return false;
+    }
+    // on doit verifier si c'est un jeton vide ou or
+    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty) or (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold)){
+        return false;
+    }
+
+    getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
+    // on vide le jeton du plateau
+    coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+    return true;
+}
+
+bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
+    // faudra verifier la validite des coordonnees
+    int numberOfPearlCoins = 0;
+    bool allSameColor = true;
+
+    if (coordinates.size() > 3){
+        return false;
+    }
+
+    for (auto c : coordinates){
+        //verifications
+        continue;
+    }
+    const Coin& firstCoin = coinBoard.getCoin(coordinates[0].first, coordinates[0].second);
+    for (auto c : coordinates){
+
+        if (firstCoin.getColor() != coinBoard.getCoin(c.first, c.second).getColor()){
+            allSameColor = false;
+        }
+        if (coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Pearl){
+            numberOfPearlCoins += 1;
+        }
+        playerTakeCoin(c);
+    }
+
+    if (allSameColor or (numberOfPearlCoins == 2)){
+        if (privileges > 0){
+            decrementPrivileges();
+            getOpponentPlayer().incrementPrivileges();
+        } else if (getActivePlayer().getPrivileges() > 0){
+            getActivePlayer().decrementPrivileges();
+            getOpponentPlayer().incrementPrivileges();
+        }
+    }
+
+
+}

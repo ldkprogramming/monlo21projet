@@ -7,6 +7,9 @@
 #include "algorithm"
 #include <cstdlib>
 
+
+// // faut completement refaire
+/*
 bool Controller::checkIfPlayerWins(Game &game, Player &player) {
     int winTotalPoints = game.getWinConditions().getTotalPoints();
     int winTotalCrowns = game.getWinConditions().getTotalCrowns();
@@ -120,10 +123,6 @@ void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryAct
                 std::cout << "Combien de Jetons ?";
                 std::cin >> coinNumber;
 
-                /* faudra bien sur ajouter les verifications
-                 * => si le jeton est empty, si c'est un or
-                 * les privileges pour 2 perle ou 3 memes jetons, etc.
-                 */
 
 
                 for (int i = 0; i< coinNumber; i++) {
@@ -135,9 +134,7 @@ void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryAct
                     coinChoices.push_back(std::pair<int, int>(x, y));
                 }
 
-                /*
-                 * faudra verifier si c'est aligne !
-                 */
+
 
                 for (auto coordinates : coinChoices) {
                     player.addCoin(game.getCoinBoard().getCoin(coordinates.first, coordinates.second));
@@ -150,9 +147,6 @@ void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryAct
 
         }
         case CompulsoryActions::ReserveCard:{
-            /* ajouter les verifs
-             *
-             */
             int pileNumber = 0;
             std::cout << "Quelle pioche ?";
             std::cin >> pileNumber;
@@ -168,4 +162,6 @@ void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryAct
         }
     }
 }
+*/
+
 

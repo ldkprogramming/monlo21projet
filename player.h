@@ -51,6 +51,12 @@ public:
 
     const std::vector<Card> getHand() const {return hand;}
     const std::vector<Card> getReservedCards() const {return reservedCards;}
+    void incrementPrivileges() {privileges += 1;}
+    void decrementPrivileges() {
+        if (privileges > 0){
+            privileges -= 1;
+        }
+    }
 };
 
 
