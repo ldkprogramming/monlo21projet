@@ -28,6 +28,7 @@ class Game {
     Player player2;
 
     PlayerEnum winner = PlayerEnum::Empty;
+    PlayerEnum loser = PlayerEnum::Empty;
     PlayerEnum turn = PlayerEnum::Player1;
 
     Pile pile1 = Pile(PileType::One);
@@ -57,12 +58,21 @@ public:
 
     const Player &getPlayer2() const ;
 
+    const Player& getPlayer(const PlayerEnum p) const{
+        if (p == PlayerEnum::Player2){
+            return player2;
+        }
+        return player1;
+    }
+
     const Pile &getRoyalPile() const;
     const Pile &getPile1() const;
     const Pile &getPile2() const;
     const Pile &getPile3() const;
 
     const PlayerEnum getPlayerTurn() const {return turn;}
+    const PlayerEnum getWinner() const {return winner;}
+    const PlayerEnum getLoser() const {return loser;}
 
 };
 

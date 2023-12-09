@@ -6,6 +6,7 @@
 #include "game.h"
 #include "controller.h"
 #include "gamesaver.h"
+#include "statsaver.h"
 
 
 using json = nlohmann::json;
@@ -16,5 +17,8 @@ int main() {
     GameSaver gs;
     gs.saveGame(test);
     std::cout << test.getPyramid();
+
+    StatSaver statSaver;
+    statSaver.saveGameStats(test);
     return 0;
 }

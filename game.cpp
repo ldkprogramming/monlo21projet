@@ -63,6 +63,9 @@ std::string toString(PlayerEnum p){
         case PlayerEnum::Player2:
             return "Player2";
             break;
+        default:
+            return "Empty";
+            break;
     }
 }
 
@@ -74,6 +77,7 @@ PlayerEnum toPlayerEnum(std::string s){
     if (s == "Player2"){
         return PlayerEnum::Player2;
     }
+    return PlayerEnum::Empty;
 }
 
 

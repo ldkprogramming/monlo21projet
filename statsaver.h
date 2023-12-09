@@ -18,7 +18,7 @@ class StatSaver {
 
 public:
     StatSaver(std::string path = "../jsonFiles/stats.json") : path(path){}
-    void saveGame(const Game& game);
+    void saveGameStats(const Game& game);
 };
 
 
