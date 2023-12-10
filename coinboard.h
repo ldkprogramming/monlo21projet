@@ -36,6 +36,7 @@ private:
 
 public:
     Coinboard(Coinbag& coinbag);
+    Coinboard() = default;
     void fill(Coinbag& coinbag);
     bool isEmpty() const;
     bool containsOnly(CoinColor color) const;
@@ -48,6 +49,10 @@ public:
     }
     void setCoin(int x, int y, CoinColor c){
         board[x][y] = Coin(c);
+    }
+
+    void setCoin(int x, int y, Coin c){
+        board[x][y] = c;
     }
 
 };

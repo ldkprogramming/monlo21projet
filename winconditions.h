@@ -13,7 +13,7 @@ private:
     int pointsInOneColor;
 public:
     WinConditions(int totalPoints, int totalCrowns, int pointsInOneColor) : totalPoints(totalPoints), totalCrowns(totalCrowns), pointsInOneColor(pointsInOneColor){}
-
+    WinConditions() = default;
     int getTotalPoints() const {
         return totalPoints;
     }

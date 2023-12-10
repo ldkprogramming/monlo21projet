@@ -7,19 +7,19 @@
 #include "controller.h"
 #include "gamesaver.h"
 #include "statsaver.h"
+#include "coinboard.h"
 
 
 using json = nlohmann::json;
 
 
 int main() {
-    Game test("ha","hoe");
 
+    GameSaver gs;
+    Game test(gs.getPath());
+    std::cout << test.getCoinBag();
     std::cout << test.getCoinBoard();
-    std::vector<std::pair<int, int>> c = {{1, 2}, {2,3}, {3, 3}};
-
-    test.playerUsePrivileges(3, c);
-    std::cout << test.getCoinBoard();
-
+    std::cout << test.getPile1();
+    std::cout << test.getPyramid();
     return 0;
 }

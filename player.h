@@ -28,11 +28,13 @@ private:
 
     std::map<CoinColor, int> coinsPerColor;
     std::map<CoinColor, int> bonusesPerColor;
-    std::map<CoinColor,int> pointsPerColor;
+    std::map<CoinColor, int> pointsPerColor;
 
 
 public:
     Player(std::string name);
+    Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor) :
+    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges), {}
     int getTotalPoints();
     int getTotalCrowns();
     int getMaxPointsPerColor();

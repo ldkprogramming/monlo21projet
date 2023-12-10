@@ -6,6 +6,7 @@
 #define MONLO21PROJET_CONTROLLER_H
 #include "game.h"
 #include "player.h"
+#include "gamesaver.h"
 
 class Controller {
 public:

@@ -53,3 +53,13 @@ bool Coinboard::containsAtLeastOne(CoinColor color) const {
     }
     return false;
 }
+
+void Coinboard::fill(Coinbag &coinbag) {
+    for (auto pair : orderOfFilling){
+        if (!coinbag.isEmpty()){
+            if (getCoin(pair.first, pair.second).getColor() == CoinColor::Empty){
+                setCoin(pair.first, pair.second, coinbag.distributeCoin());
+            }
+        }
+    }
+}

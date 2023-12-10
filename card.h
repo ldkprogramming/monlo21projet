@@ -41,6 +41,7 @@ public:
         skill1 = s1;
         skill2 = s2;
     }
+    Card(int cId);
     int getCrowns() const {return crowns;}
     int getPoints() const {return points;}
     int getId() const {return cardId;}
@@ -53,6 +54,19 @@ public:
     const std::map<CoinColor, int> &getCosts() const;
 
     void incrementBonus(CoinColor c, int amount);
+
+    static PileType getPileTypeOfCard(int cId){
+        if (cId <= 29){
+            return PileType::One;
+        }
+        if (cId <= 53){
+            return PileType::Two;
+        }
+        if (cId <= 66){
+            return PileType::Three;
+        }
+        return PileType::Royal;
+    }
 
 };
 

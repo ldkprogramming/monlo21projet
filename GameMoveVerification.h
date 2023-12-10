@@ -34,5 +34,6 @@ public:
     void change_verificator_state(GameMoveVerification&);
     void verify_coin_alignment(std::vector<std::pair<int,int>> coinchoices);
 
+
 };
 

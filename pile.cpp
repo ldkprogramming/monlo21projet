@@ -28,7 +28,8 @@ Pile::Pile(PileType type){
 
     }
     json data = json::parse(f);
-    for(auto card : data["cards"]){
+    for (json::iterator it = data["cards"].begin(); it != data["cards"].end(); ++it){
+        auto card = data["cards"][it.key()];
         int id = card["card_id"].template get<int>();
         int points = card["points"].template get<int>();
         int crowns = card["crowns"].template get<int>();
@@ -52,9 +53,10 @@ Pile::Pile(PileType type){
         bonuses[CoinColor::Blue] = card["bonuses"]["Blue"].template get<int>();
 
         Skill skill1 = toSkill(card["skill1"].template get<std::string>());
-        Skill skill2 = toSkill(card["skill1"].template get<std::string>());
+        Skill skill2 = toSkill(card["skill2"].template get<std::string>());
 
         cards.emplace_back(id, points, crowns, costs, bonuses, skill1, skill2);
+
     }
     // penser a rajouter le cas des cartes royales ?
 

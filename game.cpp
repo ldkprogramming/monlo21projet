@@ -5,6 +5,7 @@
 #include "game.h"
 #include <string>
 #include "nlohmann/json.hpp"
+#include "coinboard.h"
 #include <fstream>
 
 using json = nlohmann::json;
@@ -25,9 +26,6 @@ int Game::getPrivileges() const {
     return privileges;
 }
 
-void Game::setPrivileges(int privileges) {
-    Game::privileges = privileges;
-}
 
 const Pile &Game::getPile1() const {
     return pile1;
@@ -221,4 +219,73 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
     }
 
 
+}
+Game::Game(const std::string& path) : player1("ha"), player2("ho"){
+    std::ifstream f(path);
+    json data = json::parse(f);
+
+    // On initialise le sac a jetons
+    std::vector<Coin> coinsInCoinBag;
+    for (auto c : data["coinBag"]){
+        coinsInCoinBag.push_back(Coin(toCoinColor(c)));
+    }
+    coinBag = Coinbag(coinsInCoinBag);
+
+    // On initialise le plateau de jetons
+    for (int i =0 ; i<5;i++){
+        for (int j=0; j<5; j++){
+            coinBoard.setCoin(i, j, toCoinColor(data["coinBoard"][i][j]));
+        }
+    }
+
+    // On initialise les pioches
+    std::vector<Card> pile1Cards;
+    for (auto c : data["pile1"]){
+        pile1Cards.push_back(Card(c));
+    }
+    pile1 = Pile(PileType::One, pile1Cards);
+    std::vector<Card> pile2Cards;
+    for (auto c : data["pile2"]){
+        pile2Cards.push_back(Card(c));
+    }
+    pile2 = Pile(PileType::Two, pile2Cards);
+    std::vector<Card> pile3Cards;
+    for (auto c : data["pile3"]){
+        pile3Cards.push_back(Card(c));
+    }
+    pile3 = Pile(PileType::Three, pile3Cards);
+    std::vector<Card> royalPileCards;
+    for (auto c : data["royalPile"]){
+        royalPileCards.push_back(Card(c));
+    }
+    royalPile = Pile(PileType::Royal, royalPileCards);
+
+    // On initialise les joueurs
+
+    // On initialise les privileges
+    privileges = data["privileges"];
+
+    //On initialise la pyramide
+    std::vector<Card> level1Cards;
+    for (auto c: data["pyramid"]["level1Cards"]){
+        level1Cards.push_back(Card(c));
+    }
+    std::vector<Card> level2Cards;
+    for (auto c: data["pyramid"]["level2Cards"]){
+        level2Cards.push_back(Card(c));
+    }
+    std::vector<Card> level3Cards;
+    for (auto c: data["pyramid"]["level3Cards"]){
+        level3Cards.push_back(Card(c));
+    }
+    std::vector<Card> royalCards;
+    for (auto c: data["pyramid"]["royalCards"]){
+        royalCards.push_back(Card(c));
+    }
+
+    pyramid = CardPyramid(level1Cards, level2Cards, level3Cards, royalCards);
+    winConditions = WinConditions(data["winConditions"]["totalPoints"],data["winConditions"]["totalCrowns"], data["winConditions"]["pointsInOneColor"]);
+    turn = toPlayerEnum(data["turn"]);
+    winner = PlayerEnum::Empty;
+    loser = PlayerEnum::Empty;
 }

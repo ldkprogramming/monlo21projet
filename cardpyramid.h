@@ -24,6 +24,8 @@ private:
 
 public:
     CardPyramid(Pile& pile1, Pile& pile2, Pile& pile3, Pile& royalPile);
+    CardPyramid(std::vector<Card> level1Cards, std::vector<Card> level2Cards, std::vector<Card> level3Cards, std::vector<Card> royalCards) : level1Cards(level1Cards), level2Cards(level2Cards), level3Cards(level3Cards), royalCards(royalCards)  {}
+    CardPyramid() = default;
 
     const std::vector<Card> &getLevel1Cards() const;
 

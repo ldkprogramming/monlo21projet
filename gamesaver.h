@@ -18,9 +18,9 @@ private:
      */
     std::string path;
 public:
-    std::string getSavePath(){ return path; }
     GameSaver(std::string path = "../jsonFiles/ongoingGame.json") : path(path) {}
     bool saveGame(const Game& game) const;
+    std::string getPath(){return path;}
 
     // peut-etre ajouter une verification de la validite d'une sauvegarde ?
 };

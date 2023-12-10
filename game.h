@@ -23,24 +23,24 @@ PlayerEnum getOpponent(PlayerEnum p);
 
 class Game {
 
-    Coinbag coinBag = Coinbag();
-    Coinboard coinBoard = Coinboard(coinBag);
-    int privileges = 3;
+    Coinbag coinBag;
+    Coinboard coinBoard;
+    int privileges;
     Player player1;
     Player player2;
 
-    PlayerEnum winner = PlayerEnum::Empty;
-    PlayerEnum loser = PlayerEnum::Empty;
-    PlayerEnum turn = PlayerEnum::Player1;
+    PlayerEnum winner;
+    PlayerEnum loser;
+    PlayerEnum turn;
 
-    Pile pile1 = Pile(PileType::One);
-    Pile pile2 = Pile(PileType::Two);
-    Pile pile3 = Pile(PileType::Three);
-    Pile royalPile = Pile(PileType::Royal);
+    Pile pile1;
+    Pile pile2;
+    Pile pile3;
+    Pile royalPile;
 
-    CardPyramid pyramid = CardPyramid(pile1, pile2, pile3, royalPile);
+    CardPyramid pyramid;
 
-    WinConditions winConditions = WinConditions(20, 10, 10);
+    WinConditions winConditions;
 
 
     bool playerUsePrivilege(std::pair<int, int> coordinates);
@@ -70,10 +70,17 @@ public:
     const Coinbag& getCoinBag() const;
     const Coinboard &getCoinBoard() const;
     int getPrivileges() const;
-    void setPrivileges(int privileges);
     friend class Controller;
 
-    Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name){}
+    Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name),pile1(PileType::One), pile2(PileType::Two), pile3(PileType::Three), royalPile(PileType::Royal),pyramid(pile1, pile2, pile3, royalPile), winConditions(20, 10, 10){
+        winner = PlayerEnum::Empty;
+        loser = PlayerEnum::Empty;
+        turn = PlayerEnum::Player1;
+        coinBag = Coinbag();
+        coinBoard = Coinboard(coinBag);
+        privileges = 3;
+    }
+    Game(const std::string&  path);
 
     WinConditions getWinConditions() const{ return winConditions; }
 

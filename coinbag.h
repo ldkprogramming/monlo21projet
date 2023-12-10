@@ -20,6 +20,7 @@ private:
 
 public:
     Coinbag();
+    Coinbag(std::vector<Coin> coins) : coins(coins){}
     void shuffle();
     int getNumberOfCoins();
     void addCoin(const Coin& coin);
