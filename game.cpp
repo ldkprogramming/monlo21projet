@@ -217,6 +217,8 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
             getOpponentPlayer().incrementPrivileges();
         }
     }
+    // On passe au tour suivant !
+    turn = getOpponent(turn);
 
 
 }
@@ -288,4 +290,34 @@ Game::Game(const std::string& path) : player1("ha"), player2("ho"){
     turn = toPlayerEnum(data["turn"]);
     winner = PlayerEnum::Empty;
     loser = PlayerEnum::Empty;
+}
+
+bool Game::playerReserveCard(CardLevel level, int cardNumber) {
+    // ajouter les verifications
+    // par exemple, on peut pas reserver de carte royale
+    if (level == CardLevel::Royal){
+        return false;
+    }
+    // ou bien, on peut pas reserver une carte inexistante
+    if ((cardNumber < 0) or (cardNumber > pyramid.getNumberOfCards(level))){
+        return false;
+    }
+
+    getActivePlayer().reserveCard(pyramid.distributeCard(level, cardNumber));
+    switch (level){
+        case CardLevel::One : {
+            pyramid.refill(level, pile1);
+        }
+        case CardLevel::Two : {
+            pyramid.refill(level, pile2);
+        }
+        case CardLevel::Three : {
+            pyramid.refill(level, pile3);
+        }
+    }
+
+    // On passe au tour suivant !
+    turn = getOpponent(turn);
+
+    return true;
 }

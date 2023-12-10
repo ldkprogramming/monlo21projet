@@ -107,6 +107,8 @@ public:
     bool playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pair<int, int>>& coordinates);
     bool playerFillBoard();
     bool playerTakeCoins(std::vector<std::pair<int, int>> coordinates);
+    bool playerReserveCard(CardLevel level, int cardNumber);
+    bool playerBuyCard(CardLevel level, int cardNumber);
 
     void incrementPrivileges(){
         privileges += 1;
@@ -116,6 +118,8 @@ public:
             privileges -= 1;
         }
     }
+
+
 
 };
 

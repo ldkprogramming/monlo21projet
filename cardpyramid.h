@@ -5,6 +5,11 @@
 #ifndef MONLO21PROJET_CARDPYRAMID_H
 #define MONLO21PROJET_CARDPYRAMID_H
 #include "pile.h"
+#include "card.h"
+
+enum class CardLevel {
+    One, Two, Three, Royal
+};
 
 class CardPyramid {
 
@@ -21,6 +26,8 @@ private:
     std::vector<Card> royalCards;
     int maxNumberOfRoyalCards = 4;
 
+    std::vector<Card>& getCards(CardLevel level);
+
 
 public:
     CardPyramid(Pile& pile1, Pile& pile2, Pile& pile3, Pile& royalPile);
@@ -28,26 +35,23 @@ public:
     CardPyramid() = default;
 
     const std::vector<Card> &getLevel1Cards() const;
-
     int getMaxNumberOfLevel1Cards() const;
 
     const std::vector<Card> &getLevel2Cards() const;
-
     int getMaxNumberOfLevel2Cards() const;
 
     const std::vector<Card> &getLevel3Cards() const;
-
     int getMaxNumberOfLevel3Cards() const;
 
     const std::vector<Card> &getRoyalCards() const;
-
     int getMaxNumberOfRoyalCards() const;
 
-    const Card& distributeCard(int pileNumber, int cardNumber);
-
-    void refill(int pileNumber, Pile& pile);
-
+    const Card& distributeCard(CardLevel level, int cardNumber);
+    void refill(CardLevel level, Pile& pile);
     friend std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid);
+
+    const int getMaxCards(CardLevel level) const;
+    const int getNumberOfCards(CardLevel level) const;
 };
 
 

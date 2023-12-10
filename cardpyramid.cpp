@@ -60,32 +60,17 @@ int CardPyramid::getMaxNumberOfRoyalCards() const {
     return maxNumberOfRoyalCards;
 }
 
-const Card& CardPyramid::distributeCard(int pileNumber, int cardNumber){
+const Card& CardPyramid::distributeCard(CardLevel level, int cardNumber){
     /*
      * ajouter les verifs!
      */
-    switch (pileNumber){
-        case 1:{
-            Card result = level1Cards[cardNumber];
-            level1Cards.erase(level1Cards.begin()+cardNumber-1);
-            return result;
-        }
-        case 2:{
-            Card result = level2Cards[cardNumber];
-            level2Cards.erase(level2Cards.begin()+cardNumber-1);
-            return result;
-        }
-        case 3:{
-            Card result = level3Cards[cardNumber];
-            level3Cards.erase(level3Cards.begin()+cardNumber-1);
-            return result;
-        }
-        case 4:{
-            Card result = royalCards[cardNumber];
-            royalCards.erase(royalCards.begin()+cardNumber-1);
-            return result;
-        }
-    }
+    Card result = getCards(level)[cardNumber];
+    getCards(level).erase(getCards(level).begin()+ cardNumber -1);
+
+    return result;
+
+    // ne pas oublier de refill
+
 }
 
 std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid){
@@ -115,34 +100,72 @@ std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid){
     return f;
 }
 
-void CardPyramid::refill(int pileNumber, Pile &pile) {
-    // c'est tres moche mais ca marche, on pourra modifier apres
-    int maxNumberOfCards;
-    switch (pileNumber){
-        case 1:
-            maxNumberOfCards = getMaxNumberOfLevel1Cards();
-            while ((level1Cards.size() < maxNumberOfCards) and (!pile.isEmpty())){
-                level1Cards.push_back(pile.distributeCard());
-            }
-            break;
-        case 2:
-            maxNumberOfCards = getMaxNumberOfLevel2Cards();
-            while ((level2Cards.size() < maxNumberOfCards) and (!pile.isEmpty())){
-                level2Cards.push_back(pile.distributeCard());
-            }
-            break;
-        case 3:
-            maxNumberOfCards = getMaxNumberOfLevel3Cards();
-            while ((level3Cards.size() < maxNumberOfCards) and (!pile.isEmpty())){
-                level3Cards.push_back(pile.distributeCard());
-            }
-            break;
-        case 4:
-            maxNumberOfCards = getMaxNumberOfRoyalCards();
-            while ((royalCards.size() < maxNumberOfCards) and (!pile.isEmpty())){
-                royalCards.push_back(pile.distributeCard());
-            }
-            break;
+void CardPyramid::refill(CardLevel level, Pile &pile) {
+    int maxCards = getMaxCards(level);
+    while ((getCards(level).size() < maxCards) and (!pile.isEmpty())){
+        getCards(level).push_back(pile.distributeCard());
     }
+}
 
+const int CardPyramid::getMaxCards(CardLevel level) const{
+    switch (level){
+        case CardLevel::One : {
+            return getMaxNumberOfLevel1Cards();
+            break;
+        }
+        case CardLevel::Two : {
+            return getMaxNumberOfLevel2Cards();
+            break;
+        }
+        case CardLevel::Three: {
+            return getMaxNumberOfLevel3Cards();
+            break;
+        }
+        default : {
+            return getMaxNumberOfRoyalCards();
+            break;
+        }
+    }
+}
+
+std::vector<Card> &CardPyramid::getCards(CardLevel level) {
+    switch (level){
+        case CardLevel::One : {
+            return level1Cards;
+            break;
+        }
+        case CardLevel::Two : {
+            return level2Cards;
+            break;
+        }
+        case CardLevel::Three: {
+            return level3Cards;
+            break;
+        }
+        default : {
+            return royalCards;
+            break;
+        }
+    }
+}
+
+const int CardPyramid::getNumberOfCards(CardLevel level) const {
+    switch (level){
+        case CardLevel::One : {
+            return level1Cards.size();
+            break;
+        }
+        case CardLevel::Two : {
+            return level2Cards.size();
+            break;
+        }
+        case CardLevel::Three: {
+            return level3Cards.size();
+            break;
+        }
+        default : {
+            return royalCards.size();
+            break;
+        }
+    }
 }
