@@ -46,12 +46,14 @@ public:
     const std::vector<Card> &getRoyalCards() const;
     int getMaxNumberOfRoyalCards() const;
 
-    const Card& distributeCard(CardLevel level, int cardNumber);
+    Card& distributeCard(CardLevel level, int cardNumber);
+    const Card& checkCard(CardLevel level, int cardNumber);
     void refill(CardLevel level, Pile& pile);
     friend std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid);
 
     const int getMaxCards(CardLevel level) const;
     const int getNumberOfCards(CardLevel level) const;
+
 };
 
 

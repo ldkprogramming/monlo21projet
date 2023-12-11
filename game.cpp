@@ -179,6 +179,7 @@ bool Game::playerTakeCoin(std::pair<int, int> coordinates) {
 
     getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
     // on vide le jeton du plateau
+
     coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
     return true;
 }
@@ -193,7 +194,7 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
     }
 
     for (auto c : coordinates){
-        //verifications
+        //faudra ajouter les verifications
         continue;
     }
     const Coin& firstCoin = coinBoard.getCoin(coordinates[0].first, coordinates[0].second);
@@ -314,10 +315,97 @@ bool Game::playerReserveCard(CardLevel level, int cardNumber) {
         case CardLevel::Three : {
             pyramid.refill(level, pile3);
         }
+        default : {
+            throw std::runtime_error("Bad card level !");
+        }
+
+    }
+    // on passe au tour suivant !
+    turn = getOpponent(turn);
+    return true;
+}
+
+bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor = CoinColor::Empty,
+                         CoinColor stolenColor = CoinColor::Empty, std::pair<int, int> coordinates = {0, 0}) {
+    // l'argument optionnel bonusColor sert en cas de capacite bonus
+    // l'argument optionnel stolenColor sert en cas de capacite robCoin
+    // On peut pas acheter une carte royale
+    if (level == CardLevel::Royal){
+        return false;
+    }
+    // ou bien, on peut pas acheter une carte inexistante
+    if ((cardNumber < 0) or (cardNumber > pyramid.getNumberOfCards(level))){
+        return false;
+    }
+    // on verifie evidemment si le joueur peut acheter la carte
+    if (!getActivePlayer().canBuy(pyramid.checkCard(level, cardNumber))){
+        return false;
     }
 
-    // On passe au tour suivant !
-    turn = getOpponent(turn);
 
+
+    // On traite la question des jetons
+    for (auto c : pyramid.checkCard(level, cardNumber).getCosts()){
+        if (c.second > 0){
+            int cost = c.second - getActivePlayer().getBonus(c.first);
+            while (cost > 0){
+                getActivePlayer().loseCoin(c.first);
+            }
+        }
+    }
+
+
+    Card& card = pyramid.distributeCard(level, cardNumber);
+    // on applique les capacites
+    applyCardSkill(card, card.getSkill1(), bonusColor, stolenColor, coordinates);
+    applyCardSkill(card, card.getSkill2(), bonusColor, stolenColor, coordinates);
+
+    // On ajoute la carte a la main du joueur
+    getActivePlayer().addCardToHand(card);
+
+
+    // On traite la capacite PlayAgain
+    // Si la carte ne possede pas la capacite, on change de tour
+    if (!((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) or (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
+        turn = getOpponent(turn);
+    }
+
+    return true;
+}
+
+bool Game::applyCardSkill(Card &card, Skill skill, CoinColor bonusColor, CoinColor stolenColor,
+                          std::pair<int, int> coordinates) {
+    // la capacite playAgain sera traitee au niveau de la methode playerBuyCard
+    switch (skill){
+        case (Skill::Bonus): {
+            card.incrementBonus(bonusColor, 1);
+            break;
+        }
+        case (Skill::RobCoin) : {
+            // faudra faire la verification des jetons possedes par l'adversaire
+            getOpponentPlayer().loseCoin(stolenColor);
+            getActivePlayer().addCoin(stolenColor);
+        }
+        case (Skill::TakeCoin) : {
+            // faudra laisser prendre seulement les jetons valides...
+            if (coinBoard.containsAtLeastOne(card.getCardColor())){
+                // Faudra surement creer une methode distributeCoin pour ne pas devoir a
+                // ecrire tout le temps ces deux lignes cote a cote
+                getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
+                coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+
+            }
+        }
+        case (Skill::TakePrivilege) : {
+            if (privileges > 0){
+                decrementPrivileges();
+                getActivePlayer().incrementPrivileges();
+            } else if (getOpponentPlayer().getPrivileges() > 0){
+                getOpponentPlayer().decrementPrivileges();
+                getActivePlayer().incrementPrivileges();
+            }
+        }
+
+    }
     return true;
 }

@@ -60,7 +60,7 @@ int CardPyramid::getMaxNumberOfRoyalCards() const {
     return maxNumberOfRoyalCards;
 }
 
-const Card& CardPyramid::distributeCard(CardLevel level, int cardNumber){
+Card& CardPyramid::distributeCard(CardLevel level, int cardNumber){
     /*
      * ajouter les verifs!
      */
@@ -168,4 +168,9 @@ const int CardPyramid::getNumberOfCards(CardLevel level) const {
             break;
         }
     }
+}
+
+const Card &CardPyramid::checkCard(CardLevel level, int cardNumber) {
+    // faudra ajouter les verifs
+    return getCards(level)[cardNumber];
 }

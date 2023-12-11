@@ -65,6 +65,9 @@ class Game {
 
     bool playerTakeCoin(std::pair<int, int> coordinates);
 
+    bool applyCardSkill(Card& card, Skill skill, CoinColor bonusColor = CoinColor::Empty,
+                        CoinColor stolenColor = CoinColor::Empty , std::pair<int, int> coordinates = {0, 0});
+
 public:
     const CardPyramid &getPyramid() const;
     const Coinbag& getCoinBag() const;
@@ -80,7 +83,7 @@ public:
         coinBoard = Coinboard(coinBag);
         privileges = 3;
     }
-    Game(const std::string&  path);
+    explicit Game(const std::string&  path);
 
     WinConditions getWinConditions() const{ return winConditions; }
 
@@ -108,7 +111,9 @@ public:
     bool playerFillBoard();
     bool playerTakeCoins(std::vector<std::pair<int, int>> coordinates);
     bool playerReserveCard(CardLevel level, int cardNumber);
-    bool playerBuyCard(CardLevel level, int cardNumber);
+    bool playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor, CoinColor stolenColor,
+                       std::pair<int, int> coordinates);
+
 
     void incrementPrivileges(){
         privileges += 1;
@@ -118,9 +123,6 @@ public:
             privileges -= 1;
         }
     }
-
-
-
 };
 
 

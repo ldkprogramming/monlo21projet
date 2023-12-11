@@ -65,6 +65,16 @@ int Player::getMaxPointsPerColor() {
 
 bool Player::canBuy(const Card &card) {
     // ATTENTION faut ajouter la verification sur une carte contenant la capacite bonus
+    if ((card.getSkill1() == Skill::Bonus) or (card.getSkill2() == Skill::Bonus)){
+        for (auto c : bonusesPerColor){
+            if (c.second > 0){
+                break;
+            }
+        }
+        return false;
+    }
+
+
     for (auto cost : card.getCosts()){
         if ( bonusesPerColor[cost.first] + coinsPerColor[cost.first] < cost.second ){
             return false;
@@ -118,4 +128,27 @@ std::ostream& operator<<(std::ostream &f, const Player& p){
 
     f << "\n--------\n";
     return f;
+}
+
+void Player::loseCoin(CoinColor c) {
+    if (c == CoinColor::Gold){
+        throw std::runtime_error("Invalid color");
+    }
+    if (coinsPerColor[c] <= 0){
+        throw std::runtime_error("Invalid color");
+    }
+    coinsPerColor[c] -= 1;
+    auto it = coins.begin();
+    while (it != coins.end()){
+        if (it->getColor() == c){
+            it = coins.erase(it);
+            break;
+        } else {
+            it++;
+        }
+    }
+}
+
+void Player::addCardToHand(const Card &card) {
+    hand.push_back(card);
 }

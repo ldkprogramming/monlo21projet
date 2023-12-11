@@ -34,7 +34,7 @@ private:
 public:
     Player(std::string name);
     Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor) :
-    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges), {}
+    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges) {}
     int getTotalPoints();
     int getTotalCrowns();
     int getMaxPointsPerColor();
@@ -57,6 +57,15 @@ public:
     void decrementPrivileges() {
         if (privileges > 0){
             privileges -= 1;
+        }
+    }
+    void loseCoin(CoinColor c);
+    void addCardToHand(const Card& card);
+    const int getBonus(CoinColor color) const {
+        for (auto c : bonusesPerColor){
+            if (c.first == color){
+                return c.second;
+            }
         }
     }
 };
