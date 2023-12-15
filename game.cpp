@@ -85,25 +85,26 @@ bool Game::playerUsePrivilege(std::pair<int, int> coordinates) {
 
     // faut verifier si les coordonnees sont correctes, valides
     // faudra ajouter un attribut largeur au coinboard, mais pour l'instant ca marche
-    if ((coordinates.first > 4 ) or (coordinates.first < 0) or (coordinates.second > 4 ) or (coordinates.second < 0)){
+    if ((coordinates.first > 4) || (coordinates.first < 0) || (coordinates.second > 4) || (coordinates.second < 0)) {
         return false;
+
+        // faut verifier si ce n'est pas un jeton or
+        if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)) {
+            return false;
+        }
+        // faut verifier que le joueur a qui c le tour possede au moins un privilege
+        if (getPlayer(turn).getPrivileges() < 1) {
+            return false;
+        }
+
+        getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
+
+        // on vide le jeton du plateau
+        coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+        return true;
+
+
     }
-    // faut verifier si ce n'est pas un jeton or
-    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) or (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)){
-        return false;
-    }
-    // faut verifier que le joueur a qui c le tour possede au moins un privilege
-    if (getPlayer(turn).getPrivileges() < 1){
-        return false;
-    }
-
-    getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
-
-    // on vide le jeton du plateau
-    coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
-    return true;
-
-
 }
 
 PlayerEnum getOpponent(PlayerEnum p){
@@ -134,11 +135,11 @@ bool Game::playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pa
     }
     // faut verifier si les coordonnees sont valides
     for (auto c : coordinates){
-        if ((c.first > 4 ) or (c.first < 0) or (c.second > 4 ) or (c.second < 0)){
+        if ((c.first > 4 ) || (c.first < 0) || (c.second > 4 ) || (c.second < 0)){
             return false;
         }
         // faut verifier si ce n'est pas un jeton or
-        if ((coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Gold) or (coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Empty)){
+        if ((coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Gold) || (coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Empty)){
             return false;
         }
     }
@@ -169,11 +170,11 @@ bool Game::playerFillBoard() {
 
 bool Game::playerTakeCoin(std::pair<int, int> coordinates) {
     // on doit verifier si les coordonnees sont valides
-    if ((coordinates.first > 4 ) or (coordinates.first < 0) or (coordinates.second > 4 ) or (coordinates.second < 0)){
+    if ((coordinates.first > 4 ) || (coordinates.first < 0)|| (coordinates.second > 4 ) ||(coordinates.second < 0)){
         return false;
     }
     // on doit verifier si c'est un jeton vide ou or
-    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty) or (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold)){
+    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold)){
         return false;
     }
 
@@ -209,7 +210,7 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
         playerTakeCoin(c);
     }
 
-    if (allSameColor or (numberOfPearlCoins == 2)){
+    if (allSameColor || (numberOfPearlCoins == 2)){
         if (privileges > 0){
             decrementPrivileges();
             getOpponentPlayer().incrementPrivileges();
@@ -300,7 +301,7 @@ bool Game::playerReserveCard(CardLevel level, int cardNumber) {
         return false;
     }
     // ou bien, on peut pas reserver une carte inexistante
-    if ((cardNumber < 0) or (cardNumber > pyramid.getNumberOfCards(level))){
+    if ((cardNumber < 0) || (cardNumber > pyramid.getNumberOfCards(level))){
         return false;
     }
 
@@ -334,7 +335,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
         return false;
     }
     // ou bien, on peut pas acheter une carte inexistante
-    if ((cardNumber < 0) or (cardNumber > pyramid.getNumberOfCards(level))){
+    if ((cardNumber < 0) || (cardNumber > pyramid.getNumberOfCards(level))){
         return false;
     }
     // on verifie evidemment si le joueur peut acheter la carte
@@ -366,7 +367,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
 
     // On traite la capacite PlayAgain
     // Si la carte ne possede pas la capacite, on change de tour
-    if (!((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) or (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
+    if (!((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) || (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
         turn = getOpponent(turn);
     }
 
