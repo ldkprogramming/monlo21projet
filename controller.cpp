@@ -183,6 +183,32 @@ bool Controller::reset_game(
     return true;
 }
 
+std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
+{
+    std::vector<Coin> coins;
+    int number_of_coins;
+    std::cout << "Combien de jetons voulez vous prendre" << std::endl;
+    std::cin >> number_of_coins;
+    int x, y;
+    for (int i = 0; number_of_coins; i++) {
+        std::cout << "Entrez la coordonnées x du jeton à prendre " << std::endl;
+        std::cin >> x;
+        std::cout << "Entrez la coordonnées y du jeton à prendre " << std::endl;
+        std::cin >> y;
+        coins.push_back(this->GameControlled.coinBoard.getCoin(x,y));
+    }
+    return coins;
+}
+
+bool Controller::ask_player_for_optional_actions(Player& player)
+{
+    int state;
+    std::cout << "Voulez-vous effectuer une action optionnelle ? \n 1 pour oui \n 0 pour non" << std::endl;;
+    std::cin >> state;
+    if (state) { return true; }
+    else { return false; }
+}
+
 void Controller::change_turn()
 {
     if (GameControlled.getPlayerTurn() == PlayerEnum::Player1) {

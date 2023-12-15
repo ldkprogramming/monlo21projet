@@ -13,6 +13,6 @@
 #include <cstdio>
 
 class AIPlayer : public Player{
-	
+
 };
 
