@@ -102,7 +102,7 @@ std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid){
 
 void CardPyramid::refill(CardLevel level, Pile &pile) {
     int maxCards = getMaxCards(level);
-    while ((getCards(level).size() < maxCards) and (!pile.isEmpty())){
+    while ((getCards(level).size() < maxCards) && (!pile.isEmpty())){
         getCards(level).push_back(pile.distributeCard());
     }
 }
