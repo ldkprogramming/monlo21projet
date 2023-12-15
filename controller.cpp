@@ -164,4 +164,36 @@ void Controller::applyCompulsoryAction(Game &game, Player &player, CompulsoryAct
 }
 */
 
+Controller::Controller(GameMoveVerification& checker, const Game& GameControlled) : checker(checker), GameControlled(GameControlled){}
 
+bool Controller::launch_save(GameSaver& save)
+{
+    save.saveGame(this->GameControlled);
+   
+}
+
+
+
+bool Controller::reset_game(
+)
+{
+    this->GameControlled.~Game();
+    this->checker.~GameMoveVerification();
+    
+    return true;
+}
+
+void Controller::change_turn()
+{
+    if (GameControlled.getPlayerTurn() == PlayerEnum::Player1) {
+        GameControlled.turn = GameControlled.getOpponentPlayer();
+    }
+}
+
+bool Controller::verify_win(Player& player){
+    int winTotalPoints = this->GameControlled.getWinConditions().getTotalPoints();
+    int winTotalCrowns = this->GameControlled.getWinConditions().getTotalCrowns();
+    int winPointsInOneColor = this->GameControlled.getWinConditions().getPointsInOneColor();
+
+    return ((player.getMaxPointsPerColor() == winPointsInOneColor) || (player.getTotalPoints() == winTotalPoints) || (player.getTotalCrowns() == winTotalCrowns));
+}
