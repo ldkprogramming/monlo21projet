@@ -22,6 +22,8 @@ PlayerEnum getOpponent(PlayerEnum p);
 
 
 class Game {
+    friend class Controller;
+    friend class GameMoveVerification;
 
     Coinbag coinBag;
     Coinboard coinBoard;
@@ -41,6 +43,7 @@ class Game {
     CardPyramid pyramid;
 
     WinConditions winConditions;
+
 
 
     bool playerUsePrivilege(std::pair<int, int> coordinates);
