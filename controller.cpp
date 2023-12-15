@@ -203,10 +203,24 @@ std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
 bool Controller::ask_player_for_optional_actions(Player& player)
 {
     int state;
-    std::cout << "Voulez-vous effectuer une action optionnelle ? \n 1 pour oui \n 0 pour non" << std::endl;;
+    std::cout << "Voulez-vous effectuer une action optionnelle ? \n 1 pour oui \n 0 pour non" << std::endl;
     std::cin >> state;
     if (state) { return true; }
     else { return false; }
+}
+
+Card& Controller::ask_player_for_card_to_buy(Player& player)
+{
+    int pile, position;
+    std::cout << "Quelle carte voulez-vous acheter ?" << std::endl << "Entrez le numéro de pile \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n 4 pour les cartes royales \n";
+    std::cin >> pile;
+    std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
+    std::cin >> position;
+    
+    
+    Card& card_to_buy = this->GameControlled.pyramid.checkCard(pile, position);
+    return card_to_buy;
+   
 }
 
 void Controller::change_turn()
