@@ -28,6 +28,14 @@ public:
 	bool launch_save(GameSaver& save);
 	bool reset_game();
 
+	std::vector<Coin> ask_player_for_tokens(Player& Player);
+	bool ask_player_for_optional_actions(Player& player);
+	Card& ask_player_for_card_to_buy(Player& player);
+	Card& ask_player_for_card_to_reserve(Player& player);
+	CoinColor ask_player_for_bonus_color(Player& player);
+
+
+
 	void play_game();
 	void change_turn();
 	bool verify_win(Player& player);
