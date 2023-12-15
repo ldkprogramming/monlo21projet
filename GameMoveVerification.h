@@ -17,22 +17,25 @@
 
 class GameMoveVerification{
     friend class Game;
+    friend class Controller;
     Game& GameChecked;
     bool verificator_state = true;
 
     
 public:
 
-    GameMoveVerification(Game&); // Controller en argument potentiellement je sais pas
-    GameMoveVerification(const GameMoveVerification&) = delete;
-    GameMoveVerification& operator=(const GameMoveVerification&) = delete;
-    ~GameMoveVerification(); //Potentiellement inutile étant donné qu'il y a uniquement un booléen et une référence
-    
+    GameMoveVerification(Game& game); // Controller en argument potentiellement je sais pas
+    GameMoveVerification(const GameMoveVerification&) = delete; 
     inline Game& get_game_checked() const {return GameChecked;};
     inline int get_verificator_state() const {return verificator_state;};
 
-    void change_verificator_state(GameMoveVerification&);
-    void verify_coin_alignment(std::vector<std::pair<int,int>> coinchoices);
+    void change_verificator_state();
+    bool verify_coin_alignment(std::vector<std::pair<int,int>> coinchoices);
+    bool verify_coin_colors(std::vector<Coin> coinstaken);
+    bool verify_optional_actions(Player& player);
+    bool verify_card_type_reservation(Card& reservedCard);
+    bool verify_no_bonus_card(Card& boughtCard, Player& player);
+
 
 
 };
