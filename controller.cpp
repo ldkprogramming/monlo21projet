@@ -9,8 +9,9 @@
 
 
 
-Controller::Controller(GameMoveVerification& checker,  const Game& GameControlled) : checker(checker), GameControlled(GameControlled){}
+Controller::Controller(GameMoveVerification& checker, Game& GameControlled) : checker (checker), GameControlled(GameControlled) {
 
+}
 bool Controller::launch_save(GameSaver& save)
 {
     save.saveGame(this->GameControlled);
@@ -60,6 +61,19 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
     }
     return coordinates;
 }
+
+std::pair<int, int> Controller::ask_for_player_solo_token_coordinates(Player& p)
+{
+    int x, y;
+    std::cout << "Entrez la coordonnées x du jeton à prendre " << std::endl;
+    std::cin >> x;
+    std::cout << "Entrez la coordonnées y du jeton à prendre " << std::endl;
+    std::cin >> y;
+    std::pair<int,int> coordinates = std::pair<int, int>(x, y);
+    return coordinates;
+}
+    
+
 
 bool Controller::ask_player_for_optional_actions(Player& player)
 {
@@ -126,6 +140,42 @@ CoinColor Controller::ask_player_for_bonus_color(Player& player)
         break;
     }
     
+}
+
+CoinColor Controller::ask_for_color_to_steal(Player& p)
+
+{
+        int Color;
+        std::cout << " Quelle couleur de jetons voulez-vous parler ? " << std::endl << "1 : Rouge \n  2 : Vert \n 3 : Bleu \n  4 : Blanc \n 5 : Noir \n 6 : Perle" << std::endl;
+        std::cin >> Color;
+
+        switch (Color)
+        {
+        case 1:
+            return CoinColor::Red;
+
+        case 2:
+            return CoinColor::Green;
+
+        case 3:
+            return CoinColor::Blue;
+
+        case 4:
+            return CoinColor::White;
+
+        case 5:
+            return CoinColor::Black;
+        case 6:
+            return CoinColor::Pearl;
+
+        default:
+            return ask_for_color_to_steal(p);
+            break;
+        }
+
+   
+
+    return CoinColor();
 }
 
 PlayerType Controller::ask_for_opponenent_type(Player& opponent)
@@ -207,6 +257,18 @@ CompulsoryActions Controller::ask_for_compulsory_action_type(Player& p)
     }
 }
 
+std::vector<Coin> Controller::coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates)
+{
+    std::vector<Coin> coinvector;
+    for (auto c : coordinates) {
+        coinvector.push_back(this->GameControlled.getCoinBoard().getCoin(c.first, c.second));
+   
+    }
+    return coinvector;
+}
+
+
+
 
 void Controller::play_game()
 {
@@ -218,7 +280,6 @@ void Controller::play_game()
     while (!verify_win(this->GameControlled.getActivePlayer()))
         if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human) { play_turn_human(); }
         else(play_turn_AI());
-    change_turn();
 
 
 }
@@ -240,11 +301,54 @@ void Controller::play_turn_human()
                 if (checker.get_verificator_state() == false) { checker.change_verificator_state(); }
                  
             }
+            if (optionalaction == OptionalActions::FillBoard) {
+                GameControlled.playerFillBoard();
+            }
+
         }
+        }
+        CompulsoryActions Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
+        if (Compulsory_Action == CompulsoryActions::TakeCoins) {
+            std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
+            while  (!checker.verify_coin_alignment(coordinates) || !checker.verify_coin_colors(coordinates_to_coin(coordinates) )) {
+                throw (" Erreur de choix \n");
+                coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
+            }
+            GameControlled.playerTakeCoins(coordinates);
+        }
+        if (Compulsory_Action == CompulsoryActions::ReserveCard) {
+            Card& card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
+            if (!checker.verify_card_type_reservation(card_to_reserve)) {
+                throw("Erreur de choix \n");
+                card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
+            }
+
+            GameControlled.playerReserveCard(card_to_reserve.getPileTypeOfCard(card_to_reserve.getId()),card_to_reserve.getId())
+        }
+
+        if (Compulsory_Action == CompulsoryActions::BuyCard) {
+            Card& card_to_buy = ask_player_for_card_to_buy(GameControlled.getActivePlayer());
+            Skill cardskill1 = card_to_buy.getSkill1();
+            Skill cardskill2 = card_to_buy.getSkill2();
+            
+            if (cardskill1 == Skill::TakeCoin && cardskill2 == Skill::RobCoin || cardskill1 == Skill::RobCoin && cardskill2 == Skill::TakeCoin) {
+                GameControlled.playerBuyCard(card_to_buy.getPileTypeOfCard(card_to_buy.getId()), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
+            }
+
+            if (cardskill1 == Skill::TakeCoin || cardskill2 == Skill::TakeCoin) {
+                GameControlled.playerBuyCard(card_to_buy.getPileTypeOfCard(card_to_buy.getId()), card_to_buy.getId(), card_to_buy.getCardColor(), CoinColor::Empty, ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
+            }
+            if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
+                GameControlled.playerBuyCard(card_to_buy.getPileTypeOfCard(card_to_buy.getId()), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
+            }
+        
+            
+        }
+       
 
 
     }
 
-
+    
 
 }
