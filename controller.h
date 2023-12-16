@@ -33,7 +33,7 @@ public:
 	Card& ask_player_for_card_to_buy(Player& player);
 	Card& ask_player_for_card_to_reserve(Player& player);
 	CoinColor ask_player_for_bonus_color(Player& player);
-	CoinColor convert_string_to_coin_color(std::string);
+	PlayerType ask_for_opponenent_type(Player& opponent);
 
 
 	void play_game();

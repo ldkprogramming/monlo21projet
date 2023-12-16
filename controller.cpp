@@ -19,8 +19,7 @@ bool Controller::launch_save(GameSaver& save)
 
 
 
-bool Controller::reset_game(
-)
+bool Controller::reset_game()
 {
     this->GameControlled.~Game();
     this->checker.~GameMoveVerification();
@@ -112,6 +111,20 @@ CoinColor Controller::ask_player_for_bonus_color(Player& player)
     
 }
 
+PlayerType Controller::ask_for_opponenent_type(Player& opponent)
+{
+    int choice;
+    std::cout << "Voulez vous jouer contre une IA ? " << std::endl << "0 pour non et 1 pour oui" << std::endl;
+    std::cin >> choice;
+    if (choice) {
+        return PlayerType::AI;
+    }
+    return PlayerType::AI;
+}
+
+
+
+
 
 
 void Controller::change_turn()
@@ -127,4 +140,11 @@ bool Controller::verify_win(Player& player){
     int winPointsInOneColor = this->GameControlled.getWinConditions().getPointsInOneColor();
 
     return ((player.getMaxPointsPerColor() == winPointsInOneColor) || (player.getTotalPoints() == winTotalPoints) || (player.getTotalCrowns() == winTotalCrowns));
+}
+
+
+void Controller::play_game()
+{
+
+
 }
