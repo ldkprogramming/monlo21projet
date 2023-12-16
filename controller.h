@@ -34,6 +34,8 @@ public:
 	Card& ask_player_for_card_to_reserve(Player& player);
 	CoinColor ask_player_for_bonus_color(Player& player);
 	PlayerType ask_for_opponenent_type(Player& opponent);
+	OptionalActions ask_for_optional_action_type(Player& player);
+	
 
 
 	void play_game();

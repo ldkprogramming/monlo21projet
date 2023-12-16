@@ -122,6 +122,26 @@ PlayerType Controller::ask_for_opponenent_type(Player& opponent)
     return PlayerType::AI;
 }
 
+OptionalActions Controller::ask_for_optional_action_type(Player& player)
+{
+    int choice;
+    std::cout << "Quelle action voulez-vous effectuer ? \n 1 pour  prendre un jeton avec un privilège \n 2 pour remplir le plateau";
+    std::cin >> choice;
+    switch (choice) {
+    case 1 :
+        return OptionalActions::UsePrivileges;
+    case 2:
+        return OptionalActions::FillBoard;
+
+    default:
+        return ask_for_optional_action_type(player);
+
+
+    }
+    
+
+}
+
 
 
 
