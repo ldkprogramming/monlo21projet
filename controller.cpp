@@ -68,6 +68,52 @@ Card& Controller::ask_player_for_card_to_buy(Player& player)
    
 }
 
+Card& Controller::ask_player_for_card_to_reserve(Player& player)
+{
+    int pile, position;
+    std::cout << "Quelle carte voulez-vous réserver ?" << std::endl << "Entrez le numéro de pile \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n 4 pour les cartes royales \n";
+    std::cin >> pile;
+    std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
+    std::cin >> position;
+
+
+    Card& card_to_reserve = this->GameControlled.pyramid.checkCard(pile, position);
+    return card_to_reserve;
+
+    
+}
+
+CoinColor Controller::ask_player_for_bonus_color(Player& player)
+{
+    int Color;
+    std::cout << "A quelle couleur vous attacher ce bonus ?" << std::endl << "1 : Rouge \n  2 : Vert \n 3 : Bleu \n  4 : Blanc \n 5 : Noir" << std::endl ;
+    std::cin >> Color;
+
+    switch (Color)
+    {
+    case 1:
+        return CoinColor::Red;
+
+    case 2:
+        return CoinColor::Green;
+
+    case 3 :
+        return CoinColor::Blue;
+
+    case 4 :
+        return CoinColor::White;
+
+    case 5 : 
+        return CoinColor::Black;
+    default:
+        return ask_player_for_bonus_color(player);
+        break;
+    }
+    
+}
+
+
+
 void Controller::change_turn()
 {
     if (GameControlled.getPlayerTurn() == PlayerEnum::Player1) {
