@@ -45,6 +45,7 @@ public:
     int getMaxPointsPerColor();
     const int getPrivileges() const {return privileges;}
     bool canBuy(const Card& card);
+    PlayerType get_type() const { return type; }
 
     const std::map<CoinColor, int> &getCoinsPerColor() const;
     const std::map<CoinColor, int> &getBonusesPerColor() const;

@@ -171,7 +171,14 @@ void Controller::play_game()
     else { this->GameControlled.turn = PlayerEnum::Player1; }
 
     while (!verify_win(this->GameControlled.getActivePlayer()))
-        Controller::play_turn();
+        if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human) { play_turn_human(); }
+        else(play_turn_AI());
+    change_turn();
 
+
+}
+
+void Controller::play_turn_human()
+{
 
 }
