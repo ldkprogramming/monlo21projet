@@ -9,6 +9,10 @@
 #include "card.h"
 #include "coin.h"
 
+enum class PlayerType {
+    AI, Human 
+};
+
 enum class OptionalActions{
     UsePrivileges, FillBoard, Empty
 };
@@ -30,6 +34,7 @@ private:
     std::map<CoinColor, int> bonusesPerColor;
     std::map<CoinColor, int> pointsPerColor;
 
+    PlayerType type;
 
 public:
     Player(std::string name);

@@ -27,6 +27,8 @@ Player::Player(std::string name) : name(name){
     pointsPerColor[CoinColor::Black] = 0;
     pointsPerColor[CoinColor::Pearl] = 0;
     pointsPerColor[CoinColor::Gold] = 0;
+
+    type = PlayerType::Human;
 }
 
 int Player::getTotalCrowns() {

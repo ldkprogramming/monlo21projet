@@ -13,6 +13,12 @@
 #include <cstdio>
 
 class AIPlayer : public Player{
+	
+	
+
+public:
+
+	AIPlayer(std::string name, PlayerType type = PlayerType::AI) : Player(name){}
 
 };
 
