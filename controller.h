@@ -39,6 +39,8 @@ public:
 
 
 	void play_game();
+	void play_turn_human();
+	void play_turn_AI();
 	void change_turn();
 	bool verify_win(Player& player);
 

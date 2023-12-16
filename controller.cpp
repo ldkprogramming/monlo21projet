@@ -170,6 +170,8 @@ void Controller::play_game()
     if (coin) {this->GameControlled.turn = PlayerEnum::Player2; }
     else { this->GameControlled.turn = PlayerEnum::Player1; }
 
-    while(!verify_win(this->GameControlled.getActivePlayer()))
+    while (!verify_win(this->GameControlled.getActivePlayer()))
+        Controller::play_turn();
+
 
 }
