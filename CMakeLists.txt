@@ -31,6 +31,7 @@ add_executable(monlo21projet main.cpp
         statsaver.cpp
         statsaver.h
         aiplayer.cpp
-        aiplayer.h
+        
+
 )
 
