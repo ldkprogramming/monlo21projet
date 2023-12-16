@@ -32,16 +32,18 @@ public:
 	std::vector<std::pair<int, int>> ask_player_for_tokens_coordinates(Player& player);
 	std::pair<int, int> ask_for_player_solo_token_coordinates(Player& p);
 	bool ask_player_for_optional_actions(Player& player);
-	Card& ask_player_for_card_to_buy(Player& player);
-	Card& ask_player_for_card_to_reserve(Player& player);
+	const Card& ask_player_for_card_to_buy(Player& player);
+	const Card& ask_player_for_card_to_reserve(Player& player);
 	CoinColor ask_player_for_bonus_color(Player& player);
 	CoinColor ask_for_color_to_steal(Player& p);
 	PlayerType ask_for_opponenent_type(Player& opponent);
 	OptionalActions ask_for_optional_action_type(Player& player);
 	int ask_for_number_of_privileges_to_use(Player& p);
 	CompulsoryActions ask_for_compulsory_action_type(Player& p);
-	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
 	
+	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
+	CardLevel int_to_cardlevel(int level);
+	CardLevel piletype_to_cardlevel(PileType type);
 
 	void play_game();
 	void play_turn_human();

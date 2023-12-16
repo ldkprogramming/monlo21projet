@@ -84,30 +84,31 @@ bool Controller::ask_player_for_optional_actions(Player& player)
     else { return false; }
 }
 
-Card& Controller::ask_player_for_card_to_buy(Player& player)
+ const Card& Controller::ask_player_for_card_to_buy(Player& player)
 {
     int pile, position;
     std::cout << "Quelle carte voulez-vous acheter ?" << std::endl << "Entrez le numéro de pile \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n 4 pour les cartes royales \n";
     std::cin >> pile;
     std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
     std::cin >> position;
-    
-    
-    Card& card_to_buy = this->GameControlled.pyramid.checkCard(pile, position);
+    CardLevel pileconverted = int_to_cardlevel(pile);
+
+    const Card& card_to_buy = this->GameControlled.pyramid.checkCard(pileconverted, position);
     return card_to_buy;
    
 }
 
-Card& Controller::ask_player_for_card_to_reserve(Player& player)
+ const Card& Controller::ask_player_for_card_to_reserve(Player& player)
 {
     int pile, position;
     std::cout << "Quelle carte voulez-vous réserver ?" << std::endl << "Entrez le numéro de pile \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n 4 pour les cartes royales \n";
     std::cin >> pile;
     std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
     std::cin >> position;
+    CardLevel pileconverted = int_to_cardlevel(pile);
 
-
-    Card& card_to_reserve = this->GameControlled.pyramid.checkCard(pile, position);
+    const Card& card_to_reserve = this->GameControlled.pyramid.checkCard(pileconverted, position);
+    
     return card_to_reserve;
 
     
@@ -178,7 +179,8 @@ CoinColor Controller::ask_for_color_to_steal(Player& p)
     return CoinColor();
 }
 
-PlayerType Controller::ask_for_opponenent_type(Player& opponent)
+PlayerType Controller::ask_for_opponenent_type(Player& 
+)
 {
     int choice;
     std::cout << "Voulez vous jouer contre une IA ? " << std::endl << "0 pour non et 1 pour oui" << std::endl;
@@ -217,7 +219,7 @@ OptionalActions Controller::ask_for_optional_action_type(Player& player)
 void Controller::change_turn()
 {
     if (GameControlled.getPlayerTurn() == PlayerEnum::Player1) {
-        GameControlled.turn = GameControlled.getOpponentPlayer();
+        GameControlled.turn = getOpponent(GameControlled.turn);
     }
 }
 
@@ -267,6 +269,32 @@ std::vector<Coin> Controller::coordinates_to_coin(std::vector<std::pair<int, int
     return coinvector;
 }
 
+CardLevel Controller::int_to_cardlevel(int level)
+{
+    switch (level)
+    {
+    case 1:
+        return CardLevel::One;
+        break;
+    case 2:
+        return CardLevel::Two;
+        break;
+    case 3:
+        return CardLevel::Three;
+        break;
+    default:
+        break;
+    }
+}
+
+CardLevel Controller::piletype_to_cardlevel(PileType type)
+{
+    if (type == PileType::One) { return CardLevel::One; }
+    if (type == PileType::Two) { return CardLevel::Two; }
+    if (type == PileType::Three) { return CardLevel::Three; }
+    if (type == PileType::Royal) { return CardLevel::Royal; }
+}
+
 
 
 
@@ -293,7 +321,7 @@ void Controller::play_turn_human()
             if (optionalaction == OptionalActions::UsePrivileges) {
                 int number_of_privileges = ask_for_number_of_privileges_to_use(this->GameControlled.getActivePlayer());
                 std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
-                if (!GameControlled.usePrivileges(number_of_privileges, coordinates)) {
+                if (!GameControlled.playerUsePrivileges(number_of_privileges, coordinates)) {
                     checker.change_verificator_state();
                     int number_of_privileges = ask_for_number_of_privileges_to_use(this->GameControlled.getActivePlayer());
                     std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
@@ -315,35 +343,39 @@ void Controller::play_turn_human()
                 coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
             }
             GameControlled.playerTakeCoins(coordinates);
+            change_turn();
         }
         if (Compulsory_Action == CompulsoryActions::ReserveCard) {
-            Card& card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
+            const Card& card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
             if (!checker.verify_card_type_reservation(card_to_reserve)) {
                 throw("Erreur de choix \n");
                 card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
+       
             }
 
-            GameControlled.playerReserveCard(card_to_reserve.getPileTypeOfCard(card_to_reserve.getId()),card_to_reserve.getId())
+
+            GameControlled.playerReserveCard(piletype_to_cardlevel(card_to_reserve.getPileTypeOfCard(card_to_reserve.getId())), card_to_reserve.getId());
+            change_turn();
         }
 
         if (Compulsory_Action == CompulsoryActions::BuyCard) {
-            Card& card_to_buy = ask_player_for_card_to_buy(GameControlled.getActivePlayer());
+            const Card& card_to_buy = ask_player_for_card_to_buy(GameControlled.getActivePlayer());
             Skill cardskill1 = card_to_buy.getSkill1();
             Skill cardskill2 = card_to_buy.getSkill2();
             
             if (cardskill1 == Skill::TakeCoin && cardskill2 == Skill::RobCoin || cardskill1 == Skill::RobCoin && cardskill2 == Skill::TakeCoin) {
-                GameControlled.playerBuyCard(card_to_buy.getPileTypeOfCard(card_to_buy.getId()), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
+                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
             }
 
             if (cardskill1 == Skill::TakeCoin || cardskill2 == Skill::TakeCoin) {
-                GameControlled.playerBuyCard(card_to_buy.getPileTypeOfCard(card_to_buy.getId()), card_to_buy.getId(), card_to_buy.getCardColor(), CoinColor::Empty, ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
+                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), CoinColor::Empty, ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
             }
             if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
-                GameControlled.playerBuyCard(card_to_buy.getPileTypeOfCard(card_to_buy.getId()), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
+                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
             }
-        
             
         }
+        
        
 
 
@@ -351,4 +383,4 @@ void Controller::play_turn_human()
 
     
 
-}
+

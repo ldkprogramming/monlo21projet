@@ -102,7 +102,7 @@ bool GameMoveVerification::verify_optional_actions(Player& player) //Vérifie si
 
 }
 
-bool GameMoveVerification::verify_card_type_reservation(Card& reservedCard) //On vérifie que la carte n'est pas une carte royale
+bool GameMoveVerification::verify_card_type_reservation(const Card& reservedCard) //On vérifie que la carte n'est pas une carte royale
 {
 	if (reservedCard.getPileTypeOfCard(reservedCard.getId()) == PileType::Royal)
 	{
@@ -111,7 +111,7 @@ bool GameMoveVerification::verify_card_type_reservation(Card& reservedCard) //On
 	return true;
 }
 
-bool GameMoveVerification::verify_no_bonus_card(Card& boughtCard, Player& player)
+bool GameMoveVerification::verify_no_bonus_card(const Card& boughtCard, Player& player)
 {
 	if ((boughtCard.getSkill1() == Skill::Bonus || boughtCard.getSkill2() == Skill::Bonus) && player.getBonusesPerColor().size() == 0) {
 		return false;

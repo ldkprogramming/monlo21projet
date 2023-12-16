@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& f, const Card& c){
     return f;
 }
 
-CoinColor Card::getCardColor() {
+CoinColor Card::getCardColor() const {
     CoinColor coinColor = CoinColor::Empty;
     for (auto pair : bonuses){
         if (pair.second > 0){

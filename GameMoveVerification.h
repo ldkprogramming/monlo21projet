@@ -33,8 +33,8 @@ public:
     bool verify_coin_alignment(std::vector<std::pair<int,int>> coinchoices);
     bool verify_coin_colors(std::vector<Coin> coinstaken);
     bool verify_optional_actions(Player& player);
-    bool verify_card_type_reservation(Card& reservedCard);
-    bool verify_no_bonus_card(Card& boughtCard, Player& player);
+    bool verify_card_type_reservation(const Card& reservedCard);
+    bool verify_no_bonus_card(const Card& boughtCard, Player& player);
 
 
 
