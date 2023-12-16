@@ -165,6 +165,11 @@ bool Controller::verify_win(Player& player){
 
 void Controller::play_game()
 {
+    
+    int coin = rand() % 2;
+    if (coin) {this->GameControlled.turn = PlayerEnum::Player2; }
+    else { this->GameControlled.turn = PlayerEnum::Player1; }
 
+    while(!verify_win(this->GameControlled.getActivePlayer()))
 
 }
