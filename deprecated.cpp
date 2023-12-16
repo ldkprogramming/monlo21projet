@@ -1,6 +1,7 @@
 // // faut completement refaire
 /*
-bool Controller::checkIfPlayerWins(Game &game, Player &player) {
+bool Controller::checkIfPlayerWins(
+&game, Player &player) {
     int winTotalPoints = game.getWinConditions().getTotalPoints();
     int winTotalCrowns = game.getWinConditions().getTotalCrowns();
     int winPointsInOneColor = game.getWinConditions().getPointsInOneColor();

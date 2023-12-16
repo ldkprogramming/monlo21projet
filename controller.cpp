@@ -9,7 +9,7 @@
 
 
 
-Controller::Controller(GameMoveVerification& checker, const Game& GameControlled) : checker(checker), GameControlled(GameControlled){}
+Controller::Controller(GameMoveVerification& checker,  const Game& GameControlled) : checker(checker), GameControlled(GameControlled){}
 
 bool Controller::launch_save(GameSaver& save)
 {
@@ -42,6 +42,23 @@ std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
         coins.push_back(this->GameControlled.coinBoard.getCoin(x,y));
     }
     return coins;
+}
+
+std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(Player& player)
+{
+    std::vector<std::pair<int, int>> coordinates;
+    int number_of_coins;
+    std::cout << "Combien de jetons voulez vous prendre" << std::endl;
+    std::cin >> number_of_coins;
+    int x, y;
+    for (int i = 0; number_of_coins; i++) {
+        std::cout << "Entrez la coordonnées x du jeton à prendre " << std::endl;
+        std::cin >> x;
+        std::cout << "Entrez la coordonnées y du jeton à prendre " << std::endl;
+        std::cin >> y;
+        coordinates.push_back(std::pair<int, int>(x, y));
+    }
+    return coordinates;
 }
 
 bool Controller::ask_player_for_optional_actions(Player& player)
@@ -162,6 +179,34 @@ bool Controller::verify_win(Player& player){
     return ((player.getMaxPointsPerColor() == winPointsInOneColor) || (player.getTotalPoints() == winTotalPoints) || (player.getTotalCrowns() == winTotalCrowns));
 }
 
+int Controller::ask_for_number_of_privileges_to_use(Player &p) {
+    int number;
+    std::cout << "Combien de privilèges voulez-vous utiliser ?"<< std::endl;
+    std::cin >> number;
+    return number;
+}
+
+CompulsoryActions Controller::ask_for_compulsory_action_type(Player& p)
+{
+    int choice;
+    std::cout << "Quelle type d'action obligatoire voulez-vous effectuer ? \n 1 : Acheter une carte \n 2 : Réserver une carte \n 3 : Prendre des jetons"  << std::endl;
+    std::cin >> choice;
+    switch (choice)
+    {
+    case 1 :
+        return CompulsoryActions::BuyCard;
+    case 2 :
+        return CompulsoryActions::ReserveCard;
+    case 3 :
+        return CompulsoryActions::TakeCoins;
+    default:
+        std::cout << "Erreur de choix" << std::endl;
+        return ask_for_compulsory_action_type(p);
+
+        break;
+    }
+}
+
 
 void Controller::play_game()
 {
@@ -180,5 +225,26 @@ void Controller::play_game()
 
 void Controller::play_turn_human()
 {
+    OptionalActions optionalaction;
+    while (checker.verify_optional_actions(this->GameControlled.getActivePlayer())) {
+        if (ask_player_for_optional_actions(this->GameControlled.getActivePlayer())) {
+            optionalaction = ask_for_optional_action_type(this->GameControlled.getActivePlayer());
+            if (optionalaction == OptionalActions::UsePrivileges) {
+                int number_of_privileges = ask_for_number_of_privileges_to_use(this->GameControlled.getActivePlayer());
+                std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
+                if (!GameControlled.usePrivileges(number_of_privileges, coordinates)) {
+                    checker.change_verificator_state();
+                    int number_of_privileges = ask_for_number_of_privileges_to_use(this->GameControlled.getActivePlayer());
+                    std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
+                }
+                if (checker.get_verificator_state() == false) { checker.change_verificator_state(); }
+                 
+            }
+        }
+
+
+    }
+
+
 
 }

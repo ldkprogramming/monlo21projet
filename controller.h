@@ -29,13 +29,16 @@ public:
 	bool reset_game();
 
 	std::vector<Coin> ask_player_for_tokens(Player& Player);
+	std::vector<std::pair<int, int>> ask_player_for_tokens_coordinates(Player& player);
 	bool ask_player_for_optional_actions(Player& player);
 	Card& ask_player_for_card_to_buy(Player& player);
 	Card& ask_player_for_card_to_reserve(Player& player);
 	CoinColor ask_player_for_bonus_color(Player& player);
 	PlayerType ask_for_opponenent_type(Player& opponent);
 	OptionalActions ask_for_optional_action_type(Player& player);
-	
+	int ask_for_number_of_privileges_to_use(Player& p);
+	CompulsoryActions ask_for_compulsory_action_type(Player& p);
+
 
 
 	void play_game();
