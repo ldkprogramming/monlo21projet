@@ -333,4 +333,10 @@ CoinColor AIPlayer::AI_choose_color_to_steal(Controller& controller)
 	return steal.at(rand() % steal.size());
 }
 
+int AIPlayer::AI_number_of_privileges_to_use(Controller& controller)
+{
+		return rand() % getPrivileges()+1; // On retourne une valeur aléatoire de privilège
+}
+
+
 
