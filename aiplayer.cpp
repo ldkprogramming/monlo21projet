@@ -285,9 +285,64 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 	return coordinates_void;
 }
 
+const Card& AIPlayer::AI_reserve_card(Controller& controller)
+{
+	int choice = rand() % 2;
+	if (choice) {
+		std::vector<Card> reserve;
+		for (auto c : controller.get_GameControlled().getPyramid().getLevel3Cards()) {
+			reserve.push_back(c);
+		}
+
+		for (auto c : controller.get_GameControlled().getPyramid().getLevel2Cards()) {
+			reserve.push_back(c);
+		}
+
+		for (auto c : controller.get_GameControlled().getPyramid().getLevel1Cards()) {
+			reserve.push_back(c);
+		}
+		return reserve.at(rand() % reserve.size());
+	}
+	
+	else {
+		int choicepile = rand() % 3 + 1;
+		switch (choicepile)
+		{
+		case 1:
+			return controller.get_GameControlled().getPile1().getCards().at(0);
+		case 2:
+			return controller.get_GameControlled().getPile2().getCards().at(0);
+
+		default:
+			return controller.get_GameControlled().getPile3().getCards().at(0);
+
+			break;
+		}
+	}
+
+	
+}
+
 const Card& AIPlayer::AI_buy_card(Controller& controller)
 {
-	// TODO: insérer une instruction return ici
+	for (auto c : getReservedCards()) {
+		if (canBuy(c));
+		return c;
+	}
+	for (auto c : controller.get_GameControlled().getPyramid().getLevel3Cards()) {
+		if (canBuy(c));
+		return c;
+	}
+
+	for (auto c : controller.get_GameControlled().getPyramid().getLevel2Cards()) {
+		if (canBuy(c));
+		return c;
+	}
+
+	for (auto c : controller.get_GameControlled().getPyramid().getLevel1Cards()) {
+		if (canBuy(c));
+		return c;
+	}
 }
 
 
