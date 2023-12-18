@@ -294,7 +294,7 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 OptionalActions AIPlayer::AI_choose_optional_action(Controller& Controller)
 {
 	int choice = rand() % 2;
-
+	.
 	if (choice) { return OptionalActions::UsePrivileges; }
 	else { return OptionalActions::FillBoard; }
 	
@@ -310,5 +310,13 @@ bool AIPlayer::AI_optional_or_not(Controller& controller)
 
 CoinColor AIPlayer::AI_choose_bonus(Controller& controller)
 {
-	return CoinColor();
+	std::vector<CoinColor> bonus;
+	for (auto c : getCoinsPerColor()) {
+		if (c.second > 0) {
+			bonus.push_back(c.first);
+		}
+	}
+
+	return bonus.at(rand() % bonus.size());
+
 }
