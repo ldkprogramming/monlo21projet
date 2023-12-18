@@ -20,7 +20,7 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 	int x1 = coinchoices.at(0).first, x2 = coinchoices.at(1).first, x3 = coinchoices.at(2).first;
 	int y1 = coinchoices.at(0).second, y2 = coinchoices.at(1).second, y3 = coinchoices.at(2).second;
 	switch (coinchoices.size()) {
-	case 2: //Jetons perles
+	case 2: 
 		if (x1 == x2) {
 			if ((y1 == y2 + 1) || (y1 == y2 - 1)) {
 				return true;
@@ -79,13 +79,6 @@ bool GameMoveVerification::verify_coin_colors(std::vector<Coin> coinstaken)
 { 
 	for (auto c : coinstaken) {
 		if (c.getColor() == CoinColor::Gold) {
-			return false;
-		}
-		if (c.getColor() == CoinColor::Pearl && coinstaken.size() == 3) {
-			return false;
-		}
-		if (c.getColor() != CoinColor::Pearl && coinstaken.size() == 2)
-		{
 			return false;
 		}
 	}
