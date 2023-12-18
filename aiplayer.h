@@ -1,16 +1,15 @@
 #pragma once
-#include "game.h"
-#include "GameMoveVerification.h"
-#include "player.h"
-#include "coin.h"
-#include "coinboard.h"
-#include "coinbag.h"
 #include "card.h"
 #include "cardpyramid.h"
+#include "coin.h"
+#include "coinbag.h"
+#include "coinboard.h"
+#include "game.h"
+#include "GameMoveVerification.h"
 #include "pile.h"
 #include "player.h"
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 
 class AIPlayer : public Player{
 	int actionsdone = 0;

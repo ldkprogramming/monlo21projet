@@ -281,7 +281,8 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 			}
 		}
 	}
-
+	std::vector<std::pair<int, int>> coordinates_void = { {0,0} }; //On a trouvé aucune combinaison plurielle
+	return coordinates_void;
 }
 
 
@@ -294,7 +295,7 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 OptionalActions AIPlayer::AI_choose_optional_action(Controller& Controller)
 {
 	int choice = rand() % 2;
-	.
+	
 	if (choice) { return OptionalActions::UsePrivileges; }
 	else { return OptionalActions::FillBoard; }
 	
@@ -314,9 +315,22 @@ CoinColor AIPlayer::AI_choose_bonus(Controller& controller)
 	for (auto c : getCoinsPerColor()) {
 		if (c.second > 0) {
 			bonus.push_back(c.first);
-		}
+		} 
 	}
 
 	return bonus.at(rand() % bonus.size());
 
 }
+
+CoinColor AIPlayer::AI_choose_color_to_steal(Controller& controller)
+{
+	std::vector<CoinColor> steal;
+	for (auto c : controller.get_GameControlled().getPlayer(getOpponent(controller.get_GameControlled().getPlayerTurn())).getCoinsPerColor()) {
+		if (c.second > 0) {
+			steal.push_back(c.first);
+		}
+	}
+	return steal.at(rand() % steal.size());
+}
+
+
