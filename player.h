@@ -34,12 +34,12 @@ private:
     std::map<CoinColor, int> bonusesPerColor;
     std::map<CoinColor, int> pointsPerColor;
 
-    PlayerType type;
+    PlayerType type = PlayerType::Human;
 
 public:
     Player(std::string name);
-    Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor) :
-    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges) {}
+    Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor, PlayerType type) :
+    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges), type(type) {}
     int getTotalPoints();
     int getTotalCrowns();
     int getMaxPointsPerColor();
