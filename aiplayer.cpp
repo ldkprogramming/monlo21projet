@@ -309,6 +309,11 @@ bool AIPlayer::AI_optional_or_not(Controller& controller)
 	else { return false; }
 }
 
+std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& controller)
+{
+	return std::vector<std::pair<int, int>>();
+}
+
 CoinColor AIPlayer::AI_choose_bonus(Controller& controller)
 {
 	std::vector<CoinColor> bonus;
@@ -337,6 +342,39 @@ int AIPlayer::AI_number_of_privileges_to_use(Controller& controller)
 {
 		return rand() % getPrivileges()+1; // On retourne une valeur aléatoire de privilège
 }
+
+CompulsoryActions AIPlayer::AI_choose_compulsory_action(Controller& Controller)
+{
+	
+	for (auto c : getReservedCards()) {
+		if (canBuy(c));
+		return CompulsoryActions::BuyCard;
+	}
+	for(auto c : Controller.get_GameControlled().getPyramid().getLevel3Cards()){
+		if (canBuy(c));
+		return CompulsoryActions::BuyCard;
+	}
+
+	for (auto c : Controller.get_GameControlled().getPyramid().getLevel2Cards()) {
+		if (canBuy(c));
+		return CompulsoryActions::BuyCard;
+	}
+
+	for (auto c : Controller.get_GameControlled().getPyramid().getLevel1Cards()) {
+		if (canBuy(c));
+		return CompulsoryActions::BuyCard;
+	}
+
+	for (auto c : getCoinsPerColor()) {
+		if (c.second > 1 && c.first == CoinColor::Gold) {
+			return CompulsoryActions::ReserveCard;
+		}
+	}
+	
+
+	return CompulsoryActions::TakeCoins;
+}
+
 
 
 
