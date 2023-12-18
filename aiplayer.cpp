@@ -319,9 +319,22 @@ void AIPlayer::AI_increment_actions_done()
 	actionsdone += 1;
 }
 
-std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& controller)
+std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& controller, int privileges)
 {
-	return std::vector<std::pair<int, int>>();
+	std::vector<std::pair<int, int>> coincoordinates;
+	for (int i = 0; i < privileges; i++) {
+		for (int j = 0; j < 4; j++) {
+			for (int k = 0; k < 4; k++) {
+				if (controller.get_GameControlled().getCoinBoard().getCoin(j, k).getColor() != CoinColor::Empty && coincoordinates.size() < privileges) {
+					coincoordinates.push_back(std::pair<int, int>(j, k));
+				}
+				else {
+					if (coincoordinates.size() >= privileges) { return coincoordinates; }
+				}
+			}
+		}
+	}
+	return coincoordinates;
 }
 
 CoinColor AIPlayer::AI_choose_bonus(Controller& controller)
