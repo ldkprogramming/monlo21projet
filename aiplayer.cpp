@@ -285,6 +285,11 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 	return coordinates_void;
 }
 
+const Card& AIPlayer::AI_buy_card(Controller& controller)
+{
+	// TODO: insérer une instruction return ici
+}
+
 
 
 
@@ -307,6 +312,11 @@ bool AIPlayer::AI_optional_or_not(Controller& controller)
 
 	if (choice) { return true;}
 	else { return false; }
+}
+
+void AIPlayer::AI_increment_actions_done()
+{
+	actionsdone += 1;
 }
 
 std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& controller)

@@ -12,10 +12,11 @@
 #include <cstdlib>
 
 class AIPlayer : public Player{
-	int actionsdone = 0;
+	int actionsdone = 0; //Sert à indiquer à Qt qu'une action a été faite par l'IA donc on 
 public:
 
 	AIPlayer(std::string name, PlayerType type = PlayerType::AI) : Player(name){}
+
 	
 	
 	std::vector<std::pair<int, int>> AI_take_coins_by_coordinates(Controller& controller);
@@ -29,7 +30,7 @@ public:
 	CompulsoryActions AI_choose_compulsory_action(Controller& Controller);
 	OptionalActions AI_choose_optional_action(Controller& Controller);
 	bool AI_optional_or_not(Controller& controller);
-
+	void AI_increment_actions_done();
 
 };
 
