@@ -33,7 +33,7 @@ public:
 	std::pair<int, int> ask_for_player_solo_token_coordinates(Player& p);
 	bool ask_player_for_optional_actions(Player& player);
 	const Card& ask_player_for_card_to_buy(Player& player);
-	const Card& ask_player_for_card_to_reserve(Player& player);
+	std::pair<int,CardLevel> ask_player_for_card_to_reserve(Player& player);
 	CoinColor ask_player_for_bonus_color(Player& player);
 	CoinColor ask_for_color_to_steal(Player& p);
 	PlayerType ask_for_opponenent_type(Player& opponent);

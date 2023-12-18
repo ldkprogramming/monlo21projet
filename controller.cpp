@@ -98,7 +98,7 @@ bool Controller::ask_player_for_optional_actions(Player& player)
    
 }
 
- const Card& Controller::ask_player_for_card_to_reserve(Player& player)
+ std::pair<int,CardLevel> Controller::ask_player_for_card_to_reserve(Player& player)
 {
     int pile, position;
     std::cout << "Quelle carte voulez-vous réserver ?" << std::endl << "Entrez le numéro de pile \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n 4 pour les cartes royales \n";
@@ -106,10 +106,11 @@ bool Controller::ask_player_for_optional_actions(Player& player)
     std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
     std::cin >> position;
     CardLevel pileconverted = int_to_cardlevel(pile);
-
-    const Card& card_to_reserve = this->GameControlled.pyramid.checkCard(pileconverted, position);
+    std::pair<int, CardLevel> card (pile, pileconverted);
+  
+    return card;
     
-    return card_to_reserve;
+ 
 
     
 }
@@ -146,41 +147,38 @@ CoinColor Controller::ask_player_for_bonus_color(Player& player)
 CoinColor Controller::ask_for_color_to_steal(Player& p)
 
 {
-        int Color;
-        std::cout << " Quelle couleur de jetons voulez-vous parler ? " << std::endl << "1 : Rouge \n  2 : Vert \n 3 : Bleu \n  4 : Blanc \n 5 : Noir \n 6 : Perle" << std::endl;
-        std::cin >> Color;
+    int Color;
+    std::cout << " Quelle couleur de jetons voulez-vous parler ? " << std::endl << "1 : Rouge \n  2 : Vert \n 3 : Bleu \n  4 : Blanc \n 5 : Noir \n 6 : Perle" << std::endl;
+    std::cin >> Color;
 
-        switch (Color)
-        {
-        case 1:
-            return CoinColor::Red;
+    switch (Color)
+    {
+    case 1:
+        return CoinColor::Red;
 
-        case 2:
-            return CoinColor::Green;
+    case 2:
+        return CoinColor::Green;
 
-        case 3:
-            return CoinColor::Blue;
+    case 3:
+        return CoinColor::Blue;
 
-        case 4:
-            return CoinColor::White;
+    case 4:
+        return CoinColor::White;
 
-        case 5:
-            return CoinColor::Black;
-        case 6:
-            return CoinColor::Pearl;
+    case 5:
+        return CoinColor::Black;
+    case 6:
+        return CoinColor::Pearl;
 
-        default:
-            return ask_for_color_to_steal(p);
-            break;
-        }
+    default:
+        return ask_for_color_to_steal(p);
+        break;
+    }
 
-   
 
-    return CoinColor();
 }
 
-PlayerType Controller::ask_for_opponenent_type(Player& 
-)
+PlayerType Controller::ask_for_opponenent_type(Player& )
 {
     int choice;
     std::cout << "Voulez vous jouer contre une IA ? " << std::endl << "0 pour non et 1 pour oui" << std::endl;
@@ -346,15 +344,16 @@ void Controller::play_turn_human()
             change_turn();
         }
         if (Compulsory_Action == CompulsoryActions::ReserveCard) {
-            const Card& card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
-            if (!checker.verify_card_type_reservation(card_to_reserve)) {
+            std::pair<int, CardLevel> cardinfos = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
+            if (!checker.verify_card_type_reservation(GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first))) {
                 throw("Erreur de choix \n");
-                card_to_reserve = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
+                cardinfos = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
        
             }
 
 
-            GameControlled.playerReserveCard(piletype_to_cardlevel(card_to_reserve.getPileTypeOfCard(card_to_reserve.getId())), card_to_reserve.getId());
+
+            GameControlled.playerReserveCard(cardinfos.second, GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first).getId());
             change_turn();
         }
 
