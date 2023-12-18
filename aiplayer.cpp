@@ -88,6 +88,10 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 	//Diagonale à faire
 }
 	
+bool AIPlayer::AI_optional_or_not(Controller& controller)
+{
+	int choice = rand() % 2;
 
-	
-
+	if (choice) { return true;}
+	else { return false; }
+}
