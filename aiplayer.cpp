@@ -345,6 +345,17 @@ const Card& AIPlayer::AI_buy_card(Controller& controller)
 	}
 }
 
+std::pair<int, int> AIPlayer::AI_take_one_coin_by_coordinates(Controller& controller)
+{
+	
+	int x = rand()%5, y = rand() % 5;
+	while (controller.get_GameControlled().getCoinBoard().getCoin(x, y).getColor() == CoinColor::Empty || controller.get_GameControlled().getCoinBoard().getCoin(x, y).getColor() == CoinColor::Gold) {
+		x = rand() % 5; y = rand() % 5;
+	}
+	
+	return std::pair<int, int>(x,y);
+}
+
 
 
 
