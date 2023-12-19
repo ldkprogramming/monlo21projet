@@ -39,4 +39,5 @@ public:
     bool compulsory_action_can_be_done(Player& p);
 
     bool can_royal_card_pick(Player& p);
-};
+    bool verify_royal_card_pick(Player& p, const Card& pickedCard);
+}; 

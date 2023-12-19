@@ -40,6 +40,7 @@ public:
 	OptionalActions ask_for_optional_action_type(Player& player);
 	int ask_for_number_of_privileges_to_use(Player& p);
 	CompulsoryActions ask_for_compulsory_action_type(Player& p);
+	int ask_for_royal_card(Player& p);
 	
 	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
 	CardLevel int_to_cardlevel(int level);

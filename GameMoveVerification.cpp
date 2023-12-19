@@ -101,9 +101,16 @@ bool GameMoveVerification::verify_card_type_reservation(const Card& reservedCard
 	{
 		return false;
 	}
-	return true;
+	for (int j = 0; j < 4; j++) {
+		for (int k = 0; k < 4; k++) {
+			if (get_game_checked().getCoinBoard().getCoin(j, k).getColor() == CoinColor::Gold) {
+				return true;
+			}
+		}
+		
+	}
+	return false;
 }
-
 bool GameMoveVerification::verify_no_bonus_card(const Card& boughtCard, Player& player)
 {
 	if ((boughtCard.getSkill1() == Skill::Bonus || boughtCard.getSkill2() == Skill::Bonus) && player.getBonusesPerColor().size() == 0) {
@@ -158,5 +165,13 @@ bool GameMoveVerification::can_royal_card_pick(Player& p)
 		}
 	}
 	return true;
+}
+
+bool GameMoveVerification::verify_royal_card_pick(Player& p, const Card& pickedCard)
+{
+	if (pickedCard.getPileTypeOfCard(pickedCard.getId()) == PileType::Royal) {
+		return true;
+	}
+	return false;
 }
 
