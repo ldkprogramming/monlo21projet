@@ -135,3 +135,28 @@ bool GameMoveVerification::compulsory_action_can_be_done(Player& p)
 		}
 		return false;
 	}
+
+bool GameMoveVerification::can_royal_card_pick(Player& p)
+{
+	if (p.getTotalCrowns() >= 3 && p.getTotalCrowns() < 6) {
+		for (auto hand : p.getHand()) {
+			if (hand.getPileTypeOfCard(hand.getId()) == PileType::Royal) {
+				return false;
+			}
+		}
+	}
+
+	int counter = 0;
+	if  (p.getTotalCrowns() > 6) {
+		for (auto hand : p.getHand()) {
+			if (hand.getPileTypeOfCard(hand.getId()) == PileType::Royal) {
+				counter += 1;
+			}
+		}
+		if (counter == 2) {
+			return false;
+		}
+	}
+	return true;
+}
+
