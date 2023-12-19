@@ -36,7 +36,5 @@ public:
     bool verify_card_type_reservation(const Card& reservedCard);
     bool verify_no_bonus_card(const Card& boughtCard, Player& player);
 
-
-
-};
+    bool compulsory_action_can_be_done(Player& p);
 

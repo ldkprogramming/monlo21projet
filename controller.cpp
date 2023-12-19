@@ -380,6 +380,10 @@ void Controller::play_turn_human()
 
     }
 
+void Controller::play_turn_AI()
+{
+}
+
     
 
 
