@@ -367,7 +367,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
 
     // On traite la capacite PlayAgain
     // Si la carte ne possede pas la capacite, on change de tour
-    if (!((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) || (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
+    if (((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) || (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
         turn = getOpponent(turn);
     }
 

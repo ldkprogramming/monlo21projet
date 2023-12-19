@@ -167,7 +167,7 @@ bool GameMoveVerification::can_royal_card_pick(Player& p)
 	return true;
 }
 
-bool GameMoveVerification::verify_royal_card_pick(Player& p, const Card& pickedCard)
+bool GameMoveVerification::verify_royal_card_pick(const Player& p, const Card& pickedCard)
 {
 	if (pickedCard.getPileTypeOfCard(pickedCard.getId()) == PileType::Royal) {
 		return true;

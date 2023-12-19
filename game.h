@@ -76,7 +76,7 @@ public:
     const Coinbag& getCoinBag() const;
     const Coinboard &getCoinBoard() const;
     int getPrivileges() const;
-  
+    const Card& get_Card_from_ID(int cID) const;
 
     Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name),pile1(PileType::One), pile2(PileType::Two), pile3(PileType::Three), royalPile(PileType::Royal),pyramid(pile1, pile2, pile3, royalPile), winConditions(20, 10, 10){
         winner = PlayerEnum::Empty;
@@ -126,6 +126,7 @@ public:
             privileges -= 1;
         }
     }
+
 };
 
 

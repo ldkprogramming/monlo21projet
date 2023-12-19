@@ -64,10 +64,12 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
       coordinates.push_back(std::pair<int, int>(x, y));
     }
     
-    for (size_t i = 0; i < coordinates.size() -1 ; i++) {
-        if (coordinates.at(i) == coordinates.at(i + 1)) {
-            throw std::runtime_error("Vecteur contenant des coordonnées identiques !");
-            return ask_player_for_tokens_coordinates(player);
+    if(coordinates.size()> 1){
+        for (size_t i = 0; i < coordinates.size() - 1; i++) {
+            if (coordinates.at(i) == coordinates.at(i + 1)) {
+                throw std::runtime_error("Vecteur contenant des coordonnées identiques !");
+                return ask_player_for_tokens_coordinates(player);
+            }
         }
     }
 
@@ -127,6 +129,7 @@ bool Controller::ask_player_for_optional_actions(Player& player)
         }
     throw std::runtime_error("Mauvaise pile selectionnée");
     return ask_player_for_card_to_buy(player);
+
 
 
 }
@@ -376,6 +379,17 @@ CardLevel Controller::piletype_to_cardlevel(PileType type)
 
 
 
+void Controller::printGameState()
+{
+    std::cout << "Tour de " << get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()).getName() << std::endl;
+    std::cout << "Plateau de jeu" << std::endl;
+    std::cout << get_GameControlled().getCoinBoard() << std::endl;
+    std::cout << "Pyramide de cartes" << std::endl;
+    std::cout << get_GameControlled().getPyramid() << std::endl;
+    std::cout << get_GameControlled().getPlayer1();
+    std::cout << get_GameControlled().getPlayer2();
+}
+
 void Controller::play_game()
 {
     
@@ -392,6 +406,7 @@ void Controller::play_game()
 
 void Controller::play_turn_human()
 {
+    printGameState();
     OptionalActions optionalaction;
     while (checker.verify_optional_actions(this->GameControlled.getActivePlayer())) {
         if (ask_player_for_optional_actions(this->GameControlled.getActivePlayer())) {
@@ -413,14 +428,29 @@ void Controller::play_turn_human()
 
         }
         }
+    printGameState();
         CompulsoryActions Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
         if (Compulsory_Action == CompulsoryActions::TakeCoins) {
+            
             std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
             while  (!checker.verify_coin_alignment(coordinates) || !checker.verify_coin_colors(coordinates_to_coin(coordinates) )) {
                 throw std::runtime_error (" Erreur de choix \n");
                 coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
             }
             GameControlled.playerTakeCoins(coordinates);
+
+            if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+                int id = ask_for_royal_card(GameControlled.getActivePlayer());
+
+                if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
+
+                    throw std::runtime_error("Erreur de choix \n");
+                    id = ask_for_royal_card(GameControlled.getActivePlayer());
+                    
+                }
+            }
+
+
             change_turn();
         }
         if (Compulsory_Action == CompulsoryActions::ReserveCard) {
@@ -436,9 +466,16 @@ void Controller::play_turn_human()
             GameControlled.playerReserveCard(cardinfos.second, GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first).getId());
             if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
                 int id = ask_for_royal_card(GameControlled.getActivePlayer());
-                // A finir ! 
+                
+                if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
+                    
+                    throw std::runtime_error("Erreur de choix ! \n");
+                    id = ask_for_royal_card(GameControlled.getActivePlayer());
+                    
+                }
             }
             
+
             change_turn();
         }
 
@@ -457,6 +494,20 @@ void Controller::play_turn_human()
             if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
                 GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
             }
+           
+            if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+                int id = ask_for_royal_card(GameControlled.getActivePlayer());
+
+                if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
+
+                    throw std::runtime_error("Erreur de choix  \n");
+
+                    id = ask_for_royal_card(GameControlled.getActivePlayer());
+                 }
+            }
+
+
+            change_turn();
             
         }
         
@@ -467,6 +518,7 @@ void Controller::play_turn_human()
 
 void Controller::play_turn_AI()
 {
+
 }
 
     

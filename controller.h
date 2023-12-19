@@ -41,16 +41,20 @@ public:
 	int ask_for_number_of_privileges_to_use(Player& p);
 	CompulsoryActions ask_for_compulsory_action_type(Player& p);
 	int ask_for_royal_card(Player& p);
+
 	
 	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
 	CardLevel int_to_cardlevel(int level);
 	CardLevel piletype_to_cardlevel(PileType type);
 
+	
+	void printGameState();
 	void play_game();
 	void play_turn_human();
 	void play_turn_AI();
 	void change_turn();
 	bool verify_win(Player& player);
+	
 
 
 };
