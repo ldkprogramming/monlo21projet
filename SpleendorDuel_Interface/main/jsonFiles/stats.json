@@ -1,0 +1,12 @@
+{
+    "players": {
+        "ha": {
+            "gamesLost": 4,
+            "gamesWon": 5
+        },
+        "hoe": {
+            "gamesLost": 0,
+            "gamesWon": 0
+        }
+    }
+}
