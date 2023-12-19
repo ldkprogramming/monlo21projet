@@ -86,7 +86,7 @@ bool GameMoveVerification::verify_coin_colors(std::vector<Coin> coinstaken)
 	return true;
 }
 
-bool GameMoveVerification::verify_optional_actions(Player& player) //Vérifie si le joueur peut effectuer une action optionnelle
+bool GameMoveVerification::verify_optional_actions(const Player& player) //Vérifie si le joueur peut effectuer une action optionnelle
 {
 	if (player.getPrivileges() == 0) {
 		return false;

@@ -8,6 +8,7 @@
 #include "player.h"
 #include "gamesaver.h"
 #include "GameMoveVerification.h"
+#include "aiplayer.h"
 
 class Controller {
 private: 

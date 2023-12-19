@@ -1,6 +1,6 @@
 #include "aiplayer.h"
 
-std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controller& controller)
+std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controller& controller) 
 {
 
 
@@ -285,7 +285,7 @@ std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controll
 	return coordinates_void;
 }
 
-const Card& AIPlayer::AI_reserve_card(Controller& controller)
+const Card& AIPlayer::AI_reserve_card(Controller& controller) 
 {
 	int choice = rand() % 2;
 	if (choice) {
@@ -323,7 +323,7 @@ const Card& AIPlayer::AI_reserve_card(Controller& controller)
 	
 }
 
-const Card& AIPlayer::AI_buy_card(Controller& controller)
+const Card& AIPlayer::AI_buy_card(Controller& controller) 
 {
 	for (auto c : getReservedCards()) {
 		if (canBuy(c));
@@ -344,8 +344,8 @@ const Card& AIPlayer::AI_buy_card(Controller& controller)
 		return c;
 	}
 }
-
-std::pair<int, int> AIPlayer::AI_take_one_coin_by_coordinates(Controller& controller)
+ 
+std::pair<int, int> AIPlayer::AI_take_one_coin_by_coordinates(Controller& controller) 
 {
 	
 	int x = rand()%5, y = rand() % 5;
@@ -363,7 +363,7 @@ std::pair<int, int> AIPlayer::AI_take_one_coin_by_coordinates(Controller& contro
 	
 
 	
-OptionalActions AIPlayer::AI_choose_optional_action(Controller& Controller)
+OptionalActions AIPlayer::AI_choose_optional_action (Controller& Controller) 
 {
 	int choice = rand() % 2;
 	
@@ -372,7 +372,7 @@ OptionalActions AIPlayer::AI_choose_optional_action(Controller& Controller)
 	
 }
 
-bool AIPlayer::AI_optional_or_not(Controller& controller)
+bool AIPlayer::AI_optional_or_not(Controller& controller) 
 {
 	int choice = rand() % 2;
 
@@ -380,12 +380,12 @@ bool AIPlayer::AI_optional_or_not(Controller& controller)
 	else { return false; }
 }
 
-void AIPlayer::AI_increment_actions_done()
+void AIPlayer::AI_increment_actions_done() 
 {
 	actionsdone += 1;
 }
 
-std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& controller, int privileges)
+std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& controller, int privileges) 
 {
 	std::vector<std::pair<int, int>> coincoordinates;
 	for (int i = 0; i < privileges; i++) {
@@ -403,7 +403,7 @@ std::vector<std::pair<int, int>> AIPlayer::AI_use_privileges(Controller& control
 	return coincoordinates;
 }
 
-CoinColor AIPlayer::AI_choose_bonus(Controller& controller)
+CoinColor AIPlayer::AI_choose_bonus(Controller& controller) 
 {
 	std::vector<CoinColor> bonus;
 	for (auto c : getCoinsPerColor()) {
@@ -416,7 +416,7 @@ CoinColor AIPlayer::AI_choose_bonus(Controller& controller)
 
 }
 
-CoinColor AIPlayer::AI_choose_color_to_steal(Controller& controller)
+CoinColor AIPlayer::AI_choose_color_to_steal(Controller& controller) 
 {
 	std::vector<CoinColor> steal;
 	for (auto c : controller.get_GameControlled().getPlayer(getOpponent(controller.get_GameControlled().getPlayerTurn())).getCoinsPerColor()) {
@@ -427,12 +427,12 @@ CoinColor AIPlayer::AI_choose_color_to_steal(Controller& controller)
 	return steal.at(rand() % steal.size());
 }
 
-int AIPlayer::AI_number_of_privileges_to_use(Controller& controller)
+int AIPlayer::AI_number_of_privileges_to_use(Controller& controller) 
 {
 		return rand() % getPrivileges()+1; // On retourne une valeur aléatoire de privilège
 }
 
-CompulsoryActions AIPlayer::AI_choose_compulsory_action(Controller& Controller)
+CompulsoryActions AIPlayer::AI_choose_compulsory_action(Controller& Controller) 
 {
 	
 	for (auto c : getReservedCards()) {

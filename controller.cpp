@@ -408,7 +408,7 @@ void Controller::play_turn_human()
 {
     printGameState();
     OptionalActions optionalaction;
-    while (checker.verify_optional_actions(this->GameControlled.getActivePlayer())) {
+    while (get_checker().verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
         if (ask_player_for_optional_actions(this->GameControlled.getActivePlayer())) {
             optionalaction = ask_for_optional_action_type(this->GameControlled.getActivePlayer());
             if (optionalaction == OptionalActions::UsePrivileges) {
@@ -518,6 +518,9 @@ void Controller::play_turn_human()
 
 void Controller::play_turn_AI()
 {
+    printGameState();
+    if (get_checker().verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+    };
 
 }
 
