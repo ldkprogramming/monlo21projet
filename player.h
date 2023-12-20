@@ -34,7 +34,7 @@ private:
     std::map<CoinColor, int> bonusesPerColor;
     std::map<CoinColor, int> pointsPerColor;
 
-    PlayerType type = PlayerType::Human;
+    PlayerType type;
 
 public:
     Player(std::string name);
@@ -70,10 +70,12 @@ public:
     const int getBonus(CoinColor color) const {
         for (auto c : bonusesPerColor){
             if (c.first == color){
-                return c.second;
+                return c.second;        
             }
         }
     }
+
+    bool AIcanBuy(const Card& c);
 };
 
 

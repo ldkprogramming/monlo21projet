@@ -28,7 +28,6 @@ Player::Player(std::string name) : name(name){
     pointsPerColor[CoinColor::Pearl] = 0;
     pointsPerColor[CoinColor::Gold] = 0;
 
-    type = PlayerType::Human;
 }
 
 int Player::getTotalCrowns() {
@@ -153,4 +152,10 @@ void Player::loseCoin(CoinColor c) {
 
 void Player::addCardToHand(const Card &card) {
     hand.push_back(card);
+}
+
+bool Player::AIcanBuy(const Card& c)
+{
+
+    return  canBuy(c);
 }
