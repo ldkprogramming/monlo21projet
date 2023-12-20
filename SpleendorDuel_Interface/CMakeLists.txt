@@ -43,6 +43,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         main/playerview.cpp
         useprivilegebuttonView.h
         useprivilegebuttonView.cpp
+        cardPyramidView.h
+        main/cardpyramid.cpp main/cardpyramid.h
+        cardPyramidView.cpp
+        main/pile.cpp main/pile.h
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -7,6 +7,7 @@
 #include "main/playerView.h"
 #include "main/player.h"
 #include "useprivilegebuttonView.h"
+#include "cardPyramidView.h"
 
 #include <QMainWindow>
 #include <QLabel>
@@ -27,6 +28,11 @@ class gameView : public QMainWindow
     Q_OBJECT
 
 private:
+
+    // TEMP
+    cardPyramidView* cardPyramid;
+
+
     //Layout
     QVBoxLayout* gameVLayoutLeftUpper;
     QVBoxLayout* gameVLayoutCenterUpper;

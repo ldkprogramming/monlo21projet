@@ -5,6 +5,10 @@
 gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     : QMainWindow(parent), currentPlayer(nullptr){
 
+
+
+
+
     setWindowTitle("Splendor Duel");
 
     mainWidget = new QWidget(this);
@@ -50,7 +54,9 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
 
     ///Zones cartes (à implémenter - Jules)
 
-
+    // TEMPORAIRE!!!
+    cardPyramid = new cardPyramidView(this);
+    gameVLayoutRightUpper->addWidget(cardPyramid);
 
 
     ///
