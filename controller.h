@@ -67,7 +67,7 @@ public:
 	CompulsoryActions AI_choose_compulsory_action(Player& AI);
 	OptionalActions AI_choose_optional_action(Player& AI);
 	bool AI_optional_or_not(Player& AI);
-	void AI_increment_actions_done();
+	
 
 	
 

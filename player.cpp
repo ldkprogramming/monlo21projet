@@ -66,7 +66,7 @@ int Player::getMaxPointsPerColor() {
 
 bool Player::canBuy(const Card &card) {
     // ATTENTION faut ajouter la verification sur une carte contenant la capacite bonus
-    if ((card.getSkill1() == Skill::Bonus) or (card.getSkill2() == Skill::Bonus)){
+    if ((card.getSkill1() == Skill::Bonus) || (card.getSkill2() == Skill::Bonus)){
         for (auto c : bonusesPerColor){
             if (c.second > 0){
                 break;
@@ -158,4 +158,9 @@ bool Player::AIcanBuy(const Card& c)
 {
 
     return  canBuy(c);
+}
+
+void Player::incrementActionsDone()
+{
+    this->actionsDone = +1;
 }
