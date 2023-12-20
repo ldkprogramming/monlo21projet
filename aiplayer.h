@@ -12,7 +12,7 @@
 #include <cstdlib>
 
 class AIPlayer : public Player{
-	int actionsdone = 0; //Sert à indiquer à Qt qu'une action a été faite par l'IA donc on 
+	int actionsdone = 0; 
 public:
 
 	AIPlayer(std::string name, PlayerType type = PlayerType::AI) : Player(name){}

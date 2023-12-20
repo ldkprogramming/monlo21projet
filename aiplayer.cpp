@@ -1,4 +1,4 @@
-#include "aiplayer.h"
+/**/#include "aiplayer.h"
 
 std::vector<std::pair<int, int>> AIPlayer::AI_take_coins_by_coordinates(Controller& controller) 
 {
