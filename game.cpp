@@ -26,6 +26,33 @@ int Game::getPrivileges() const {
     return privileges;
 }
 
+const std::pair<CardLevel, int> Game::cardinfosfromCard(const Card& card) const
+{
+    int iterator_tracker;
+        for (auto c : getPyramid().getLevel1Cards()) {
+
+            if (c.getId() == card.getId()) {
+                return std::pair<CardLevel,int >( CardLevel::One, iterator_tracker);
+            }
+            iterator_tracker++;
+        }
+    
+    for (auto d : getPyramid().getLevel2Cards()) {
+            if (d.getId() == card.getId()) {
+                return std::pair< CardLevel,int>( CardLevel::Two,iterator_tracker);
+            }
+            iterator_tracker++;
+        }
+    
+    
+        iterator_tracker = 0;
+        for (auto e : getPyramid().getLevel3Cards())
+            if (e.getId() == card.getId()) {
+                return std::pair<CardLevel, int>(CardLevel::Three,iterator_tracker);
+            }
+        iterator_tracker++;
+}
+
 
 const Pile &Game::getPile1() const {
     return pile1;

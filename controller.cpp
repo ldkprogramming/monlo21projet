@@ -392,14 +392,18 @@ void Controller::printGameState()
 
 void Controller::play_game()
 {
-    
+    GameSaver saver;
     int coin = rand() % 2;
     if (coin) {this->GameControlled.turn = PlayerEnum::Player2; }
     else { this->GameControlled.turn = PlayerEnum::Player1; }
 
-    while (!verify_win(this->GameControlled.getActivePlayer()))
+    while (!verify_win(this->GameControlled.getActivePlayer())) {
         if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human) { play_turn_human(); }
         else(play_turn_AI());
+        saver.saveGame(this->get_GameControlled());
+    }
+    StatSaver saverstats;
+    saverstats.saveGameStats(get_GameControlled());
 
 
 }
@@ -427,8 +431,13 @@ void Controller::play_turn_human()
             }
 
         }
-        }
-    printGameState();
+        printGameState();
+    }
+    if (!get_checker().compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
+        GameControlled.playerFillBoard();
+
+    }
+    
         CompulsoryActions Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
         if (Compulsory_Action == CompulsoryActions::TakeCoins) {
             
@@ -448,6 +457,7 @@ void Controller::play_turn_human()
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
                     
                 }
+                GameControlled.getActivePlayer().addCardToHand(get_GameControlled().get_Card_from_ID(id));
             }
 
 
@@ -473,6 +483,7 @@ void Controller::play_turn_human()
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
                     
                 }
+                GameControlled.getActivePlayer().addCardToHand(get_GameControlled().get_Card_from_ID(id));
             }
             
 
@@ -504,6 +515,7 @@ void Controller::play_turn_human()
 
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
                  }
+                GameControlled.getActivePlayer().addCardToHand(get_GameControlled().get_Card_from_ID(id));
             }
 
 
@@ -520,16 +532,73 @@ void Controller::play_turn_AI()
 {
     printGameState();
     if (get_checker().verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
-        get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn());
-    
-    };
+        if (AI_optional_or_not(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+            OptionalActions optionalactionAI = AI_choose_optional_action(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+            if (optionalactionAI == OptionalActions::UsePrivileges) {
+                int privileges = AI_number_of_privileges_to_use(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+                std::vector<std::pair<int, int>> coordinates = AI_use_privileges(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()), privileges);
+                while (!GameControlled.playerUsePrivileges(privileges, coordinates)) {
+                    int privileges = AI_number_of_privileges_to_use(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+                    std::vector<std::pair<int, int>> coordinates = AI_use_privileges(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()), privileges);
+                }
+                if (optionalactionAI == OptionalActions::FillBoard) {
+                    GameControlled.playerFillBoard();
+                }
 
+
+
+            }
+
+        }
+        printGameState();
+    }
+    if (!get_checker().compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
+        GameControlled.playerFillBoard();
+   
+    }
+
+    CompulsoryActions compulsoryActionAI = AI_choose_compulsory_action(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+    if (compulsoryActionAI == CompulsoryActions::TakeCoins) {
+        std::vector<std::pair<int, int>> coordinates = AI_take_coins_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+        GameControlled.playerTakeCoins(coordinates);
+    }
+    if (compulsoryActionAI == CompulsoryActions::ReserveCard) {
+        const Card& reservedCardAI = AI_reserve_card(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+        GameControlled.playerReserveCard(get_GameControlled().cardinfosfromCard(reservedCardAI).first, get_GameControlled().cardinfosfromCard(reservedCardAI).second);
+    }
+
+    if (compulsoryActionAI == CompulsoryActions::BuyCard) {
+        const Card& boughtCardAI = AI_buy_card(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+        Skill cardskill1 = boughtCardAI.getSkill1();
+        Skill cardskill2 = boughtCardAI.getSkill2();
+
+        if (cardskill1 == Skill::TakeCoin && cardskill2 == Skill::RobCoin || cardskill1 == Skill::RobCoin && cardskill2 == Skill::TakeCoin) {
+            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), boughtCardAI.getId(), boughtCardAI.getCardColor(), AI_choose_color_to_steal(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())), AI_take_one_coin_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())));
+        }
+
+        if (cardskill1 == Skill::TakeCoin || cardskill2 == Skill::TakeCoin) {
+            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), boughtCardAI.getId(), boughtCardAI.getCardColor(), CoinColor::Empty, AI_take_one_coin_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())));
+        }
+        if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
+            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), boughtCardAI.getId(), boughtCardAI.getCardColor(), AI_choose_color_to_steal(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())), { 0, 0 });
+        }
+
+        
+    }
+    printGameState();
+    if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+        const Card& royalpick = AI_royal_pick(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+        GameControlled.getActivePlayer().addCardToHand(royalpick);
+        printGameState();
+    }
+    
+    change_turn();
 }
 
     
 
 
-std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(Player& AI)
+std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const Player& AI)
 {
     
 
@@ -813,7 +882,7 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(Playe
     std::vector<std::pair<int, int>> coordinates_void = { {0,0} }; //On a trouvé aucune combinaison plurielle
     return coordinates_void;
 }
-const Card& Controller::AI_reserve_card(Player& AI)
+const Card& Controller::AI_reserve_card(const Player& AI)
 {
     int choice = rand() % 2;
     if (choice) {
@@ -829,7 +898,7 @@ const Card& Controller::AI_reserve_card(Player& AI)
         for (auto c : get_GameControlled().getPyramid().getLevel1Cards()) {
             reserve.push_back(c);
         }
-        int total = reserve.size(); //On év
+        int total = reserve.size();
         return reserve.at(rand() % total + 1 );
     }
 
@@ -852,7 +921,7 @@ const Card& Controller::AI_reserve_card(Player& AI)
 
 }
 
-const Card& Controller::AI_buy_card(Player& AI)
+const Card& Controller::AI_buy_card(const Player& AI)
 {
     for (auto c : AI.getReservedCards()) {
         if (AI.AIcanBuy(c));
@@ -874,7 +943,7 @@ const Card& Controller::AI_buy_card(Player& AI)
     }
 }
 
-std::pair<int, int> Controller::AI_take_one_coin_by_coordinates(Player& AI)
+std::pair<int, int> Controller::AI_take_one_coin_by_coordinates(const Player& AI)
 {
 
     int x = rand() % 5, y = rand() % 5;
@@ -892,7 +961,7 @@ std::pair<int, int> Controller::AI_take_one_coin_by_coordinates(Player& AI)
 
 
 
-OptionalActions Controller::AI_choose_optional_action(Player& AI)
+OptionalActions Controller::AI_choose_optional_action(const Player& AI)
 {
     int choice = rand() % 2;
 
@@ -901,7 +970,7 @@ OptionalActions Controller::AI_choose_optional_action(Player& AI)
 
 }
 
-bool Controller::AI_optional_or_not(Player& AI)
+bool Controller::AI_optional_or_not(const Player& AI)
 {
     int choice = rand() % 2;
 
@@ -909,8 +978,14 @@ bool Controller::AI_optional_or_not(Player& AI)
     else { return false; }
 }
 
+const Card& Controller::AI_royal_pick(const Player& AI)
+{
+    int royalchoice = rand() % get_GameControlled().getPyramid().getRoyalCards().size() + 1;
+    return get_GameControlled().getPyramid().getRoyalCards().at(royalchoice);
+}
 
-std::vector<std::pair<int, int>>  Controller:: AI_use_privileges(Player& AI, int privileges)
+
+std::vector<std::pair<int, int>>  Controller:: AI_use_privileges(const Player& AI, int privileges)
 {
     std::vector<std::pair<int, int>> coincoordinates;
     for (int i = 0; i < privileges; i++) {
@@ -928,7 +1003,7 @@ std::vector<std::pair<int, int>>  Controller:: AI_use_privileges(Player& AI, int
     return coincoordinates;
 }
 
-CoinColor Controller:: AI_choose_bonus(Player& AI)
+CoinColor Controller:: AI_choose_bonus(const Player& AI)
 {
     std::vector<CoinColor> bonus;
     for (auto c : AI.getCoinsPerColor()) {
@@ -941,7 +1016,7 @@ CoinColor Controller:: AI_choose_bonus(Player& AI)
 
 }
 
-CoinColor Controller::AI_choose_color_to_steal(Player& AI)
+CoinColor Controller::AI_choose_color_to_steal(const Player& AI)
 {
     std::vector<CoinColor> steal;
     for (auto c : get_GameControlled().getPlayer(getOpponent(get_GameControlled().getPlayerTurn())).getCoinsPerColor()) {
@@ -952,12 +1027,12 @@ CoinColor Controller::AI_choose_color_to_steal(Player& AI)
     return steal.at(rand() % steal.size());
 }
 
-int Controller::AI_number_of_privileges_to_use(Player& AI)
+int Controller::AI_number_of_privileges_to_use(const Player& AI)
 {
     return rand() % AI.getPrivileges() + 1; // On retourne une valeur aléatoire de privilège
 }
 
-CompulsoryActions Controller::AI_choose_compulsory_action(Player& AI)
+CompulsoryActions Controller::AI_choose_compulsory_action(const Player& AI)
 {
 
     for (auto c : AI.getReservedCards()) {

@@ -3,7 +3,7 @@
 //
 
 #include "player.h"
-Player::Player(std::string name) : name(name){
+Player::Player(std::string name, PlayerType type) : name(name), type(type) {
     coinsPerColor[CoinColor::White] = 0;
     coinsPerColor[CoinColor::Red] = 0;
     coinsPerColor[CoinColor::Green] = 0;
@@ -154,13 +154,19 @@ void Player::addCardToHand(const Card &card) {
     hand.push_back(card);
 }
 
-bool Player::AIcanBuy(const Card& c)
+bool Player::AIcanBuy(const Card& c) const
 {
-
-    return  canBuy(c);
+    if ((c.getSkill1() == Skill::Bonus) || (c.getSkill2() == Skill::Bonus)) {
+        for (auto c : bonusesPerColor) {
+            if (c.second > 0) {
+                break;
+            }
+        }
+        return false;
+    }
 }
 
-void Player::incrementActionsDone()
+void Player::incrementActionsDone() 
 {
-    this->actionsDone = +1;
+    actionsDone = +1;
 }

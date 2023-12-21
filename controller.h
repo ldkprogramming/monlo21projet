@@ -9,6 +9,7 @@
 #include "gamesaver.h"
 #include "GameMoveVerification.h"
 #include "aiplayer.h"
+#include"statsaver.h"
 
 class Controller {
 private: 
@@ -56,19 +57,20 @@ public:
 	void change_turn();
 	bool verify_win(Player& player);
 
-	std::vector<std::pair<int, int>> AI_take_coins_by_coordinates(Player& AI);
-	const Card& AI_reserve_card(Player& AI);
-	const Card& AI_buy_card(Player& AI);
-	std::pair<int, int> AI_take_one_coin_by_coordinates(Player& AI);
-	std::vector<std::pair<int, int>> AI_use_privileges(Player& AI, int privileges);
-	CoinColor AI_choose_bonus(Player& AI);
-	CoinColor AI_choose_color_to_steal(Player& AI);
-	int AI_number_of_privileges_to_use(Player& AI);
-	CompulsoryActions AI_choose_compulsory_action(Player& AI);
-	OptionalActions AI_choose_optional_action(Player& AI);
-	bool AI_optional_or_not(Player& AI);
+	std::vector<std::pair<int, int>> AI_take_coins_by_coordinates(const Player& AI);
+	const Card& AI_reserve_card(const Player& AI);
+	const Card& AI_buy_card(const Player& AI);
+	std::pair<int, int> AI_take_one_coin_by_coordinates(const Player& AI);
+	std::vector<std::pair<int, int>> AI_use_privileges(const Player& AI, int privileges);
+	CoinColor AI_choose_bonus(const Player& AI);
+	CoinColor AI_choose_color_to_steal(const Player& AI);
+	int AI_number_of_privileges_to_use(const Player& AI);
+	CompulsoryActions AI_choose_compulsory_action(const Player& AI);
+	OptionalActions AI_choose_optional_action(const Player& AI);
+	bool AI_optional_or_not(const Player& AI);
+	const Card& AI_royal_pick(const Player& AI);
 	
-
+	
 	
 
 

@@ -1,19 +1,5 @@
 #include "GameMoveVerification.h"
 
-GameMoveVerification::GameMoveVerification(Game& game) : GameChecked(game)
-{
-	verificator_state = true;
-}
-
-void GameMoveVerification::change_verificator_state()
-{
-	if (this->verificator_state) {
-		this->verificator_state = false;
-	}
-	else {
-		this->verificator_state = true;
-	}
-}
 
 bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>> coinchoices)
 {
