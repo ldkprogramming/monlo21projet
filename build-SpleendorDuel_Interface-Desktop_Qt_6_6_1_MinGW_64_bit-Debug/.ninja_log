@@ -1,68 +1,88 @@
 # ninja log v5
-13	449	7248698051691421	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-1234	7495	7248078651500177	CMakeFiles/SpleendorDuel_Interface.dir/main/game.cpp.obj	bb7a03b89753c99a
-1286	2883	7247931415549073	CMakeFiles/SpleendorDuel_Interface.dir/main/coin.cpp.obj	90a5892cf09deddb
-1307	3037	7247931417210583	CMakeFiles/SpleendorDuel_Interface.dir/main/coinboard.cpp.obj	6611cfe41f2b41e2
-13	449	7248698051691421	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-13	449	7248698051691421	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-13	449	7248698051691421	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-1294	3028	7247931417080464	CMakeFiles/SpleendorDuel_Interface.dir/main/player.cpp.obj	9b08d236bdda96e4
-1300	3072	7247931417721191	CMakeFiles/SpleendorDuel_Interface.dir/main/coinbag.cpp.obj	3cc8bc8377fefa5b
-1264	4776	7247931434738321	CMakeFiles/SpleendorDuel_Interface.dir/coinBagView.cpp.obj	1b64638ec5fc76e1
-1274	4872	7247931435739234	CMakeFiles/SpleendorDuel_Interface.dir/privilegesView.cpp.obj	f0ecdbcc45718224
-1339	4945	7247931436459895	CMakeFiles/SpleendorDuel_Interface.dir/useprivilegebuttonView.cpp.obj	5962fc1855f55fcd
-1280	5340	7247931440394509	CMakeFiles/SpleendorDuel_Interface.dir/coinBoardView.cpp.obj	30c70697bd64c9ea
-1322	5360	7247931440594695	CMakeFiles/SpleendorDuel_Interface.dir/main/playerview.cpp.obj	f6a92407828ab095
-1279	4074	7248681704546942	CMakeFiles/SpleendorDuel_Interface.dir/main.cpp.obj	9931937b0134d820
-435	3369	7248683048569025	CMakeFiles/SpleendorDuel_Interface.dir/gameView.cpp.obj	c307cce37ed5f794
-1275	4459	7248681708397246	CMakeFiles/SpleendorDuel_Interface.dir/SpleendorDuel_Interface_autogen/mocs_compilation.cpp.obj	a62cb9c9aa03f12d
-1015	8317	7248135934603105	CMakeFiles/SpleendorDuel_Interface.dir/main/card.cpp.obj	f9da00fc793573bd
-3013	6164	7248698108749998	SpleendorDuel_Interface.exe	b29f57e274af2c25
-1229	2114	7247941629151998	CMakeFiles/SpleendorDuel_Interface.dir/main/cardpyramid.cpp.obj	cb04eb375d090d2d
-489	3012	7248698077310794	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
-14	859	7248700739810830	build.ninja	3d09bcf91004bc1b
-1060	8061	7248135464607670	CMakeFiles/SpleendorDuel_Interface.dir/main/pile.cpp.obj	2bc8148e331d700b
-15	1035	7248700739810830	build.ninja	3d09bcf91004bc1b
-8	1823	7248700758252289	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-8	1823	7248700758252289	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-8	1823	7248700758252289	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-8	1823	7248700758252289	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-1921	3393	7248700774827116	CMakeFiles/SpleendorDuel_Interface.dir/main/coin.cpp.obj	90a5892cf09deddb
-1839	3550	7248700775938136	CMakeFiles/SpleendorDuel_Interface.dir/main/cardpyramid.cpp.obj	cb04eb375d090d2d
-1844	3650	7248700777249322	CMakeFiles/SpleendorDuel_Interface.dir/main/coinboard.cpp.obj	6611cfe41f2b41e2
-1834	3660	7248700777339392	CMakeFiles/SpleendorDuel_Interface.dir/main/player.cpp.obj	9b08d236bdda96e4
-1905	3762	7248700778363859	CMakeFiles/SpleendorDuel_Interface.dir/main/coinbag.cpp.obj	3cc8bc8377fefa5b
-1829	5820	7248700799173843	CMakeFiles/SpleendorDuel_Interface.dir/useprivilegebuttonView.cpp.obj	5962fc1855f55fcd
-1869	5829	7248700799183860	CMakeFiles/SpleendorDuel_Interface.dir/privilegesView.cpp.obj	f0ecdbcc45718224
-1888	6118	7248700802166641	CMakeFiles/SpleendorDuel_Interface.dir/coinBagView.cpp.obj	1b64638ec5fc76e1
-1849	6371	7248700804688933	CMakeFiles/SpleendorDuel_Interface.dir/main/playerview.cpp.obj	f6a92407828ab095
-1877	6465	7248700805639795	CMakeFiles/SpleendorDuel_Interface.dir/main.cpp.obj	9931937b0134d820
-1863	6620	7248700807181209	CMakeFiles/SpleendorDuel_Interface.dir/coinBoardView.cpp.obj	30c70697bd64c9ea
-1857	6719	7248700808173815	CMakeFiles/SpleendorDuel_Interface.dir/gameView.cpp.obj	c307cce37ed5f794
-1894	6730	7248700808303918	CMakeFiles/SpleendorDuel_Interface.dir/SpleendorDuel_Interface_autogen/mocs_compilation.cpp.obj	a62cb9c9aa03f12d
-3551	7402	7248700815030040	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
-3651	9165	7248700832571458	CMakeFiles/SpleendorDuel_Interface.dir/main/pile.cpp.obj	2bc8148e331d700b
-3394	9291	7248700833835722	CMakeFiles/SpleendorDuel_Interface.dir/main/game.cpp.obj	bb7a03b89753c99a
-1824	9342	7248700834317138	CMakeFiles/SpleendorDuel_Interface.dir/main/card.cpp.obj	f9da00fc793573bd
-9342	12461	7248700865515371	SpleendorDuel_Interface.exe	b29f57e274af2c25
-11	1391	7248702304867708	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-11	1391	7248702304867708	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-11	1391	7248702304867708	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-11	1391	7248702304867708	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-1433	2898	7248702320930279	CMakeFiles/SpleendorDuel_Interface.dir/main/cardpyramid.cpp.obj	cb04eb375d090d2d
-1412	2921	7248702321190525	CMakeFiles/SpleendorDuel_Interface.dir/main/player.cpp.obj	9b08d236bdda96e4
-1418	5275	7248702344725899	CMakeFiles/SpleendorDuel_Interface.dir/main/playerview.cpp.obj	f6a92407828ab095
-1440	5292	7248702344886039	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
-1392	5417	7248702346166793	CMakeFiles/SpleendorDuel_Interface.dir/main.cpp.obj	9931937b0134d820
-1402	5579	7248702347785216	CMakeFiles/SpleendorDuel_Interface.dir/gameView.cpp.obj	c307cce37ed5f794
-1397	5830	7248702350297499	CMakeFiles/SpleendorDuel_Interface.dir/SpleendorDuel_Interface_autogen/mocs_compilation.cpp.obj	a62cb9c9aa03f12d
-1424	7210	7248702364053000	CMakeFiles/SpleendorDuel_Interface.dir/main/pile.cpp.obj	2bc8148e331d700b
+18	1115	7248915667341289	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
 1446	7257	7248702364503412	CMakeFiles/SpleendorDuel_Interface.dir/main/game.cpp.obj	bb7a03b89753c99a
-1407	8268	7248702374625500	CMakeFiles/SpleendorDuel_Interface.dir/main/card.cpp.obj	f9da00fc793573bd
-8269	11431	7248702406222003	SpleendorDuel_Interface.exe	b29f57e274af2c25
-10	350	7248702770530793	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-10	350	7248702770530793	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-10	350	7248702770530793	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
-10	350	7248702770530793	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
-385	2717	7248702794199405	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
-2718	5828	7248702825218249	SpleendorDuel_Interface.exe	b29f57e274af2c25
+1921	3393	7248700774827116	CMakeFiles/SpleendorDuel_Interface.dir/main/coin.cpp.obj	90a5892cf09deddb
+1844	3650	7248700777249322	CMakeFiles/SpleendorDuel_Interface.dir/main/coinboard.cpp.obj	6611cfe41f2b41e2
+18	1115	7248915667341289	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+18	1115	7248915667341289	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+18	1115	7248915667341289	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+1412	2921	7248702321190525	CMakeFiles/SpleendorDuel_Interface.dir/main/player.cpp.obj	9b08d236bdda96e4
+1905	3762	7248700778363859	CMakeFiles/SpleendorDuel_Interface.dir/main/coinbag.cpp.obj	3cc8bc8377fefa5b
+1888	6118	7248700802166641	CMakeFiles/SpleendorDuel_Interface.dir/coinBagView.cpp.obj	1b64638ec5fc76e1
+1869	5829	7248700799183860	CMakeFiles/SpleendorDuel_Interface.dir/privilegesView.cpp.obj	f0ecdbcc45718224
+1829	5820	7248700799173843	CMakeFiles/SpleendorDuel_Interface.dir/useprivilegebuttonView.cpp.obj	5962fc1855f55fcd
+1863	6620	7248700807181209	CMakeFiles/SpleendorDuel_Interface.dir/coinBoardView.cpp.obj	30c70697bd64c9ea
+1418	5275	7248702344725899	CMakeFiles/SpleendorDuel_Interface.dir/main/playerview.cpp.obj	f6a92407828ab095
+1115	3707	7248915694325441	CMakeFiles/SpleendorDuel_Interface.dir/main.cpp.obj	9931937b0134d820
+1123	3791	7248915695176217	CMakeFiles/SpleendorDuel_Interface.dir/gameView.cpp.obj	c307cce37ed5f794
+1119	4039	7248915697639705	CMakeFiles/SpleendorDuel_Interface.dir/SpleendorDuel_Interface_autogen/mocs_compilation.cpp.obj	a62cb9c9aa03f12d
+433	5264	7248706415639832	CMakeFiles/SpleendorDuel_Interface.dir/main/card.cpp.obj	f9da00fc793573bd
+3157	5980	7248913247524536	SpleendorDuel_Interface.exe	b29f57e274af2c25
+1433	2898	7248702320930279	CMakeFiles/SpleendorDuel_Interface.dir/main/cardpyramid.cpp.obj	cb04eb375d090d2d
+1128	3578	7248915693034264	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+15	1035	7248700739810830	build.ninja	3d09bcf91004bc1b
+1424	7210	7248702364053000	CMakeFiles/SpleendorDuel_Interface.dir/main/pile.cpp.obj	2bc8148e331d700b
+24	418	7248915843519083	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+24	418	7248915843519083	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+24	418	7248915843519083	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+24	418	7248915843519083	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+458	3138	7248915870716286	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3139	5983	7248915899074206	SpleendorDuel_Interface.exe	b29f57e274af2c25
+25	408	7248916527925526	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+25	408	7248916527925526	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+25	408	7248916527925526	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+25	408	7248916527925526	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+24	424	7248916697235255	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+24	424	7248916697235255	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+24	424	7248916697235255	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+24	424	7248916697235255	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+466	3215	7248916725137496	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3215	6064	7248916753540094	SpleendorDuel_Interface.exe	b29f57e274af2c25
+26	429	7248917121820790	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+26	429	7248917121820790	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+26	429	7248917121820790	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+26	429	7248917121820790	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+468	3195	7248917149479400	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3196	6033	7248917177771614	SpleendorDuel_Interface.exe	b29f57e274af2c25
+23	432	7248917260632141	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+23	432	7248917260632141	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+23	432	7248917260632141	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+23	432	7248917260632141	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+472	3165	7248917287962311	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3165	5993	7248917316149558	SpleendorDuel_Interface.exe	b29f57e274af2c25
+23	417	7248917457070807	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+23	417	7248917457070807	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+23	417	7248917457070807	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+23	417	7248917457070807	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+456	3149	7248917484395263	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3150	6000	7248917512808666	SpleendorDuel_Interface.exe	b29f57e274af2c25
+19	397	7248918445645468	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+19	397	7248918445645468	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+19	397	7248918445645468	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+19	397	7248918445645468	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+439	3048	7248918472165428	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3049	5928	7248918500803769	SpleendorDuel_Interface.exe	b29f57e274af2c25
+23	452	7248918538269705	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+23	452	7248918538269705	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+23	452	7248918538269705	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+23	452	7248918538269705	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+489	3098	7248918564711463	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3099	5939	7248918593030916	SpleendorDuel_Interface.exe	b29f57e274af2c25
+45	490	7248918743546852	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+45	490	7248918743546852	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+45	490	7248918743546852	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+45	490	7248918743546852	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+529	3204	7248918770667287	CMakeFiles/SpleendorDuel_Interface.dir/cardPyramidView.cpp.obj	875a8b8c7547a598
+3205	6063	7248918799169008	SpleendorDuel_Interface.exe	b29f57e274af2c25
+17	447	7248921543964220	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+17	447	7248921543964220	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+17	447	7248921543964220	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+17	447	7248921543964220	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+486	3489	7248921574386253	CMakeFiles/SpleendorDuel_Interface.dir/coinBoardView.cpp.obj	30c70697bd64c9ea
+3490	6301	7248921602417392	SpleendorDuel_Interface.exe	b29f57e274af2c25
+31	455	7248921703853400	SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+31	455	7248921703853400	SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+31	455	7248921703853400	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/timestamp	a0e8375ba7990373
+31	455	7248921703853400	C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/build-SpleendorDuel_Interface-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/SpleendorDuel_Interface_autogen/mocs_compilation.cpp	a0e8375ba7990373
+495	3454	7248921733838173	CMakeFiles/SpleendorDuel_Interface.dir/coinBoardView.cpp.obj	30c70697bd64c9ea
+3455	6282	7248921762021134	SpleendorDuel_Interface.exe	b29f57e274af2c25

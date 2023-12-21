@@ -81,6 +81,18 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     cardPyramid->addCard(69);
     cardPyramid->addCard(70);
 
+    cardPyramid->addCard(5, true);
+    cardPyramid->addCard(34, true);
+    cardPyramid->addCard(57, true);
+
+    buyCardButton = new buyCardButtonView(mainWidget);
+    reserveCardButton = new reserveCardButtonView(mainWidget);
+    gameHLayoutRightUpperButtons = new QHBoxLayout(this);
+
+    gameVLayoutRightUpper->addLayout(gameHLayoutRightUpperButtons);
+    gameHLayoutRightUpperButtons->addWidget(buyCardButton);
+    gameHLayoutRightUpperButtons->addWidget(reserveCardButton);
+
 
 
     ///

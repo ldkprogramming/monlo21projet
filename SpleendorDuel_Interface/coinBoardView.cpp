@@ -51,8 +51,8 @@ Coin* coinButton::changeColor(Coin* new_coin){
         this->setStyleSheet("background-color: yellow;");
         break;
     case CoinColor::Pearl:
-        //fillColor = QColor("beige");
-        this->setStyleSheet("background-color: beige;");
+        //fillColor = QColor("pink");
+        this->setStyleSheet("background-color: pink;");
         break;
     case CoinColor::Red:
         //fillColor = QColor("red");

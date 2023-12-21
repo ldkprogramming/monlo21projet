@@ -23,15 +23,9 @@ private:
     Card* card;
 public:
     cardButton(Card& c, int x, int l, QWidget *parent = nullptr);
-    cardButton(int id, QWidget* parent=nullptr);
+    cardButton(int id, QWidget* parent=nullptr, bool onPile=false);
     ~cardButton();
-
-    //à faire
-    inline const int getX() const {return x_pos;}
-    inline const int getLevel() const {return level;}
-    inline Card* getCard() {return card;}
 };
-
 
 
 
@@ -44,23 +38,48 @@ private:
 
     QHBoxLayout* layout;
     QVBoxLayout* royal;
+    QVBoxLayout* piles;
+    QHBoxLayout* pile1;
+    QHBoxLayout* pile2;
+    QHBoxLayout* pile3;
 
     QVBoxLayout* rows;
     QHBoxLayout* level1;
     QHBoxLayout* level2;
     QHBoxLayout* level3;
 
-    vector<Card> level1Cards;
-
-    vector<QLabel*> labelsLevel1;
-    vector<QLabel*> labelsLevel2;
-    vector<QLabel*> labelsLevel3;
+    vector<cardButton*> cardButtons;
 
 public:
     cardPyramidView(QWidget *parent = nullptr);
-    void addCard(const int& cId);
+    void addCard(const int& cId, bool onPile=false);
 };
 
+
+
+
+class buyCardButtonView : public QPushButton
+{
+    Q_OBJECT
+public:
+    buyCardButtonView(QWidget *parent = nullptr);
+    ~buyCardButtonView(){qDebug()<<"Destruction Bouton";}
+
+    void isUsable(){this->setCheckable(true);}
+    void isUnusable(){this->setCheckable(false);}
+};
+
+
+class reserveCardButtonView : public QPushButton
+{
+    Q_OBJECT
+public:
+    reserveCardButtonView(QWidget *parent = nullptr);
+    ~reserveCardButtonView(){qDebug()<<"Destruction Bouton";}
+
+    void isUsable(){this->setCheckable(true);}
+    void isUnusable(){this->setCheckable(false);}
+};
 
 
 

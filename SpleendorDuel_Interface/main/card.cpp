@@ -112,27 +112,12 @@ Card::Card(int cId) {
     }
 
     json data = json::parse(f);
-    // f.close();
-
-    qDebug() << "ON EST LA LES REUFS!";
-
-    std::cout<<"OUE ON EST LA!! LA DATA EST:\n";
-    std::cout<<data << std::endl;
-
-    qDebug() << "ON EST LA1 LES REUFS!";
-
-    std::cout<< "VOICI LES CARTES:\n";
-    std::cout << data["cards"][std::to_string(cId)] << std::endl;
+    f.close();
 
     auto card = data["cards"][std::to_string(cId)];
-    qDebug() << "ON EST LA2 LES REUFS!";
     int id = card["card_id"].template get<int>();
-    qDebug() << "ON EST LA3 LES REUFS!";
     int points = card["points"].template get<int>();
-    qDebug() << "ON EST LA4 LES REUFS!";
     int crowns = card["crowns"].template get<int>();
-
-    qDebug() << "ON EST ICI LES REUFS!";
 
     std::map<CoinColor, int> costs;
     costs[CoinColor::Green] = card["costs"]["Green"].template get<int>();

@@ -31,6 +31,9 @@ private:
 
     // TEMP
     cardPyramidView* cardPyramid;
+    buyCardButtonView* buyCardButton;
+    reserveCardButtonView* reserveCardButton;
+    QHBoxLayout* gameHLayoutRightUpperButtons;
 
 
     //Layout
