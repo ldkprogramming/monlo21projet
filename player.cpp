@@ -43,25 +43,29 @@ int Player::getTotalPoints() {
     for (auto card : hand){
         points += card.getPoints();
     }
+    return points;
+
+
+
 }
 
 
 int Player::getMaxPointsPerColor() {
-    for (auto card : hand){
+    for (auto card : hand) {
         CoinColor cardColor = card.getCardColor();
-        if (cardColor != CoinColor::Empty){
+        if (cardColor != CoinColor::Empty) {
             pointsPerColor[cardColor] += card.getPoints();
         }
-    }
 
-    int max = 0;
-    for (auto pair : pointsPerColor){
-        if (pair.second > max){
-            max = pair.second;
+        int max = 0;
+        for (auto pair : pointsPerColor) {
+            if (pair.second > max) {
+                max = pair.second;
+            }
         }
-    }
 
-    return max;
+        return max;
+    }
 }
 
 bool Player::canBuy(const Card &card) {

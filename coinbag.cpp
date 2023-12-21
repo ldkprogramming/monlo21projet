@@ -3,6 +3,8 @@
 //
 
 #include "coinbag.h"
+#include <cstdlib>
+#include <filesystem>
 
 Coinbag::Coinbag() {
     for (int i = 0; i < 4; i++){

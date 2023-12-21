@@ -157,4 +157,5 @@ bool GameSaver::saveGame(const Game &game) const {
     // On ecrit le tout sur un fichier externe
     std::ofstream outputFile(path);
     outputFile << std::setw(4) << j <<std::endl;
+    return true;
 }

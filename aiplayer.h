@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "card.h"
 #include "cardpyramid.h"
 #include "coin.h"
@@ -33,4 +33,4 @@ public:
 	void AI_increment_actions_done() ;
 
 };
-
+*/

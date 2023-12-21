@@ -20,15 +20,13 @@ private:
 
 
 public:
-	Controller(GameMoveVerification& checker, Game& GameControlled);
+	Controller(GameMoveVerification& checker, Game& GameControlled) : checker(checker), GameControlled(GameControlled) {}
 	Controller(const Controller&) = delete;
 	Controller& operator=(const Controller&) = delete;
 
 	inline GameMoveVerification& get_checker() const { return checker; }
 	inline const Game&  get_GameControlled() const { return GameControlled; }
 
-	bool launch_save(GameSaver& save);
-	bool reset_game();
 
 	std::vector<Coin> ask_player_for_tokens(Player& Player);
 	std::vector<std::pair<int, int>> ask_player_for_tokens_coordinates(Player& player);

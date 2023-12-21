@@ -9,24 +9,9 @@
 
 
 
-Controller::Controller(GameMoveVerification& checker, Game& GameControlled) : checker (checker), GameControlled(GameControlled) {
-
-}
-bool Controller::launch_save(GameSaver& save)
-{
-    save.saveGame(this->GameControlled);
-   
-}
 
 
 
-bool Controller::reset_game()
-{
-    this->GameControlled.~Game();
-    this->checker.~GameMoveVerification();
-    
-    return true;
-}
 
 std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
 {

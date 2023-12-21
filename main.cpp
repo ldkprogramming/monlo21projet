@@ -34,13 +34,29 @@ int main() {
     std::string  Player1Name;
     std::string  Player2Name;
 
+    int winConditions_TotalPoints;
+    int winConditions_TotalCrowns;
+    int winConditions_TotalPointsinOneColor;
+    PlayerType Player2Type;
+    int AIchoice;
+
+    StatSaver& statsaver = StatSaver();
+
+
+    WinConditions& winSet = WinConditions::WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
+    Game& PlayedGame = Game::Game(Player1Name, Player2Name, Player2Type);
+    GameMoveVerification& Checker = GameMoveVerification::GameMoveVerification(PlayedGame);
+    Controller& CurrentController = Controller::Controller(Checker, PlayedGame);
+
+    Game& savedGame = Game("../jsonFiles/ongoingGame.json");
+    GameMoveVerification& savedChecker = GameMoveVerification(savedGame);
+    Controller savedController = Controller(savedChecker, savedGame);
+
+
+
     switch (menuChoice) {
     case 1 :
-        int winConditions_TotalPoints;
-        int winConditions_TotalCrowns;
-        int winConditions_TotalPointsinOneColor;
-        PlayerType Player2Type;
-        int AIchoice;
+      
         
         std::cout << "Entrez le nom du Joueur 1" << std::endl;
         std::cin >> Player1Name;
@@ -58,10 +74,6 @@ int main() {
         std::cin >> winConditions_TotalCrowns;
         std::cout << "Entrez le nombre de points d'une seule couleur à avoir  " << std::endl;
         std::cin >> winConditions_TotalPointsinOneColor;
-        WinConditions& winSet = WinConditions::WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
-        Game& PlayedGame = Game::Game(Player1Name, Player2Name, Player2Type);
-        GameMoveVerification& Checker = GameMoveVerification::GameMoveVerification(PlayedGame);
-        Controller& CurrentController = Controller::Controller(Checker, PlayedGame);
         
         std::cout << "Lancement du jeu " << std::endl;
         CurrentController.play_game();
@@ -70,10 +82,7 @@ int main() {
         break;
     
     case 2:
-        Game & savedGame = Game("../jsonFiles/ongoingGame.json");
-        GameMoveVerification& savedChecker = GameMoveVerification(savedGame);
-        Controller savedController = Controller(savedChecker, savedGame);
-
+       
         std::cout << "Lancement de la partie sauvegardée !" << std::endl;
 
         CurrentController.play_game();
@@ -85,7 +94,7 @@ int main() {
     case 3:
 
         std::cout << "Affichage des données sauvegardées " << std::endl;
-        StatSaver& statsaver = StatSaver();
+        
         //Méthode pour afficher à faire
     
     default:
