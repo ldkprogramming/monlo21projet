@@ -6,6 +6,7 @@
 #include "game.h"
 #include "controller.h"
 #include "gamesaver.h"
+#include "GameMoveVerification.h"
 #include "statsaver.h"
 #include "coinboard.h"
 #include <string>
@@ -16,19 +17,16 @@ using json = nlohmann::json;
 
 /*int main() {
 
-    GameSaver gs;
-    Game test(gs.getPath());
-    std::cout << test.getCoinBag();
-    std::cout << test.getCoinBoard();
+    Game test("hehe", "haha");
     std::cout << test.getPile1();
-    std::cout << test.getPyramid();
+
     return 0;
 }*/
 
 int main() {
     int menuChoice;
     std::cout << "Menu principal" << std::endl;
-    std::cout << "1 :  Lancer une nouvelle partie " << std::endl << "2 : Charger la partie déjà existante" << std::endl << "3 : Afficher les scores sauvegardés" << std::endl << "4 : Quitter ";
+    std::cout << "1 :  Lancer une nouvelle partie " << std::endl << "2 : Charger la partie dï¿½jï¿½ existante" << std::endl << "3 : Afficher les scores sauvegardï¿½s" << std::endl << "4 : Quitter ";
     std::cin >> menuChoice;
     
     std::string  Player1Name;
@@ -40,7 +38,7 @@ int main() {
     PlayerType Player2Type;
     int AIchoice;
 
-    StatSaver& statsaver = StatSaver();
+    StatSaver statsaver = StatSaver();
 
 
    
@@ -61,17 +59,17 @@ int main() {
         else { Player2Type = PlayerType::Human; }
 
         std::cout << "Choix des conditions de victoire " << std::endl;
-        std::cout << "Entrez le nombre de points totaux à avoir " << std::endl;
+        std::cout << "Entrez le nombre de points totaux ï¿½ avoir " << std::endl;
         std::cin >> winConditions_TotalPoints;
-        std::cout << "Entrez le nombre de couronnes à avoir " << std::endl;
+        std::cout << "Entrez le nombre de couronnes ï¿½ avoir " << std::endl;
         std::cin >> winConditions_TotalCrowns;
-        std::cout << "Entrez le nombre de points d'une seule couleur à avoir  " << std::endl;
+        std::cout << "Entrez le nombre de points d'une seule couleur ï¿½ avoir  " << std::endl;
         std::cin >> winConditions_TotalPointsinOneColor;
 
-        WinConditions& winSet = WinConditions::WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
-        Game& PlayedGame = Game::Game(Player1Name, Player2Name, Player2Type);
-        GameMoveVerification& Checker = GameMoveVerification::GameMoveVerification(PlayedGame);
-        Controller& CurrentController = Controller::Controller(Checker, PlayedGame);
+        WinConditions winSet = WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
+        Game PlayedGame = Game(Player1Name, Player2Name, Player2Type);
+        GameMoveVerification Checker = GameMoveVerification(PlayedGame);
+        Controller CurrentController = Controller(PlayedGame);
 
         
         std::cout << "Lancement du jeu " << std::endl;
@@ -81,12 +79,12 @@ int main() {
     }
     
     if (menuChoice == 2) {
-        Game& savedGame = Game("../jsonFiles/ongoingGame.json");
-        GameMoveVerification& savedChecker = GameMoveVerification(savedGame);
-        Controller savedController = Controller(savedChecker, savedGame);
+        Game savedGame = Game("../jsonFiles/ongoingGame.json");
+        GameMoveVerification savedChecker = GameMoveVerification(savedGame);
+        Controller savedController = Controller(savedGame);
 
 
-        std::cout << "Lancement de la partie sauvegardée !" << std::endl;
+        std::cout << "Lancement de la partie sauvegardï¿½e !" << std::endl;
 
         savedController.play_game();
 
@@ -96,9 +94,9 @@ int main() {
 
     if (menuChoice == 3) {
 
-        std::cout << "Affichage des données sauvegardées " << std::endl;
+        std::cout << "Affichage des donnï¿½es sauvegardï¿½es " << std::endl;
 
-        //Méthode pour afficher à faire
+        //Mï¿½thode pour afficher ï¿½ faire
     }
     
  

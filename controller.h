@@ -15,17 +15,17 @@ class Controller {
 private: 
 	friend class Game;
 	friend class GameMoveVerification;
-	GameMoveVerification& checker;
+	//GameMoveVerification& checker;
 	Game& GameControlled;
 
 
 public:
-	Controller(GameMoveVerification& checker, Game& GameControlled) : checker(checker), GameControlled(GameControlled) {}
+	Controller(Game& GameControlled) :  GameControlled(GameControlled) {}
 	Controller(const Controller&) = delete;
 	Controller& operator=(const Controller&) = delete;
 
-	inline GameMoveVerification& get_checker() const { return checker; }
-	inline const Game&  get_GameControlled() const { return GameControlled; }
+	//inline GameMoveVerification& get_checker() const { return checker; }
+	inline Game&  get_GameControlled() const { return GameControlled; }
 
 
 	std::vector<Coin> ask_player_for_tokens(Player& Player);
@@ -50,12 +50,12 @@ public:
 	
 	void printGameState();
 	void play_game();
-	void play_turn_human();
-	void play_turn_AI();
+	void play_turn_human(GameMoveVerification& checker);
+	void play_turn_AI(GameMoveVerification& checker);
 	void change_turn();
 	bool verify_win(Player& player);
 
-	std::vector<std::pair<int, int>> AI_take_coins_by_coordinates(const Player& AI);
+	std::vector<std::pair<int, int>> AI_take_coins_by_coordinates(const Player& AI,  GameMoveVerification& checker);
 	const Card& AI_reserve_card(const Player& AI);
 	const Card& AI_buy_card(const Player& AI);
 	std::pair<int, int> AI_take_one_coin_by_coordinates(const Player& AI);
