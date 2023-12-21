@@ -43,21 +43,14 @@ int main() {
     StatSaver& statsaver = StatSaver();
 
 
-    WinConditions& winSet = WinConditions::WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
-    Game& PlayedGame = Game::Game(Player1Name, Player2Name, Player2Type);
-    GameMoveVerification& Checker = GameMoveVerification::GameMoveVerification(PlayedGame);
-    Controller& CurrentController = Controller::Controller(Checker, PlayedGame);
+   
+   
 
-    Game& savedGame = Game("../jsonFiles/ongoingGame.json");
-    GameMoveVerification& savedChecker = GameMoveVerification(savedGame);
-    Controller savedController = Controller(savedChecker, savedGame);
+
+    if (menuChoice == 1) {
 
 
 
-    switch (menuChoice) {
-    case 1 :
-      
-        
         std::cout << "Entrez le nom du Joueur 1" << std::endl;
         std::cin >> Player1Name;
         std::cout << "Entrez le nom du Joueur 2" << std::endl;
@@ -74,35 +67,44 @@ int main() {
         std::cin >> winConditions_TotalCrowns;
         std::cout << "Entrez le nombre de points d'une seule couleur à avoir  " << std::endl;
         std::cin >> winConditions_TotalPointsinOneColor;
+
+        WinConditions& winSet = WinConditions::WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
+        Game& PlayedGame = Game::Game(Player1Name, Player2Name, Player2Type);
+        GameMoveVerification& Checker = GameMoveVerification::GameMoveVerification(PlayedGame);
+        Controller& CurrentController = Controller::Controller(Checker, PlayedGame);
+
         
         std::cout << "Lancement du jeu " << std::endl;
         CurrentController.play_game();
 
         std::cout << "Fin du jeu" << std::endl;
-        break;
+    }
     
-    case 2:
-       
+    if (menuChoice == 2) {
+        Game& savedGame = Game("../jsonFiles/ongoingGame.json");
+        GameMoveVerification& savedChecker = GameMoveVerification(savedGame);
+        Controller savedController = Controller(savedChecker, savedGame);
+
+
         std::cout << "Lancement de la partie sauvegardée !" << std::endl;
 
-        CurrentController.play_game();
+        savedController.play_game();
 
         std::cout << "Fin du jeu" << std::endl;
-        break;
-
-
-    case 3:
-
-        std::cout << "Affichage des données sauvegardées " << std::endl;
         
-        //Méthode pour afficher à faire
-    
-    default:
-        break;
     }
 
-    return 0;
+    if (menuChoice == 3) {
+
+        std::cout << "Affichage des données sauvegardées " << std::endl;
+
+        //Méthode pour afficher à faire
+    }
+    
+ 
+    }
 
 
 
-}
+
+

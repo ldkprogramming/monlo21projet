@@ -26,6 +26,32 @@ int Game::getPrivileges() const {
     return privileges;
 }
 
+const Card& Game::get_Card_from_ID(int cID) const
+{
+    for (auto card : getPyramid().getLevel1Cards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+    }
+    for (auto card : getPyramid().getLevel2Cards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+    }
+    for (auto card : getPyramid().getLevel3Cards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+
+    }
+    for (auto card : getPyramid().getRoyalCards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+    }
+}
+
+
 const std::pair<CardLevel, int> Game::cardinfosfromCard(const Card& card) const
 {
     int iterator_tracker;
@@ -251,7 +277,7 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
 
 
 }
-Game::Game(const std::string& path) : player1("ha",), player2("ho", ) {
+Game::Game(const std::string& path) : player1(json::parse(std::ifstream(path))["player1"]["name"], toPlayerType(json::parse(std::ifstream(path))["player1"]["type"])), player2(json::parse(std::ifstream(path))["player2"]["name"],toPlayerType(json::parse(std::ifstream(path))["player2"]["type"])) {
     std::ifstream f(path);
     json data = json::parse(f);
 
@@ -436,4 +462,9 @@ bool Game::applyCardSkill(Card &card, Skill skill, CoinColor bonusColor, CoinCol
 
     }
     return true;
+}
+PlayerType Game::toPlayerType(std::string json)
+{
+    if (json == "AI") { return PlayerType::AI; }
+    else return  PlayerType::Human;
 }

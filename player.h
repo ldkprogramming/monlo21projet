@@ -77,6 +77,7 @@ public:
         }
     }
 
+    
     bool AIcanBuy(const Card& c) const;
     void incrementActionsDone();
 };

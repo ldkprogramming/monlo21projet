@@ -157,7 +157,7 @@ void Player::loseCoin(CoinColor c) {
 void Player::addCardToHand(const Card &card) {
     hand.push_back(card);
 }
-
+ 
 bool Player::AIcanBuy(const Card& c) const
 {
     if ((c.getSkill1() == Skill::Bonus) || (c.getSkill2() == Skill::Bonus)) {
