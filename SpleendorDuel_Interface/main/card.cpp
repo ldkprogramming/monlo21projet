@@ -69,6 +69,10 @@ const std::map<CoinColor, int> &Card::getCosts() const {
     return costs;
 }
 
+const std::map<CoinColor, int> &Card::getBonuses() const {
+    return bonuses;
+}
+
 Skill Card::getSkill1() const {
     return skill1;
 }

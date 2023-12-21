@@ -52,6 +52,7 @@ public:
     CoinColor getCardColor();
 
     const std::map<CoinColor, int> &getCosts() const;
+    const std::map<CoinColor, int> &getBonuses() const;
 
     void incrementBonus(CoinColor c, int amount);
 

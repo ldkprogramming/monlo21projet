@@ -40,10 +40,21 @@ cardButton::cardButton(int cId, QWidget* parent): QPushButton(parent){
     }
 
     // Bonus
-    CoinColor bonus = c->getCardColor(); // A changer!
-    if (bonus != CoinColor::Empty){
-        text.append("\nBonus: ");
-        text.append(toString(bonus));
+    map<CoinColor, int> bonuses = c->getBonuses();
+    bool hasBonus = false;
+    for (auto b : bonuses){
+        if (b.second > 0){
+            if (!hasBonus) {
+                text.append("\nBonus:\n");
+                hasPrice = true;
+            }
+            QString colorBonus = QString::fromStdString(toString(b.first));
+            colorBonus.append(": ");
+            colorBonus.append(QString::number(b.second));
+            text.append("|");
+            text.append(colorBonus);
+            text.append("| ");
+        }
     }
 
     // Points
