@@ -14,20 +14,21 @@ Pile::Pile(PileType type){
     std::ifstream f;
     switch (type){
         case PileType::One:
-            f = std::ifstream ("../jsonFiles/pile1.json");
+            f = std::ifstream ("../SpleendorDuel_Interface/main/jsonFiles/pile1.json");
             break;
         case PileType::Two:
-            f = std::ifstream ("../jsonFiles/pile2.json");
+            f = std::ifstream ("../SpleendorDuel_Interface/main/jsonFiles/pile2.json");
             break;
         case PileType::Three:
-            f = std::ifstream ("../jsonFiles/pile3.json");
+            f = std::ifstream ("../SpleendorDuel_Interface/main/jsonFiles/pile3.json");
             break;
         case PileType::Royal:
-            f = std::ifstream ("../jsonFiles/royalpile.json");
+            f = std::ifstream ("../SpleendorDuel_Interface/main/jsonFiles/royalpile.json");
             break;
 
     }
     json data = json::parse(f);
+    f.close();
     for (json::iterator it = data["cards"].begin(); it != data["cards"].end(); ++it){
         auto card = data["cards"][it.key()];
         int id = card["card_id"].template get<int>();

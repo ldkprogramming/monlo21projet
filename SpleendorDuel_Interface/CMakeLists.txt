@@ -47,6 +47,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         main/cardpyramid.cpp main/cardpyramid.h
         cardPyramidView.cpp
         main/pile.cpp main/pile.h
+        main/game.cpp main/game.h
+        main/jsonFiles/ongoingGame.json main/jsonFiles/pile1.json main/jsonFiles/pile2.json main/jsonFiles/pile3.json main/jsonFiles/royalpile.json main/jsonFiles/stats.json
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -13,23 +13,24 @@ using namespace std;
 
 
 
-// class cardButton : public QPushButton
-// {
-//     Q_OBJECT
-// private:
-//     int x_pos;
-//     int level;
-//     int id;
-//     Card* card;
-// public:
-//     cardButton(int x, int y, QWidget *parent = nullptr);
-//     ~cardButton();
+class cardButton : public QPushButton
+{
+    Q_OBJECT
+private:
+    int x_pos;
+    int level;
+    int id;
+    Card* card;
+public:
+    cardButton(Card& c, int x, int l, QWidget *parent = nullptr);
+    cardButton(int id, QWidget* parent=nullptr);
+    ~cardButton();
 
-//     //à faire
-//     inline const int getX() const {return x_pos;}
-//     inline const int getLevel() const {return level;}
-//     inline Card* getCard() {return card;}
-// };
+    //à faire
+    inline const int getX() const {return x_pos;}
+    inline const int getLevel() const {return level;}
+    inline Card* getCard() {return card;}
+};
 
 
 
@@ -39,7 +40,10 @@ class cardPyramidView: public QWidget
 {
     Q_OBJECT
 private:
-    CardPyramid* cards;
+    // CardPyramid* cards;
+
+    QHBoxLayout* layout;
+    QVBoxLayout* royal;
 
     QVBoxLayout* rows;
     QHBoxLayout* level1;
@@ -54,6 +58,7 @@ private:
 
 public:
     cardPyramidView(QWidget *parent = nullptr);
+    void addCard(const int& cId);
 };
 
 

@@ -58,6 +58,30 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     cardPyramid = new cardPyramidView(this);
     gameVLayoutRightUpper->addWidget(cardPyramid);
 
+    // Card* c = new Card(10);
+    // cardPyramid->addCard(c->getId());
+
+    cardPyramid->addCard(0);
+    cardPyramid->addCard(1);
+    cardPyramid->addCard(2);
+    cardPyramid->addCard(3);
+    cardPyramid->addCard(4);
+
+    cardPyramid->addCard(30);
+    cardPyramid->addCard(31);
+    cardPyramid->addCard(32);
+    cardPyramid->addCard(33);
+
+    cardPyramid->addCard(54);
+    cardPyramid->addCard(55);
+    cardPyramid->addCard(56);
+
+    cardPyramid->addCard(67);
+    cardPyramid->addCard(68);
+    cardPyramid->addCard(69);
+    cardPyramid->addCard(70);
+
+
 
     ///
 
@@ -250,7 +274,7 @@ int gameView::checkCoinsSelection(){
     qDebug() << "Actualisation des données des joueurs \n";
     player1View -> updateView();
     player2View -> updateView();
-    cout<<player2->getPrivileges();
+    // cout<<player2->getPrivileges();
     privilegeLabel ->updateCounter();
 
     return 1;

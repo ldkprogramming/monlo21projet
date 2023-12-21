@@ -345,6 +345,12 @@
 			null
 		],
 		[
+			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/game.h",
+			"MU",
+			"FKWUBUMHKV/moc_game.cpp",
+			null
+		],
+		[
 			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/pile.h",
 			"MU",
 			"FKWUBUMHKV/moc_pile.cpp",
@@ -492,6 +498,11 @@
 		],
 		[
 			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/coinboard.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/game.cpp",
 			"MU",
 			null
 		],

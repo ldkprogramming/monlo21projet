@@ -6,6 +6,8 @@
 #include <ostream>
 #include <fstream>
 
+#include <QDebug>
+
 using json = nlohmann::json;
 
 #include "card.h"
@@ -92,25 +94,41 @@ Card::Card(int cId) {
     std::ifstream f;
     switch (type) {
         case PileType::One:
-            f = std::ifstream("../jsonFiles/pile1.json");
+            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/pile1.json");
             break;
         case PileType::Two:
-            f = std::ifstream("../jsonFiles/pile2.json");
+            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/pile2.json");
             break;
         case PileType::Three:
-            f = std::ifstream("../jsonFiles/pile3.json");
+            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/pile3.json");
             break;
         case PileType::Royal:
-            f = std::ifstream("../jsonFiles/royalpile.json");
+            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/royalpile.json");
             break;
     }
-    json data = json::parse(f);
 
+    json data = json::parse(f);
+    // f.close();
+
+    qDebug() << "ON EST LA LES REUFS!";
+
+    std::cout<<"OUE ON EST LA!! LA DATA EST:\n";
+    std::cout<<data << std::endl;
+
+    qDebug() << "ON EST LA1 LES REUFS!";
+
+    std::cout<< "VOICI LES CARTES:\n";
+    std::cout << data["cards"][std::to_string(cId)] << std::endl;
 
     auto card = data["cards"][std::to_string(cId)];
+    qDebug() << "ON EST LA2 LES REUFS!";
     int id = card["card_id"].template get<int>();
+    qDebug() << "ON EST LA3 LES REUFS!";
     int points = card["points"].template get<int>();
+    qDebug() << "ON EST LA4 LES REUFS!";
     int crowns = card["crowns"].template get<int>();
+
+    qDebug() << "ON EST ICI LES REUFS!";
 
     std::map<CoinColor, int> costs;
     costs[CoinColor::Green] = card["costs"]["Green"].template get<int>();

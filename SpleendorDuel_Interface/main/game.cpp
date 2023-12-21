@@ -226,6 +226,7 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
 Game::Game(const std::string& path) : player1("ha"), player2("ho"){
     std::ifstream f(path);
     json data = json::parse(f);
+    f.close();
 
     // On initialise le sac a jetons
     std::vector<Coin> coinsInCoinBag;

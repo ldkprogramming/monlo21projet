@@ -2645,3 +2645,5 @@ C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDu
 C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/useprivilegebuttonView.cpp
 C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/cardpyramid.h
 C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/cardpyramid.cpp
+C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/game.h
+C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/game.cpp

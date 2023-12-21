@@ -616,6 +616,8 @@ SpleendorDuel_Interface_autogen/timestamp: \
   C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/coinbag.h \
   C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/coinboard.cpp \
   C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/coinboard.h \
+  C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/game.cpp \
+  C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/game.h \
   C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/pile.cpp \
   C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/pile.h \
   C:/Users/jules/OneDrive/Bureau/Projet\ LO21\ Final\ Final/monlo21projet/SpleendorDuel_Interface/main/player.cpp \
