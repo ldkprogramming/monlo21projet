@@ -1,6 +1,6 @@
 #include "cardPyramidView.h"
 
-
+#include <QSignalMapper>
 
 
 
@@ -122,11 +122,24 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
     // setMinimumSize(BUTTON_SIZE);
     // setMaximumSize(BUTTON_SIZE);
 
-    setCheckable(false);
+    setCheckable(true);
 }
 
 cardButton::~cardButton(){}
 
+
+
+void cardPyramidView::cardClicked(cardButton* c){
+    qDebug() << "Carte cliquée";
+
+    for (auto card : cardButtons){
+        qDebug() << "Yahoo";
+        if (card != c){
+            // card->clearFocus();
+            card->setChecked(false);
+        }
+    }
+}
 
 
 
@@ -135,6 +148,8 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
     Card* c = new Card(cId);
     PileType level = c->getPileTypeOfCard(cId);
     delete c;
+
+    QSignalMapper* signalMapper = new QSignalMapper (this) ;
 
     if (!onPile){
         cardButton* cB = new cardButton(cId, this);
@@ -154,6 +169,8 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
         default:
             break;
         }
+
+        connect(cB, &QPushButton::clicked, [this, cB] { cardClicked(cB); });
         cardButtons.push_back(cB);
     }
     else {
@@ -171,6 +188,8 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
         default:
             break;
         }
+
+        connect(cB, &QPushButton::clicked, [this, cB] { cardClicked(cB); });
         cardButtons.push_back(cB);
     }
 

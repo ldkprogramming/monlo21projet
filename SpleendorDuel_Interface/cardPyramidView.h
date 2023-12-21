@@ -53,6 +53,10 @@ private:
 public:
     cardPyramidView(QWidget *parent = nullptr);
     void addCard(const int& cId, bool onPile=false);
+
+
+private slots:
+    void cardClicked(cardButton* c);
 };
 
 
