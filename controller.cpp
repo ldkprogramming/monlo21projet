@@ -21,9 +21,9 @@ std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
     std::cin >> number_of_coins;
     int x, y;
     for (int i = 0; number_of_coins; i++) {
-        std::cout << "Entrez la coordonnées x du jeton à prendre " << std::endl;
+        std::cout << "Entrez la coordonnï¿½es x du jeton ï¿½ prendre " << std::endl;
         std::cin >> x;
-        std::cout << "Entrez la coordonnées y du jeton à prendre " << std::endl;
+        std::cout << "Entrez la coordonnï¿½es y du jeton ï¿½ prendre " << std::endl;
         std::cin >> y;
         coins.push_back(this->GameControlled.coinBoard.getCoin(x,y));
     }
@@ -38,12 +38,12 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
     std::cin >> number_of_coins;
     int x, y;
     for (int i = 0; number_of_coins; i++) {
-        std::cout << "Entrez la coordonnées x du jeton à prendre " << std::endl;
+        std::cout << "Entrez la coordonnï¿½es x du jeton ï¿½ prendre " << std::endl;
         std::cin >> x;
-        std::cout << "Entrez la coordonnées y du jeton à prendre " << std::endl;
+        std::cout << "Entrez la coordonnï¿½es y du jeton ï¿½ prendre " << std::endl;
         std::cin >> y;
         if (x > 4 || x < 0 || y> 4 || y < 0) {
-            throw std::runtime_error("Coordonnées erronnées !  ");
+            throw std::runtime_error("Coordonnï¿½es erronnï¿½es !  ");
             return ask_player_for_tokens_coordinates(player);
         }
       coordinates.push_back(std::pair<int, int>(x, y));
@@ -52,7 +52,7 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
     if(coordinates.size()> 1){
         for (size_t i = 0; i < coordinates.size() - 1; i++) {
             if (coordinates.at(i) == coordinates.at(i + 1)) {
-                throw std::runtime_error("Vecteur contenant des coordonnées identiques !");
+                throw std::runtime_error("Vecteur contenant des coordonnï¿½es identiques !");
                 return ask_player_for_tokens_coordinates(player);
             }
         }
@@ -64,9 +64,9 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
 std::pair<int, int> Controller::ask_for_player_solo_token_coordinates(Player& p)
 {
     int x, y;
-    std::cout << "Entrez la coordonnées x du jeton à prendre " << std::endl;
+    std::cout << "Entrez la coordonnï¿½es x du jeton ï¿½ prendre " << std::endl;
     std::cin >> x;
-    std::cout << "Entrez la coordonnées y du jeton à prendre " << std::endl;
+    std::cout << "Entrez la coordonnï¿½es y du jeton ï¿½ prendre " << std::endl;
     std::cin >> y;
     std::pair<int,int> coordinates = std::pair<int, int>(x, y);
     return coordinates;
@@ -112,7 +112,7 @@ bool Controller::ask_player_for_optional_actions(Player& player)
             }
         }
         }
-    throw std::runtime_error("Mauvaise pile selectionnée");
+    throw std::runtime_error("Mauvaise pile selectionnï¿½e");
     return ask_player_for_card_to_buy(player);
 
 
@@ -160,7 +160,7 @@ bool Controller::ask_player_for_optional_actions(Player& player)
          iterator_tracker++;
      }
 
-     std::cout << "Mauvaise pile selectionnée " << std::endl;
+     std::cout << "Mauvaise pile selectionnï¿½e " << std::endl;
      return ask_player_for_card_to_reserve(player);
  }
 
@@ -246,7 +246,7 @@ PlayerType Controller::ask_for_opponenent_type(Player& )
 OptionalActions Controller::ask_for_optional_action_type(Player& player)
 {
     int choice;
-    std::cout << "Quelle action voulez-vous effectuer ? \n 1 pour  prendre un jeton avec un privilège \n 2 pour remplir le plateau";
+    std::cout << "Quelle action voulez-vous effectuer ? \n 1 pour  prendre un jeton avec un privilï¿½ge \n 2 pour remplir le plateau";
     std::cin >> choice;
     switch (choice) {
     case 1 :
@@ -286,7 +286,7 @@ bool Controller::verify_win(Player& player){
 
 int Controller::ask_for_number_of_privileges_to_use(Player &p) {
     int number;
-    std::cout << "Combien de privilèges voulez-vous utiliser ?"<< std::endl;
+    std::cout << "Combien de privilï¿½ges voulez-vous utiliser ?"<< std::endl;
     std::cin >> number;
     return number;
 }
@@ -294,7 +294,7 @@ int Controller::ask_for_number_of_privileges_to_use(Player &p) {
 CompulsoryActions Controller::ask_for_compulsory_action_type(Player& p)
 {
     int choice;
-    std::cout << "Quelle type d'action obligatoire voulez-vous effectuer ? \n 1 : Acheter une carte \n 2 : Réserver une carte \n 3 : Prendre des jetons"  << std::endl;
+    std::cout << "Quelle type d'action obligatoire voulez-vous effectuer ? \n 1 : Acheter une carte \n 2 : Rï¿½server une carte \n 3 : Prendre des jetons"  << std::endl;
     std::cin >> choice;
     switch (choice)
     {
@@ -377,14 +377,20 @@ void Controller::printGameState()
 
 void Controller::play_game()
 {
+    GameMoveVerification checker(this->get_GameControlled());
     GameSaver saver;
     int coin = rand() % 2;
     if (coin) {this->GameControlled.turn = PlayerEnum::Player2; }
     else { this->GameControlled.turn = PlayerEnum::Player1; }
 
     while (!verify_win(this->GameControlled.getActivePlayer())) {
-        if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human) { play_turn_human(); }
-        else(play_turn_AI());
+        if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human)
+            {
+                this->play_turn_human(checker);
+            }
+        else {
+            play_turn_AI(checker);
+        }
         saver.saveGame(this->get_GameControlled());
     }
     StatSaver saverstats;
@@ -393,11 +399,11 @@ void Controller::play_game()
 
 }
 
-void Controller::play_turn_human()
+void Controller::play_turn_human(GameMoveVerification& checker)
 {
     printGameState();
     OptionalActions optionalaction;
-    while (get_checker().verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+    while (checker.verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
         if (ask_player_for_optional_actions(this->GameControlled.getActivePlayer())) {
             optionalaction = ask_for_optional_action_type(this->GameControlled.getActivePlayer());
             if (optionalaction == OptionalActions::UsePrivileges) {
@@ -418,7 +424,7 @@ void Controller::play_turn_human()
         }
         printGameState();
     }
-    if (!get_checker().compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
+    if (!checker.compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
         GameControlled.playerFillBoard();
 
     }
@@ -433,7 +439,7 @@ void Controller::play_turn_human()
             }
             GameControlled.playerTakeCoins(coordinates);
 
-            if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+            if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {
                 int id = ask_for_royal_card(GameControlled.getActivePlayer());
 
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
@@ -459,7 +465,7 @@ void Controller::play_turn_human()
 
 
             GameControlled.playerReserveCard(cardinfos.second, GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first).getId());
-            if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+            if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {
                 int id = ask_for_royal_card(GameControlled.getActivePlayer());
                 
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
@@ -491,7 +497,7 @@ void Controller::play_turn_human()
                 GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
             }
            
-            if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+            if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {
                 int id = ask_for_royal_card(GameControlled.getActivePlayer());
 
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
@@ -513,10 +519,10 @@ void Controller::play_turn_human()
 
     }
 
-void Controller::play_turn_AI()
+void Controller::play_turn_AI(GameMoveVerification& checker)
 {
     printGameState();
-    if (get_checker().verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+    if (checker.verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
         if (AI_optional_or_not(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
             OptionalActions optionalactionAI = AI_choose_optional_action(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
             if (optionalactionAI == OptionalActions::UsePrivileges) {
@@ -537,14 +543,14 @@ void Controller::play_turn_AI()
         }
         printGameState();
     }
-    if (!get_checker().compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
+    if (!checker.compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
         GameControlled.playerFillBoard();
    
     }
 
     CompulsoryActions compulsoryActionAI = AI_choose_compulsory_action(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
     if (compulsoryActionAI == CompulsoryActions::TakeCoins) {
-        std::vector<std::pair<int, int>> coordinates = AI_take_coins_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+        std::vector<std::pair<int, int>> coordinates = AI_take_coins_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()), checker);
         GameControlled.playerTakeCoins(coordinates);
     }
     if (compulsoryActionAI == CompulsoryActions::ReserveCard) {
@@ -571,7 +577,7 @@ void Controller::play_turn_AI()
         
     }
     printGameState();
-    if (get_checker().can_royal_card_pick(GameControlled.getActivePlayer())) {
+    if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {
         const Card& royalpick = AI_royal_pick(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
         GameControlled.getActivePlayer().addCardToHand(royalpick);
         printGameState();
@@ -583,7 +589,7 @@ void Controller::play_turn_AI()
     
 
 
-std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const Player& AI)
+std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const Player& AI,  GameMoveVerification& checker)
 {
     
 
@@ -595,13 +601,13 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
             coordinates_3.push_back(std::pair<int, int>(j, i));
 
         }
-        if (this->get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3)))
+        if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3)))
         {
             return coordinates_3; //Si la combinaison est valide on prend
 
         }
         else {
-            coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); //Sinon on efface les coordonnées du vecteur
+            coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); //Sinon on efface les coordonnï¿½es du vecteur
         }
 
     }
@@ -615,13 +621,13 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
             coordinates_3.push_back(std::pair<int, int>(j, i));
 
         }
-        if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3)))
+        if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3)))
         {
             return coordinates_3; //Si la combinaison est valide on prend
 
         }
         else {
-            coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); //Sinon on efface les coordonnées du vecteur
+            coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); //Sinon on efface les coordonnï¿½es du vecteur
         }
     }
     for (int i = 0; i < 3; i++) {
@@ -630,11 +636,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(i + j, j));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -644,11 +650,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(i + j, j));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -660,11 +666,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(i - j, j));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -676,11 +682,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(j, i + j));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -692,11 +698,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(i + j, 4 - j));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -708,11 +714,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(i - j, 4 - j));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -724,11 +730,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 3; j++) {
             coordinates_3.push_back(std::pair<int, int>(j, 4 - (i + j)));
 
-            if (get_checker().verify_coin_alignment(coordinates_3) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_3))) {
+            if (checker.verify_coin_alignment(coordinates_3) && checker.verify_coin_colors(coordinates_to_coin(coordinates_3))) {
                 return coordinates_3; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_3.erase(coordinates_3.begin(), coordinates_3.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -740,13 +746,13 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
             coordinates_2.push_back(std::pair<int, int>(i, j));
 
         }
-        if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2)))
+        if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2)))
         {
             return coordinates_2; //Si la combinaison est valide on prend
 
         }
         else {
-            coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); //Sinon on efface les coordonnées du vecteur
+            coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); //Sinon on efface les coordonnï¿½es du vecteur
         }
 
     }
@@ -760,13 +766,13 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
             coordinates_2.push_back(std::pair<int, int>(j, i));
 
         }
-        if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2)))
+        if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2)))
         {
             return coordinates_2; //Si la combinaison est valide on prend
 
         }
         else {
-            coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); //Sinon on efface les coordonnées du vecteur
+            coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); //Sinon on efface les coordonnï¿½es du vecteur
         }
 
     }
@@ -777,11 +783,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 2; j++) {
             coordinates_2.push_back(std::pair<int, int>(i + j, j));
 
-            if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2))) {
+            if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2))) {
                 return coordinates_2; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -792,11 +798,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 2; j++) {
             coordinates_2.push_back(std::pair<int, int>(i - j, j));
 
-            if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2))) {
+            if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2))) {
                 return coordinates_2; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -808,11 +814,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 2; j++) {
             coordinates_2.push_back(std::pair<int, int>(j, i + j));
 
-            if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2))) {
+            if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2))) {
                 return coordinates_2; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -824,11 +830,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 2; j++) {
             coordinates_2.push_back(std::pair<int, int>(i + j, 4 - j));
 
-            if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2))) {
+            if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2))) {
                 return coordinates_2; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -840,11 +846,11 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 2; j++) {
             coordinates_2.push_back(std::pair<int, int>(i - j, 4 - j));
 
-            if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2))) {
+            if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2))) {
                 return coordinates_2; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
@@ -856,15 +862,15 @@ std::vector<std::pair<int, int>> Controller:: AI_take_coins_by_coordinates(const
         for (int j = 0; j < 2; j++) {
             coordinates_2.push_back(std::pair<int, int>(j, 4 - (i + j)));
 
-            if (get_checker().verify_coin_alignment(coordinates_2) && get_checker().verify_coin_colors(coordinates_to_coin(coordinates_2))) {
+            if (checker.verify_coin_alignment(coordinates_2) && checker.verify_coin_colors(coordinates_to_coin(coordinates_2))) {
                 return coordinates_2; // Si la combinaison est valide on prend
             }
             else {
-                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnées du vecteur
+                coordinates_2.erase(coordinates_2.begin(), coordinates_2.end()); // Sinon on efface les coordonnï¿½es du vecteur
             }
         }
     }
-    std::vector<std::pair<int, int>> coordinates_void = { {0,0} }; //On a trouvé aucune combinaison plurielle
+    std::vector<std::pair<int, int>> coordinates_void = { {0,0} }; //On a trouvï¿½ aucune combinaison plurielle
     return coordinates_void;
 }
 const Card& Controller::AI_reserve_card(const Player& AI)
@@ -1014,7 +1020,7 @@ CoinColor Controller::AI_choose_color_to_steal(const Player& AI)
 
 int Controller::AI_number_of_privileges_to_use(const Player& AI)
 {
-    return rand() % AI.getPrivileges() + 1; // On retourne une valeur aléatoire de privilège
+    return rand() % AI.getPrivileges() + 1; // On retourne une valeur alï¿½atoire de privilï¿½ge
 }
 
 CompulsoryActions Controller::AI_choose_compulsory_action(const Player& AI)
