@@ -49,6 +49,7 @@ private:
     QHBoxLayout* level3;
 
     vector<cardButton*> cardButtons;
+    cardButton* selectedCard;
 
 public:
     cardPyramidView(QWidget *parent = nullptr);

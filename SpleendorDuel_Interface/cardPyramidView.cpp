@@ -18,10 +18,11 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
     Card* c = new Card(cId);
     cardButton(*c, 0, 0, parent);
 
+        // Texte de la carte
+
     QString text;
 
     if (!onPile) {
-            // Texte de la carte
         // Indice
         text = "Carte n°";
         text.append(QString::number(cId));
@@ -112,8 +113,28 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
     }
 
     delete c;
-
     this->setText(text);
+    PileType pile = c->getPileTypeOfCard(cId);
+    switch(pile){
+    case PileType::One:
+        this->setStyleSheet("background-color: #549364;");
+        break;
+    case PileType::Two:
+        this->setStyleSheet("background-color: #CD9C4D;");
+        break;
+    case PileType::Three:
+        this->setStyleSheet("background-color: #0F546E;");
+        break;
+    case PileType::Royal:
+        this->setStyleSheet("background-color: #FFD045");
+        break;
+    default:
+        break;
+    }
+        // Couleur
+
+
+
 
         //Taille
     // resize(50,50);
@@ -139,6 +160,8 @@ void cardPyramidView::cardClicked(cardButton* c){
             card->setChecked(false);
         }
     }
+
+    selectedCard = c;
 }
 
 
@@ -149,7 +172,7 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
     PileType level = c->getPileTypeOfCard(cId);
     delete c;
 
-    QSignalMapper* signalMapper = new QSignalMapper (this) ;
+    // QSignalMapper* signalMapper = new QSignalMapper (this) ;
 
     if (!onPile){
         cardButton* cB = new cardButton(cId, this);
@@ -198,6 +221,8 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
 
 cardPyramidView::cardPyramidView(QWidget* parent) : QWidget(parent)
 {
+    selectedCard = nullptr;
+
     layout = new QHBoxLayout(this);
     royal = new QVBoxLayout(this);
     piles = new QVBoxLayout(this);
@@ -219,9 +244,9 @@ cardPyramidView::cardPyramidView(QWidget* parent) : QWidget(parent)
     rows->addLayout(level2);
     rows->addLayout(level1);
 
-    piles->addLayout(pile1);
-    piles->addLayout(pile2);
     piles->addLayout(pile3);
+    piles->addLayout(pile2);
+    piles->addLayout(pile1);
 
     this->setLayout(layout);
 }
