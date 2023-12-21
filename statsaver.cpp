@@ -6,6 +6,7 @@
 #include "nlohmann/json.hpp"
 #include <fstream>
 #include <ostream>
+#include <string>
 
 using json = nlohmann::json;
 
@@ -35,4 +36,18 @@ void StatSaver::saveGameStats(const Game &game) {
 
     std::ofstream outputFile(path);
     outputFile << std::setw(4) << data <<std::endl;
+}
+
+std::ostream& operator<<(std::ostream f, const StatSaver s)
+{
+    std::string path = s.getPath();
+    json stats = json::parse(path);
+
+    for (auto c : stats["players"]) {
+        f << c << std::endl;
+    }
+    
+
+
+
 }

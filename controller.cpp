@@ -271,7 +271,7 @@ OptionalActions Controller::ask_for_optional_action_type(Player& player)
 
 void Controller::change_turn()
 {
-    if (GameControlled.getPlayerTurn() == PlayerEnum::Player1) {
+    {
         GameControlled.turn = getOpponent(GameControlled.turn);
     }
 }

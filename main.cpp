@@ -98,7 +98,7 @@ int main() {
 
         std::cout << "Affichage des données sauvegardées " << std::endl;
 
-        //Méthode pour afficher à faire
+        std::cout << statsaver;
     }
     
  
