@@ -392,14 +392,17 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
     // l'argument optionnel stolenColor sert en cas de capacite robCoin
     // On peut pas acheter une carte royale
     if (level == CardLevel::Royal){
+        std::cout << "Pas de royal";
         return false;
     }
     // ou bien, on peut pas acheter une carte inexistante
     if ((cardNumber < 0) || (cardNumber > pyramid.getNumberOfCards(level))){
+        std::cout << "Number";
         return false;
     }
     // on verifie evidemment si le joueur peut acheter la carte
     if (!getActivePlayer().canBuy(pyramid.checkCard(level, cardNumber))){
+        std::cout << "Canbuy";
         return false;
     }
 

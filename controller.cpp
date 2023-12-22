@@ -444,7 +444,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
         CompulsoryActions Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
         if (Compulsory_Action == CompulsoryActions::BuyCard) {
             
-            while (Compulsory_Action==CompulsoryActions::BuyCard && !checker.canBuyCard(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())))
+            while (Compulsory_Action==CompulsoryActions::BuyCard && checker.canBuyCard(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))==false)
             {
                 std::cout << "Vous ne pouvez pas acheter de cartes " << std::endl;
                 Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
