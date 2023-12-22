@@ -428,6 +428,10 @@ void Controller::play_turn_human(GameMoveVerification& checker)
                 GameControlled.playerFillBoard();
             }
 
+            
+        }
+        else {
+            break;
         }
         printGameState();
     }
@@ -561,7 +565,7 @@ void Controller::play_turn_AI(GameMoveVerification& checker)
 
 
             }
-
+            
         }
         printGameState();
     }
