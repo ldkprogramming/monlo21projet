@@ -136,6 +136,15 @@ bool GameMoveVerification::compulsory_action_can_be_done(Player& p)
 				return true;
 			}
 		}
+		//Réserver une carte
+		for (int x = 0; x < 5; x++) {
+			for (int y = 0; y < 5; y++) {
+				if (get_game_checked().getCoinBoard().getCoin(x, y).getColor() == CoinColor::Gold)
+					return true; 
+			}
+		}
+		if (!get_game_checked().getCoinBoard().isEmpty()) { return true; }
+
 		return false;
 	}
 

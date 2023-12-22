@@ -82,14 +82,14 @@ std::ostream& operator<<(std::ostream& f, const Card& c){
     '\n';
     f << "skill1 : " << toString(c.skill1) << '\n';
     f << "skill2 : " << toString(c.skill2) << '\n';
-   
+    f << "Cout : " << std::endl;
+    for (auto cost : c.getCosts()) {
+        f << toString(cost.first) << " : " << cost.second << std::endl;
+    }
     return f;
 }
 
-/**std::ostream& operator<<(std::ostream& f, const std::map<CoinColor, int> p) {
-    f << toString(p.) << " : " << p << std::endl;
-        return f;
-}*/
+
 
 CoinColor Card::getCardColor() const {
     CoinColor coinColor = CoinColor::Empty;
