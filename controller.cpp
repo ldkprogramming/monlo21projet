@@ -13,14 +13,14 @@
 
 
 
-std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
+std::vector<Coin> Controller::ask_player_for_tokens(const Player& Player)
 {
     std::vector<Coin> coins;
     int number_of_coins;
     std::cout << "Combien de jetons voulez vous prendre" << std::endl;
     std::cin >> number_of_coins;
     int x, y;
-    for (int i = 0; number_of_coins; i++) {
+    for (int i = 0; i<number_of_coins; i++) {
         std::cout << "Entrez la coordonn�es x du jeton � prendre " << std::endl;
         std::cin >> x;
         std::cout << "Entrez la coordonn�es y du jeton � prendre " << std::endl;
@@ -30,7 +30,7 @@ std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
     return coins;
 }
 
-std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(Player& player)
+std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(const Player& player)
 {
     std::vector<std::pair<int, int>> coordinates;
     int number_of_coins;
@@ -56,7 +56,7 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
     if(coordinates.size()> 1){
         for (size_t i = 0; i < coordinates.size() - 1; i++) {
             if (coordinates.at(i) == coordinates.at(i + 1)) {
-                throw std::runtime_error("Vecteur contenant des coordonn�es identiques !");
+                std::cout << " Erreur de choix \n" << std::endl;
                 return ask_player_for_tokens_coordinates(player);
             }
         }
@@ -65,7 +65,7 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
     return coordinates;
 }
 
-std::pair<int, int> Controller::ask_for_player_solo_token_coordinates(Player& p)
+std::pair<int, int> Controller::ask_for_player_solo_token_coordinates(const Player& p)
 {
     int x, y;
     std::cout << "Entrez la coordonn�es x du jeton � prendre " << std::endl;
@@ -78,7 +78,7 @@ std::pair<int, int> Controller::ask_for_player_solo_token_coordinates(Player& p)
     
 
 
-bool Controller::ask_player_for_optional_actions(Player& player)
+bool Controller::ask_player_for_optional_actions(const Player& player)
 {
     int state;
     std::cout << "Voulez-vous effectuer une action optionnelle ? \n 1 pour oui \n 0 pour non" << std::endl;
@@ -87,12 +87,12 @@ bool Controller::ask_player_for_optional_actions(Player& player)
     else { return false; }
 }
 
- const Card& Controller::ask_player_for_card_to_buy(Player& player){
+ const Card& Controller::ask_player_for_card_to_buy(const Player& player){
     int pile, id;
     std::cout << this->get_GameControlled().getPyramid();
     std::cout << "Quelle carte voulez-vous acheter ?" << std::endl << "Entrez le niveau de la carte \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n";
     std::cin >> pile;
-    std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
+    std::cout << "Entrez l'ID de la carte dans la pyramide" << std::endl;
     std::cin >> id;
     CardLevel pileconverted = int_to_cardlevel(pile);
     if (pile == 1) {
@@ -126,13 +126,13 @@ bool Controller::ask_player_for_optional_actions(Player& player)
    
 
 
- std::pair<int, CardLevel> Controller::ask_player_for_card_to_reserve(Player& player)
+ std::pair<int, CardLevel> Controller::ask_player_for_card_to_reserve(const Player& player)
  {
      int pile, id;
      std::cout << this->get_GameControlled().getPyramid();
-     std::cout << "Quelle carte voulez-vous acheter ?" << std::endl << "Entrez le niveau de la carte \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n";
+     std::cout << "Quelle carte voulez-vous réserver ?" << std::endl << "Entrez le niveau de la carte \n 1 pour le niveau 1 \n 2 pour le niveau 2 \n 3 pour le niveau 3 \n";
      std::cin >> pile;
-     std::cout << "Entrez la position de la carte dans la pyramide" << std::endl;
+     std::cout << "Entrez l'ID de la carte dans la pyramide" << std::endl;
      std::cin >> id;
      CardLevel pileconverted = int_to_cardlevel(pile);
      int iterator_tracker;
@@ -171,7 +171,7 @@ bool Controller::ask_player_for_optional_actions(Player& player)
     
 
 
-CoinColor Controller::ask_player_for_bonus_color(Player& player)
+CoinColor Controller::ask_player_for_bonus_color(const Player& player)
 {
     int Color;
     std::cout << "A quelle couleur vous attacher ce bonus ?" << std::endl << "1 : Rouge \n  2 : Vert \n 3 : Bleu \n  4 : Blanc \n 5 : Noir" << std::endl ;
@@ -194,14 +194,14 @@ CoinColor Controller::ask_player_for_bonus_color(Player& player)
     case 5 : 
         return CoinColor::Black;
     default:
-        throw std::runtime_error("Mauvais choix !");
+        std::cout << " Erreur de choix \n" << std::endl;
         return ask_player_for_bonus_color(player);
         break;
     }
     
 }
 
-CoinColor Controller::ask_for_color_to_steal(Player& p)
+CoinColor Controller::ask_for_color_to_steal(const Player& p)
 
 {
     int Color;
@@ -236,7 +236,7 @@ CoinColor Controller::ask_for_color_to_steal(Player& p)
 
 }
 
-PlayerType Controller::ask_for_opponenent_type(Player& )
+PlayerType Controller::ask_for_opponenent_type(const Player& p )
 {
     int choice;
     std::cout << "Voulez vous jouer contre une IA ? " << std::endl << "0 pour non et 1 pour oui" << std::endl;
@@ -247,7 +247,7 @@ PlayerType Controller::ask_for_opponenent_type(Player& )
     return PlayerType::AI;
 }
 
-OptionalActions Controller::ask_for_optional_action_type(Player& player)
+OptionalActions Controller::ask_for_optional_action_type(const Player& player)
 {
     int choice;
     std::cout << "Quelle action voulez-vous effectuer ? \n 1 pour  prendre un jeton avec un privil�ge \n 2 pour remplir le plateau";
@@ -259,7 +259,7 @@ OptionalActions Controller::ask_for_optional_action_type(Player& player)
         return OptionalActions::FillBoard;
 
     default:
-        throw std::runtime_error("Mauvais choix !");
+        std::cout << " Erreur de choix \n" << std::endl;
         return ask_for_optional_action_type(player);
 
 
@@ -288,14 +288,14 @@ bool Controller::verify_win(Player& player){
     return ((player.getMaxPointsPerColor() == winPointsInOneColor) || (player.getTotalPoints() == winTotalPoints) || (player.getTotalCrowns() == winTotalCrowns));
 }
 
-int Controller::ask_for_number_of_privileges_to_use(Player &p) {
+int Controller::ask_for_number_of_privileges_to_use(const Player &p) {
     int number;
     std::cout << "Combien de privil�ges voulez-vous utiliser ?"<< std::endl;
     std::cin >> number;
     return number;
 }
 
-CompulsoryActions Controller::ask_for_compulsory_action_type(Player& p)
+CompulsoryActions Controller::ask_for_compulsory_action_type(const Player& p)
 {
     int choice;
     std::cout << "Quelle type d'action obligatoire voulez-vous effectuer ? \n 1 : Acheter une carte \n 2 : R�server une carte \n 3 : Prendre des jetons"  << std::endl;
@@ -316,7 +316,7 @@ CompulsoryActions Controller::ask_for_compulsory_action_type(Player& p)
     }
 }
 
-int Controller::ask_for_royal_card(Player& p)
+int Controller::ask_for_royal_card(const Player& p)
 {
     int id;
     std::cout << p.getName() << "Vous avez " << p.getTotalCrowns() << std::endl << "Vous pouvez choisir une carte royale !";
@@ -324,7 +324,7 @@ int Controller::ask_for_royal_card(Player& p)
     for (auto c : get_GameControlled().getPyramid().getRoyalCards()) {
         std::cout << c << " ";
     }
-    std::cout << std::endl;
+    std::cout << "Entrez l'ID de la carte" << std::endl;
     std::cin >> id;
     return id;
 }
@@ -408,15 +408,15 @@ void Controller::play_turn_human(GameMoveVerification& checker)
     printGameState();
     OptionalActions optionalaction;
     while (checker.verify_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
-        if (ask_player_for_optional_actions(this->GameControlled.getActivePlayer())) {
-            optionalaction = ask_for_optional_action_type(this->GameControlled.getActivePlayer());
+        if (ask_player_for_optional_actions(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+            optionalaction = ask_for_optional_action_type(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
             if (optionalaction == OptionalActions::UsePrivileges) {
-                int number_of_privileges = ask_for_number_of_privileges_to_use(this->GameControlled.getActivePlayer());
-                std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
+                int number_of_privileges = ask_for_number_of_privileges_to_use(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+                std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
                 while (!GameControlled.playerUsePrivileges(number_of_privileges, coordinates)) {
             
-                    int number_of_privileges = ask_for_number_of_privileges_to_use(this->GameControlled.getActivePlayer());
-                    std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
+                    int number_of_privileges = ask_for_number_of_privileges_to_use(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
+                    std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
                 }
                 
                  
@@ -449,7 +449,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
 
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
 
-                    throw std::runtime_error("Erreur de choix \n");
+                    std::cout << " Erreur de choix \n" << std::endl;
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
                     
                 }
@@ -462,7 +462,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
         if (Compulsory_Action == CompulsoryActions::ReserveCard) {
             std::pair<int, CardLevel> cardinfos = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
             if (!checker.verify_card_type_reservation(GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first))) {
-                throw std::runtime_error("Erreur de choix \n");
+                std::cout << " Erreur de choix \n" << std::endl;
                 cardinfos = ask_player_for_card_to_reserve(GameControlled.getActivePlayer());
        
             }
@@ -475,7 +475,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
                 
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
                     
-                    throw std::runtime_error("Erreur de choix ! \n");
+                    std::cout << " Erreur de choix \n" << std::endl;
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
                     
                 }
@@ -507,7 +507,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
 
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
 
-                    throw std::runtime_error("Erreur de choix  \n");
+                    std::cout << " Erreur de choix \n" << std::endl;
 
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
                  }
@@ -1032,22 +1032,26 @@ CompulsoryActions Controller::AI_choose_compulsory_action(const Player& AI)
 {
 
     for (auto c : AI.getReservedCards()) {
-        if (AI.AIcanBuy(c));
-        return CompulsoryActions::BuyCard;
+        if (AI.AIcanBuy(c)) {
+            return CompulsoryActions::BuyCard;
+        }
     }
     for (auto c : get_GameControlled().getPyramid().getLevel3Cards()) {
-        if (AI.AIcanBuy(c));
-        return CompulsoryActions::BuyCard;
+        if (AI.AIcanBuy(c)) {
+            return CompulsoryActions::BuyCard;
+        }
     }
 
     for (auto c : get_GameControlled().getPyramid().getLevel2Cards()) {
-        if (AI.AIcanBuy(c));
-        return CompulsoryActions::BuyCard;
+        if (AI.AIcanBuy(c)) {
+            return CompulsoryActions::BuyCard;
+        }
     }
 
     for (auto c : get_GameControlled().getPyramid().getLevel1Cards()) {
-        if (AI.AIcanBuy(c));
-        return CompulsoryActions::BuyCard;
+        if (AI.AIcanBuy(c)) {
+            return CompulsoryActions::BuyCard;
+        }
     }
 
     for (auto c : AI.getCoinsPerColor()) {

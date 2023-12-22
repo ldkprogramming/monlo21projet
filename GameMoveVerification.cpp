@@ -115,22 +115,26 @@ bool GameMoveVerification::compulsory_action_can_be_done(Player& p)
 {
 
 		for (auto c : p.getReservedCards()) {
-			if (p.canBuy(c));
-			return true;
+			if (p.canBuy(c)) {
+				return true;
+			}
 		}
 		for (auto c : get_game_checked().getPyramid().getLevel3Cards()) {
-			if (p.canBuy(c));
-			return true;
+			if (p.canBuy(c)) {
+				return true;
+			}
 		}
 
 		for (auto c : get_game_checked().getPyramid().getLevel2Cards()) {
-			if (p.canBuy(c));
-			return true;
+			if (p.canBuy(c)) {
+				return true;
+			}
 		}
 
 		for (auto c : get_game_checked().getPyramid().getLevel1Cards()) {
-			if (p.canBuy(c));
-			return true;
+			if (p.canBuy(c)) {
+				return true;
+			}
 		}
 		return false;
 	}

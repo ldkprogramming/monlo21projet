@@ -30,7 +30,7 @@ Player::Player(std::string name, PlayerType type) : name(name), type(type) {
 
 }
 
-int Player::getTotalCrowns() {
+int Player::getTotalCrowns() const {
     int crowns = 0;
     for (auto card : hand){
         crowns += card.getCrowns();
@@ -84,7 +84,7 @@ bool Player::canBuy(const Card &card) {
         if ( bonusesPerColor[cost.first] + coinsPerColor[cost.first] < cost.second ){
             return false;
         }
-    }
+        }
     return true;
 }
 
@@ -161,13 +161,21 @@ void Player::addCardToHand(const Card &card) {
 bool Player::AIcanBuy(const Card& c) const
 {
     if ((c.getSkill1() == Skill::Bonus) || (c.getSkill2() == Skill::Bonus)) {
-        for (auto c : bonusesPerColor) {
+        for (auto c : getBonusesPerColor()) {
             if (c.second > 0) {
                 break;
             }
         }
         return false;
     }
+
+
+    for (auto cost : c.getCosts()) {
+        if (getBonusesPerColor().at(cost.first) + getBonusesPerColor().at(cost.first) < cost.second) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Player::incrementActionsDone() 

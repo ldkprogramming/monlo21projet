@@ -28,19 +28,19 @@ public:
 	inline Game&  get_GameControlled() const { return GameControlled; }
 
 
-	std::vector<Coin> ask_player_for_tokens(Player& Player);
-	std::vector<std::pair<int, int>> ask_player_for_tokens_coordinates(Player& player);
-	std::pair<int, int> ask_for_player_solo_token_coordinates(Player& p);
-	bool ask_player_for_optional_actions(Player& player);
-	const Card& ask_player_for_card_to_buy(Player& player);
-	std::pair<int,CardLevel> ask_player_for_card_to_reserve(Player& player);
-	CoinColor ask_player_for_bonus_color(Player& player);
-	CoinColor ask_for_color_to_steal(Player& p);
-	PlayerType ask_for_opponenent_type(Player& opponent);
-	OptionalActions ask_for_optional_action_type(Player& player);
-	int ask_for_number_of_privileges_to_use(Player& p);
-	CompulsoryActions ask_for_compulsory_action_type(Player& p);
-	int ask_for_royal_card(Player& p);
+	std::vector<Coin> ask_player_for_tokens(const Player& Player);
+	std::vector<std::pair<int, int>> ask_player_for_tokens_coordinates(const Player& player);
+	std::pair<int, int> ask_for_player_solo_token_coordinates(const Player& p);
+	bool ask_player_for_optional_actions(const Player& player);
+	const Card& ask_player_for_card_to_buy(const Player& player);
+	std::pair<int,CardLevel> ask_player_for_card_to_reserve(const Player& player);
+	CoinColor ask_player_for_bonus_color(const Player& player);
+	CoinColor ask_for_color_to_steal(const Player& p);
+	PlayerType ask_for_opponenent_type(const Player& opponent);
+	OptionalActions ask_for_optional_action_type(const Player& player);
+	int ask_for_number_of_privileges_to_use(const Player& p);
+	CompulsoryActions ask_for_compulsory_action_type(const Player& p);
+	int ask_for_royal_card(const Player& p);
 
 	
 	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
