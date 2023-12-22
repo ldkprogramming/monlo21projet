@@ -172,7 +172,7 @@ bool Player::AIcanBuy(const Card& c) const
 
 
     for (auto cost : c.getCosts()) {
-        if (getBonusesPerColor().at(cost.first) + getBonusesPerColor().at(cost.first) < cost.second) {
+        if (getBonusesPerColor().at(cost.first) + getCoinsPerColor().at(cost.first) < cost.second) {
             return false;
         }
     }
