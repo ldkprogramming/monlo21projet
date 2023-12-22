@@ -70,7 +70,7 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 bool GameMoveVerification::verify_coin_colors(std::vector<Coin> coinstaken)
 { 
 	for (auto c : coinstaken) {
-		if (c.getColor() == CoinColor::Gold) {
+		if (c.getColor() == CoinColor::Gold || c.getColor() == CoinColor::Empty) {
 			return false;
 		}
 	}
@@ -183,24 +183,24 @@ bool GameMoveVerification::verify_royal_card_pick(const Player& p, const Card& p
 
 bool GameMoveVerification::canBuyCard(const Player& p) const {
 	for (auto c : p.getReservedCards() ) {
-		if (p.AIcanBuy(c)) {
+		if (p.canBuy(c)) {
 			return true;
 		}
 	}
 	for (auto c : get_game_checked().getPyramid().getLevel3Cards()) {
-		if (p.AIcanBuy(c)) {
+		if (p.canBuy(c)) {
 			return true;
 		}
 	}
 
 	for (auto c : get_game_checked().getPyramid().getLevel2Cards()) {
-		if (p.AIcanBuy(c)) {
+		if (p.canBuy(c)) {
 			return true;
 		}
 	}
 
 	for (auto c : get_game_checked().getPyramid().getLevel1Cards()) {
-		if (p.AIcanBuy(c)) {
+		if (p.canBuy(c)) {
 			return true;
 		}
 	}
