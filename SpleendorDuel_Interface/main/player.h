@@ -9,6 +9,10 @@
 #include "card.h"
 #include "coin.h"
 
+enum class PlayerType {
+    AI, Human 
+};
+
 enum class OptionalActions{
     UsePrivileges, FillBoard, Empty
 };
@@ -30,16 +34,20 @@ private:
     std::map<CoinColor, int> bonusesPerColor;
     std::map<CoinColor, int> pointsPerColor;
 
+    PlayerType type;
+
+    int actionsDone = 0;
 
 public:
-    Player(std::string name);
-    Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor) :
-    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges) {}
+    Player(std::string name, PlayerType type);
+    Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor, PlayerType type) :
+    name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges), type(type) {}
     int getTotalPoints();
-    int getTotalCrowns();
+    int getTotalCrowns() const;
     int getMaxPointsPerColor();
     const int getPrivileges() const {return privileges;}
     bool canBuy(const Card& card);
+    PlayerType get_type() const { return type; }
 
     const std::map<CoinColor, int> &getCoinsPerColor() const;
     const std::map<CoinColor, int> &getBonusesPerColor() const;
@@ -64,11 +72,16 @@ public:
     const int getBonus(CoinColor color) const {
         for (auto c : bonusesPerColor){
             if (c.first == color){
-                return c.second;
+                return c.second;        
             }
         }
     }
+
+    bool AIcanBuy( const  Card& card) const;
+    void incrementActionsDone();
 };
+
+
 
 
 

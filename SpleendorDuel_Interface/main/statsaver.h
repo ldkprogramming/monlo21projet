@@ -17,9 +17,12 @@ class StatSaver {
     std::string path;
 
 public:
-    StatSaver(std::string path = "../jsonFiles/stats.json") : path(path){}
+    StatSaver(std::string path = "../../../jsonFiles/stats.json") : path(path){}
     void saveGameStats(const Game& game);
+    std::string getPath() const { return path; }
 };
 
+std::ostream& operator<<(std::ostream f, const StatSaver s);
 
-#endif //MONLO21PROJET_STATSAVER_H
+
+#endif //MONLO21PROT_STATSAVER_H

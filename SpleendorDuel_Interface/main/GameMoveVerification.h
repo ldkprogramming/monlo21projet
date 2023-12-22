@@ -9,31 +9,33 @@
 #include "coin.h"
 #include "coinbag.h"
 #include "coinboard.h"
-#include "controller.h"
 #include "player.h"
 #include "winconditions.h"
 #include "gamesaver.h"
 #include "card.h"
 
-class GameMoveVerification{
+class GameMoveVerification {
     friend class Game;
+    friend class Controller;
     Game& GameChecked;
-    bool verificator_state = true;
 
-    
+
 public:
 
-    GameMoveVerification(Game&); // Controller en argument potentiellement je sais pas
+    GameMoveVerification(Game& game) : GameChecked(game) {} // Controller en argument potentiellement je sais pas
     GameMoveVerification(const GameMoveVerification&) = delete;
-    GameMoveVerification& operator=(const GameMoveVerification&) = delete;
-    ~GameMoveVerification(); //Potentiellement inutile étant donné qu'il y a uniquement un booléen et une référence
-    
-    inline Game& get_game_checked() const {return GameChecked;};
-    inline int get_verificator_state() const {return verificator_state;};
-
-    void change_verificator_state(GameMoveVerification&);
-    void verify_coin_alignment(std::vector<std::pair<int,int>> coinchoices);
+    inline Game& get_game_checked() const { return GameChecked; };
+  
 
 
-};
+    bool verify_coin_alignment(std::vector<std::pair<int, int>> coinchoices);
+    bool verify_coin_colors(std::vector<Coin> coinstaken);
+    bool verify_optional_actions(const Player& player);
+    bool verify_card_type_reservation(const Card& reservedCard);
+    bool verify_no_bonus_card(const Card& boughtCard, Player& player);
 
+    bool compulsory_action_can_be_done(Player& p);
+
+    bool can_royal_card_pick(Player& p);
+    bool verify_royal_card_pick(const Player& p, const Card& pickedCard);
+}; 

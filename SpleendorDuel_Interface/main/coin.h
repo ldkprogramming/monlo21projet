@@ -1,5 +1,9 @@
-#ifndef COIN_H
-#define COIN_H
+//
+// Created by Leo on 21/11/2023.
+//
+
+#ifndef MONLO21PROJET_COIN_H
+#define MONLO21PROJET_COIN_H
 
 #include <iostream>
 #include <string>
@@ -22,4 +26,4 @@ public:
 
 std::ostream& operator<<(std::ostream& f, Coin coin);
 
-#endif
+#endif //MONLO21PROJET_COIN_H

@@ -4,19 +4,21 @@
 
 
 
+// Constructeur pas utilisé pour le moment
 
-cardButton::cardButton(Card& c, int x, int l, QWidget*parent)
-    :QPushButton(parent), x_pos(x), level(l), card(new Card(c)) {
-    int id = card->getId();
-    QString string = QString::number(id);
-    this->setText(string);
-}
+// cardButton::cardButton(Card& c, int x, int l, QWidget*parent)
+//     :QPushButton(parent), x_pos(x), level(l), card(new Card(c)) {
+//     int id = card->getId();
+//     QString string = QString::number(id);
+//     this->setText(string);
+// }
 
 cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(parent) {
     qDebug()<<"création carte";
 
-    Card* c = new Card(cId);
-    cardButton(*c, 0, 0, parent);
+    // Card* c = new Card(cId);
+    card = new Card(cId);
+    // cardButton(*c, 0, 0, parent);
 
         // Texte de la carte
 
@@ -28,7 +30,7 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
         text.append(QString::number(cId));
 
         // Prix
-        map<CoinColor, int> price = c->getCosts();
+        map<CoinColor, int> price = card->getCosts();
         bool hasPrice = false;
         for (auto c : price){
             if (c.second > 0){
@@ -46,7 +48,7 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
         }
 
         // Bonus
-        map<CoinColor, int> bonuses = c->getBonuses();
+        map<CoinColor, int> bonuses = card->getBonuses();
         bool hasBonus = false;
         for (auto b : bonuses){
             if (b.second > 0){
@@ -69,26 +71,26 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
         }
 
         // Points
-        int points = c->getPoints();
+        int points = card->getPoints();
         if (points != 0){
             text.append("\nPoints: ");
             text.append(QString::number(points));
         }
         //Points couronnes
-        int crowns = c->getCrowns();
+        int crowns = card->getCrowns();
         if (crowns != 0) {
             text.append("\nCrown Points: ");
             text.append(QString::number(crowns));
         }
         // Skill1
-        Skill skill1 = c->getSkill1();
+        Skill skill1 = card->getSkill1();
         if (skill1 != Skill::Empty){
             text.append("\nSkills:\n");
             text.append(toString(skill1));
         }
 
         // Skill2
-        Skill skill2 = c->getSkill2();
+        Skill skill2 = card->getSkill2();
         if (skill2 != Skill::Empty){
             text.append(" | ");
             text.append(toString(skill2));
@@ -96,7 +98,7 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
     }
     else {
         text="Pile";
-        PileType pile = c->getPileTypeOfCard(cId);
+        PileType pile = card->getPileTypeOfCard(cId);
         switch(pile){
         case PileType::One:
             text.append(" 1");
@@ -112,9 +114,9 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
         }
     }
 
-    delete c;
+    // delete c;
     this->setText(text);
-    PileType pile = c->getPileTypeOfCard(cId);
+    PileType pile = card->getPileTypeOfCard(cId);
     switch(pile){
     case PileType::One:
         this->setStyleSheet("background-color: #549364;");
@@ -146,22 +148,29 @@ cardButton::cardButton(int cId, QWidget* parent, bool onPile): QPushButton(paren
     setCheckable(true);
 }
 
-cardButton::~cardButton(){}
+cardButton::~cardButton(){
+    qDebug() << "Destruction de cardButton";
+}
 
 
 
 void cardPyramidView::cardClicked(cardButton* c){
-    qDebug() << "Carte cliquée";
-
+    // On enleve le focus de toutes les autres cartes
     for (auto card : cardButtons){
-        qDebug() << "Yahoo";
         if (card != c){
-            // card->clearFocus();
             card->setChecked(false);
         }
     }
-
-    selectedCard = c;
+    // Selection de la carte
+    if (selectedCard == c){
+        qDebug() << "Carte deselectionnee";
+        selectedCard = nullptr;
+    }
+    // Si la carte est deja selectionnee, on la deselectionne
+    else{
+        qDebug() << "Carte selectionnee";
+        selectedCard = c;
+    }
 }
 
 
@@ -171,8 +180,6 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
     Card* c = new Card(cId);
     PileType level = c->getPileTypeOfCard(cId);
     delete c;
-
-    // QSignalMapper* signalMapper = new QSignalMapper (this) ;
 
     if (!onPile){
         cardButton* cB = new cardButton(cId, this);
@@ -217,6 +224,28 @@ void cardPyramidView::addCard(const int& cId, bool onPile)
     }
 
 }
+
+
+
+void cardPyramidView::removeCard(const int& cId) {
+    for (auto c : cardButtons) {
+        int id = c->getCard()->getId();
+        if (id == cId){
+            c->hide();
+            qDebug() << "Carte retiree";
+            break;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 cardPyramidView::cardPyramidView(QWidget* parent) : QWidget(parent)

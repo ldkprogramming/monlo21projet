@@ -22,9 +22,11 @@ private:
     int id;
     Card* card;
 public:
-    cardButton(Card& c, int x, int l, QWidget *parent = nullptr);
+    // cardButton(Card& c, int x, int l, QWidget *parent = nullptr);
     cardButton(int id, QWidget* parent=nullptr, bool onPile=false);
     ~cardButton();
+
+    Card* getCard() const {return card;}
 };
 
 
@@ -54,6 +56,9 @@ private:
 public:
     cardPyramidView(QWidget *parent = nullptr);
     void addCard(const int& cId, bool onPile=false);
+    void removeCard(const int& cId);
+
+    cardButton* getSelectedCard() const {return selectedCard;}
 
 
 private slots:

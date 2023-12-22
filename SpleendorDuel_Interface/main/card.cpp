@@ -6,11 +6,41 @@
 #include <ostream>
 #include <fstream>
 
-#include <QDebug>
-
 using json = nlohmann::json;
 
 #include "card.h"
+
+std::string toStringcard(CoinColor c){
+    switch (c)
+    {
+    case CoinColor::White:
+        return "White";
+        break;
+    case CoinColor::Blue:
+        return "Blue";
+        break;
+    case CoinColor::Black:
+        return "Black";
+        break;
+    case CoinColor::Gold:
+        return "Gold";
+        break;
+    case CoinColor::Pearl:
+        return "Pearl";
+        break;
+    case CoinColor::Red:
+        return "Red";
+        break;
+    case CoinColor::Green:
+        return "Green";
+        break;
+    case CoinColor::Empty:
+        break;
+    default:
+        break;
+    }
+
+}
 std::string toString(Skill s){
     switch (s){
         case Skill::PlayAgain:
@@ -52,10 +82,16 @@ std::ostream& operator<<(std::ostream& f, const Card& c){
     '\n';
     f << "skill1 : " << toString(c.skill1) << '\n';
     f << "skill2 : " << toString(c.skill2) << '\n';
+   
     return f;
 }
 
-CoinColor Card::getCardColor() {
+/**std::ostream& operator<<(std::ostream& f, const std::map<CoinColor, int> p) {
+    f << toString(p.) << " : " << p << std::endl;
+        return f;
+}*/
+
+CoinColor Card::getCardColor() const {
     CoinColor coinColor = CoinColor::Empty;
     for (auto pair : bonuses){
         if (pair.second > 0){
@@ -67,10 +103,6 @@ CoinColor Card::getCardColor() {
 
 const std::map<CoinColor, int> &Card::getCosts() const {
     return costs;
-}
-
-const std::map<CoinColor, int> &Card::getBonuses() const {
-    return bonuses;
 }
 
 Skill Card::getSkill1() const {
@@ -98,21 +130,20 @@ Card::Card(int cId) {
     std::ifstream f;
     switch (type) {
         case PileType::One:
-            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/pile1.json");
+            f = std::ifstream("../jsonFiles/pile1.json");
             break;
         case PileType::Two:
-            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/pile2.json");
+            f = std::ifstream("../jsonFiles/pile2.json");
             break;
         case PileType::Three:
-            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/pile3.json");
+            f = std::ifstream("../jsonFiles/pile3.json");
             break;
         case PileType::Royal:
-            f = std::ifstream("../SpleendorDuel_Interface/main/jsonFiles/royalpile.json");
+            f = std::ifstream("../jsonFiles/royalpile.json");
             break;
     }
-
     json data = json::parse(f);
-    f.close();
+
 
     auto card = data["cards"][std::to_string(cId)];
     int id = card["card_id"].template get<int>();

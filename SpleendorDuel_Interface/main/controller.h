@@ -7,35 +7,71 @@
 #include "game.h"
 #include "player.h"
 #include "gamesaver.h"
+#include "GameMoveVerification.h"
+#include "aiplayer.h"
+#include"statsaver.h"
 
 class Controller {
+private: 
+	friend class Game;
+	friend class GameMoveVerification;
+	//GameMoveVerification& checker;
+	Game& GameControlled;
+
+
 public:
-    // faut completement refaire
-    /*
-    // Retourne les actions optionnelles possibles pour un joueur
-    std::vector<OptionalActions> getValidOptionalActions(const Game& game, Player& player) const;
+	Controller(Game& GameControlled) :  GameControlled(GameControlled) {}
+	Controller(const Controller&) = delete;
+	Controller& operator=(const Controller&) = delete;
 
-    // Retourne les actions obbligatoires possibles pour un joueur
-    std::vector<CompulsoryActions> getValidCompulsoryActions (const Game& game, Player& player) const;
+	//inline GameMoveVerification& get_checker() const { return checker; }
+	inline Game&  get_GameControlled() const { return GameControlled; }
 
-    // appliquer une action optionnelle
-    void applyOptionalAction(Game& game, Player& player,  OptionalActions action);
 
-    // appliquer une action obbligatoire
-    void applyCompulsoryAction(Game& game, Player& player,  CompulsoryActions action);
+	std::vector<Coin> ask_player_for_tokens(const Player& Player);
+	std::vector<std::pair<int, int>> ask_player_for_tokens_coordinates(const Player& player);
+	std::pair<int, int> ask_for_player_solo_token_coordinates(const Player& p);
+	bool ask_player_for_optional_actions(const Player& player);
+	const Card& ask_player_for_card_to_buy(const Player& player);
+	std::pair<int,CardLevel> ask_player_for_card_to_reserve(const Player& player);
+	CoinColor ask_player_for_bonus_color(const Player& player);
+	CoinColor ask_for_color_to_steal(const Player& p);
+	PlayerType ask_for_opponenent_type(const Player& opponent);
+	OptionalActions ask_for_optional_action_type(const Player& player);
+	int ask_for_number_of_privileges_to_use(const Player& p);
+	CompulsoryActions ask_for_compulsory_action_type(const Player& p);
+	int ask_for_royal_card(const Player& p);
 
-    // appliquer les capacites d'une carte
-    bool applyCardSkills(Game& game, Player& cardOwner, Player& opponent, Card& card);
+	
+	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
+	CardLevel int_to_cardlevel(int level);
+	CardLevel piletype_to_cardlevel(PileType type);
 
-    // Jouer un jeu splendor duel
-    void play(Game& game);
+	
+	void printGameState();
+	void play_game();
+	void play_turn_human(GameMoveVerification& checker);
+	void play_turn_AI(GameMoveVerification& checker);
+	void change_turn();
+	bool verify_win(Player& player);
 
-    // Jouer le tour d'un joueur
-    void playTurn(Game& game, Player& player);
+	std::vector<std::pair<int, int>> AI_take_coins_by_coordinates(const Player& AI,  GameMoveVerification& checker);
+	const Card& AI_reserve_card(const Player& AI);
+	const Card& AI_buy_card(const Player& AI);
+	std::pair<int, int> AI_take_one_coin_by_coordinates(const Player& AI);
+	std::vector<std::pair<int, int>> AI_use_privileges(const Player& AI, int privileges);
+	CoinColor AI_choose_bonus(const Player& AI);
+	CoinColor AI_choose_color_to_steal(const Player& AI);
+	int AI_number_of_privileges_to_use(const Player& AI);
+	CompulsoryActions AI_choose_compulsory_action(const Player& AI);
+	OptionalActions AI_choose_optional_action(const Player& AI);
+	bool AI_optional_or_not(const Player& AI);
+	const Card& AI_royal_pick(const Player& AI);
+	
+	
+	
 
-    // Verifier si un Joueur gagne
-    bool checkIfPlayerWins(Game& game, Player& player);
-     */
+
 };
 
 

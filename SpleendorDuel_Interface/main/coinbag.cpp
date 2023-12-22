@@ -3,7 +3,8 @@
 //
 
 #include "coinbag.h"
-#include <chrono>
+#include <cstdlib>
+#include <filesystem>
 
 Coinbag::Coinbag() {
     for (int i = 0; i < 4; i++){
@@ -34,7 +35,7 @@ void Coinbag::addCoin(const Coin &coin) {
     if (coins.size() < maxLength){
         coins.push_back(coin);
     } else {
-        //throw MATH_ERREXCEPT;
+        throw MATH_ERREXCEPT;
     }
 }
 
@@ -59,18 +60,6 @@ Coin Coinbag::distributeCoin(){
     }
     shuffle();
     Coin coin = coins.back();
-    coins.pop_back();
-    return coin;
-}
-
-Coin* Coinbag::distributeCoinPointer(){
-    // Si le sac est vide, on donne un "jeton" Empty
-    if (coins.empty()){
-        Coin* coin = new Coin(CoinColor::Empty);
-        return coin;
-    }
-    shuffle();
-    Coin* coin = new Coin(coins.back());
     coins.pop_back();
     return coin;
 }

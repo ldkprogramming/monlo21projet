@@ -22,6 +22,8 @@ PlayerEnum getOpponent(PlayerEnum p);
 
 
 class Game {
+    friend class Controller;
+    friend class GameMoveVerification;
 
     Coinbag coinBag;
     Coinboard coinBoard;
@@ -41,6 +43,7 @@ class Game {
     CardPyramid pyramid;
 
     WinConditions winConditions;
+
 
 
     bool playerUsePrivilege(std::pair<int, int> coordinates);
@@ -73,9 +76,10 @@ public:
     const Coinbag& getCoinBag() const;
     const Coinboard &getCoinBoard() const;
     int getPrivileges() const;
-    friend class Controller;
+    const Card& get_Card_from_ID(int cID) const;
+    const std::pair<CardLevel, int> cardinfosfromCard(const Card& card) const;
 
-    Game(std::string player1Name, std::string player2Name): player1(player1Name), player2(player2Name),pile1(PileType::One), pile2(PileType::Two), pile3(PileType::Three), royalPile(PileType::Royal),pyramid(pile1, pile2, pile3, royalPile), winConditions(20, 10, 10){
+    Game(std::string player1Name, std::string player2Name,PlayerType player2Type ): player1(player1Name, PlayerType::Human), player2(player2Name, player2Type),pile1(PileType::One), pile2(PileType::Two), pile3(PileType::Three), royalPile(PileType::Royal),pyramid(pile1, pile2, pile3, royalPile), winConditions(20, 10, 10){
         winner = PlayerEnum::Empty;
         loser = PlayerEnum::Empty;
         turn = PlayerEnum::Player1;
@@ -123,6 +127,7 @@ public:
             privileges -= 1;
         }
     }
+    PlayerType toPlayerType(std::string json);
 };
 
 

@@ -58,9 +58,6 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     cardPyramid = new cardPyramidView(this);
     gameVLayoutRightUpper->addWidget(cardPyramid);
 
-    // Card* c = new Card(10);
-    // cardPyramid->addCard(c->getId());
-
     cardPyramid->addCard(0);
     cardPyramid->addCard(1);
     cardPyramid->addCard(2);
@@ -93,6 +90,7 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     gameHLayoutRightUpperButtons->addWidget(buyCardButton);
     gameHLayoutRightUpperButtons->addWidget(reserveCardButton);
 
+    connect(buyCardButton, SIGNAL(clicked(bool)), this, SLOT(checkBuyCard()));
 
 
     ///
@@ -100,8 +98,8 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     //Joueurs
     //Player player1("Tareq"); //Simple test - remplacer les noms par ceux choisis - à passer en paramètre
     //Player player2("Jules"); // Le joueur 1 sera celui qui a été sélectionné pour démarrer
-    player1 = new Player(player1Name);
-    player2 = new Player(player2Name);
+    player1 = new Player(player1Name, PlayerType::Human);
+    player2 = new Player(player2Name, PlayerType::Human);
 
     currentPlayer = player1;
     //playerView tmpPlayerView1(&player1, mainWidget);
@@ -409,5 +407,30 @@ int gameView::cardReservationCoinBoardPart(){
 }
 
 
+
+int gameView::checkBuyCard(){
+    cardButton* selectedCardButton = cardPyramid->getSelectedCard();
+
+    if (selectedCardButton==nullptr){
+        qDebug() << "Achat de carte impossible: aucune carte selectionnee";
+        return 0;
+    }
+
+    Card* selectedCard = selectedCardButton->getCard();
+    Card& card = *selectedCard;
+
+    bool canbuy = currentPlayer->canBuy(card);
+
+    if (canbuy){
+        qDebug() << "Achat de carte";
+        currentPlayer->addCardToHand(card);
+        cardPyramid->removeCard(card.getId());
+    }
+    else {
+        qDebug() << "Achat de carte impossible: le joueur n'a pas les ressources necessaires";
+    }
+
+    return 1;
+}
 
 

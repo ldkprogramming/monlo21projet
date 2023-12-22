@@ -3,7 +3,7 @@
 //
 
 #include "player.h"
-Player::Player(std::string name) : name(name){
+Player::Player(std::string name, PlayerType type) : name(name), type(type) {
     coinsPerColor[CoinColor::White] = 0;
     coinsPerColor[CoinColor::Red] = 0;
     coinsPerColor[CoinColor::Green] = 0;
@@ -27,9 +27,10 @@ Player::Player(std::string name) : name(name){
     pointsPerColor[CoinColor::Black] = 0;
     pointsPerColor[CoinColor::Pearl] = 0;
     pointsPerColor[CoinColor::Gold] = 0;
+
 }
 
-int Player::getTotalCrowns() {
+int Player::getTotalCrowns() const {
     int crowns = 0;
     for (auto card : hand){
         crowns += card.getCrowns();
@@ -38,34 +39,38 @@ int Player::getTotalCrowns() {
 }
 
 int Player::getTotalPoints() {
-    int points;
+    int points{0};
     for (auto card : hand){
         points += card.getPoints();
     }
+    return points;
+
+
+    
 }
 
 
 int Player::getMaxPointsPerColor() {
-    for (auto card : hand){
+    for (auto card : hand) {
         CoinColor cardColor = card.getCardColor();
-        if (cardColor != CoinColor::Empty){
+        if (cardColor != CoinColor::Empty) {
             pointsPerColor[cardColor] += card.getPoints();
         }
-    }
 
-    int max = 0;
-    for (auto pair : pointsPerColor){
-        if (pair.second > max){
-            max = pair.second;
+        int max = 0;
+        for (auto pair : pointsPerColor) {
+            if (pair.second > max) {
+                max = pair.second;
+            }
         }
-    }
 
-    return max;
+        return max;
+    }
 }
 
 bool Player::canBuy(const Card &card) {
     // ATTENTION faut ajouter la verification sur une carte contenant la capacite bonus
-    if ((card.getSkill1() == Skill::Bonus) or (card.getSkill2() == Skill::Bonus)){
+    if ((card.getSkill1() == Skill::Bonus) || (card.getSkill2() == Skill::Bonus)){
         for (auto c : bonusesPerColor){
             if (c.second > 0){
                 break;
@@ -79,7 +84,7 @@ bool Player::canBuy(const Card &card) {
         if ( bonusesPerColor[cost.first] + coinsPerColor[cost.first] < cost.second ){
             return false;
         }
-    }
+        }
     return true;
 }
 
@@ -98,7 +103,6 @@ const std::map<CoinColor, int> &Player::getPointsPerColor() const {
 void Player::addCoin(const Coin &c) {
     coins.push_back(c);
     coinsPerColor[c.getColor()] += 1;
-    //coinsPerColor.find(c.getColor())->second += 1;
 }
 
 void Player::reserveCard(const Card &c) {
@@ -152,4 +156,29 @@ void Player::loseCoin(CoinColor c) {
 
 void Player::addCardToHand(const Card &card) {
     hand.push_back(card);
+}
+ 
+bool Player::AIcanBuy(const Card& c) const
+{
+    if ((c.getSkill1() == Skill::Bonus) || (c.getSkill2() == Skill::Bonus)) {
+        for (auto c : getBonusesPerColor()) {
+            if (c.second > 0) {
+                break;
+            }
+        }
+        return false;
+    }
+
+
+    for (auto cost : c.getCosts()) {
+        if (getBonusesPerColor().at(cost.first) + getBonusesPerColor().at(cost.first) < cost.second) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Player::incrementActionsDone() 
+{
+    actionsDone = +1;
 }

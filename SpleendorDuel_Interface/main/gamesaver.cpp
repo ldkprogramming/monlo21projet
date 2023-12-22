@@ -106,6 +106,7 @@ bool GameSaver::saveGame(const Game &game) const {
     // Je ne sais pas trop si c'est utile de sauvegarder
     // les objets Coin en tant que tels...
     j["player1"]["name"] = game.getPlayer1().getName();
+    j["player1"]["type"] = game.getPlayer1().get_type();
     j["player1"]["hand"] = {};
     for (auto c : game.getPlayer1().getHand()){
         j["player1"]["hand"].push_back(c.getId());
@@ -130,6 +131,7 @@ bool GameSaver::saveGame(const Game &game) const {
 
 
     j["player2"]["name"] = game.getPlayer2().getName();
+    j["player2"]["type"] = game.getPlayer2().get_type();
     j["player2"]["hand"] = {};
     for (auto c : game.getPlayer2().getHand()){
         j["player2"]["hand"].push_back(c.getId());
@@ -151,10 +153,12 @@ bool GameSaver::saveGame(const Game &game) const {
     for (auto couple : game.getPlayer2().getPointsPerColor()){
         j["player2"]["pointsPerColor"][toString(couple.first)] = couple.second;
     }
+    
 
 
 
     // On ecrit le tout sur un fichier externe
     std::ofstream outputFile(path);
     outputFile << std::setw(4) << j <<std::endl;
+    return true;
 }

@@ -49,10 +49,10 @@ public:
     Skill getSkill1() const;
     Skill getSkill2() const;
 
-    CoinColor getCardColor();
+    CoinColor getCardColor() const;
 
     const std::map<CoinColor, int> &getCosts() const;
-    const std::map<CoinColor, int> &getBonuses() const;
+    const std::map<CoinColor, int> &getBonuses() const {return bonuses;}
 
     void incrementBonus(CoinColor c, int amount);
 

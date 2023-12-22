@@ -1,3 +1,7 @@
+//
+// Created by Leo on 21/11/2023.
+//
+
 #ifndef MONLO21PROJET_COINBAG_H
 #define MONLO21PROJET_COINBAG_H
 #include "coin.h"
@@ -21,7 +25,6 @@ public:
     int getNumberOfCoins();
     void addCoin(const Coin& coin);
     Coin distributeCoin();
-    Coin* distributeCoinPointer();
     bool isEmpty() const {return coins.empty();}
     const std::vector<Coin>& getCoins() const {return coins;}
     //penser a ajouter un iterateur ?

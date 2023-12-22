@@ -124,7 +124,7 @@ void coinBoardView::fillBoard(Coinbag& coinbag){
             //coins[indice]->changeColor(&new_coin);
             //coins[indice]->changeColor(coinbag.distributeCoin());
 
-            coins[indice]->changeColor(coinbag.distributeCoinPointer());
+            coins[indice]->changeColor(new Coin(coinbag.distributeCoin()));
         }
         coins[indice]->setChecked(false);
     }

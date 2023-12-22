@@ -26,6 +26,59 @@ int Game::getPrivileges() const {
     return privileges;
 }
 
+const Card& Game::get_Card_from_ID(int cID) const
+{
+    for (auto card : getPyramid().getLevel1Cards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+    }
+    for (auto card : getPyramid().getLevel2Cards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+    }
+    for (auto card : getPyramid().getLevel3Cards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+
+    }
+    for (auto card : getPyramid().getRoyalCards()) {
+        if (card.getId() == cID) {
+            return card;
+        }
+    }
+}
+
+
+const std::pair<CardLevel, int> Game::cardinfosfromCard(const Card& card) const
+{
+    int iterator_tracker;
+        for (auto c : getPyramid().getLevel1Cards()) {
+
+            if (c.getId() == card.getId()) {
+                return std::pair<CardLevel,int >( CardLevel::One, iterator_tracker);
+            }
+            iterator_tracker++;
+        }
+    
+    for (auto d : getPyramid().getLevel2Cards()) {
+            if (d.getId() == card.getId()) {
+                return std::pair< CardLevel,int>( CardLevel::Two,iterator_tracker);
+            }
+            iterator_tracker++;
+        }
+    
+    
+        iterator_tracker = 0;
+        for (auto e : getPyramid().getLevel3Cards())
+            if (e.getId() == card.getId()) {
+                return std::pair<CardLevel, int>(CardLevel::Three,iterator_tracker);
+            }
+        iterator_tracker++;
+}
+
 
 const Pile &Game::getPile1() const {
     return pile1;
@@ -85,25 +138,26 @@ bool Game::playerUsePrivilege(std::pair<int, int> coordinates) {
 
     // faut verifier si les coordonnees sont correctes, valides
     // faudra ajouter un attribut largeur au coinboard, mais pour l'instant ca marche
-    if ((coordinates.first > 4 ) or (coordinates.first < 0) or (coordinates.second > 4 ) or (coordinates.second < 0)){
+    if ((coordinates.first > 4) || (coordinates.first < 0) || (coordinates.second > 4) || (coordinates.second < 0)) {
         return false;
+
+        // faut verifier si ce n'est pas un jeton or
+        if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)) {
+            return false;
+        }
+        // faut verifier que le joueur a qui c le tour possede au moins un privilege
+        if (getPlayer(turn).getPrivileges() < 1) {
+            return false;
+        }
+
+        getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
+
+        // on vide le jeton du plateau
+        coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+        return true;
+
+
     }
-    // faut verifier si ce n'est pas un jeton or
-    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) or (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)){
-        return false;
-    }
-    // faut verifier que le joueur a qui c le tour possede au moins un privilege
-    if (getPlayer(turn).getPrivileges() < 1){
-        return false;
-    }
-
-    getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
-
-    // on vide le jeton du plateau
-    coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
-    return true;
-
-
 }
 
 PlayerEnum getOpponent(PlayerEnum p){
@@ -134,11 +188,11 @@ bool Game::playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pa
     }
     // faut verifier si les coordonnees sont valides
     for (auto c : coordinates){
-        if ((c.first > 4 ) or (c.first < 0) or (c.second > 4 ) or (c.second < 0)){
+        if ((c.first > 4 ) || (c.first < 0) || (c.second > 4 ) || (c.second < 0)){
             return false;
         }
         // faut verifier si ce n'est pas un jeton or
-        if ((coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Gold) or (coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Empty)){
+        if ((coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Gold) || (coinBoard.getCoin(c.first, c.second).getColor() == CoinColor::Empty)){
             return false;
         }
     }
@@ -169,11 +223,11 @@ bool Game::playerFillBoard() {
 
 bool Game::playerTakeCoin(std::pair<int, int> coordinates) {
     // on doit verifier si les coordonnees sont valides
-    if ((coordinates.first > 4 ) or (coordinates.first < 0) or (coordinates.second > 4 ) or (coordinates.second < 0)){
+    if ((coordinates.first > 4 ) || (coordinates.first < 0)|| (coordinates.second > 4 ) ||(coordinates.second < 0)){
         return false;
     }
     // on doit verifier si c'est un jeton vide ou or
-    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty) or (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold)){
+    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold)){
         return false;
     }
 
@@ -209,7 +263,7 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
         playerTakeCoin(c);
     }
 
-    if (allSameColor or (numberOfPearlCoins == 2)){
+    if (allSameColor || (numberOfPearlCoins == 2)){
         if (privileges > 0){
             decrementPrivileges();
             getOpponentPlayer().incrementPrivileges();
@@ -219,14 +273,11 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
         }
     }
     // On passe au tour suivant !
-    turn = getOpponent(turn);
-
 
 }
-Game::Game(const std::string& path) : player1("ha"), player2("ho"){
+Game::Game(const std::string& path) : player1(json::parse(std::ifstream(path))["player1"]["name"], toPlayerType(json::parse(std::ifstream(path))["player1"]["type"])), player2(json::parse(std::ifstream(path))["player2"]["name"],toPlayerType(json::parse(std::ifstream(path))["player2"]["type"])) {
     std::ifstream f(path);
     json data = json::parse(f);
-    f.close();
 
     // On initialise le sac a jetons
     std::vector<Coin> coinsInCoinBag;
@@ -301,7 +352,7 @@ bool Game::playerReserveCard(CardLevel level, int cardNumber) {
         return false;
     }
     // ou bien, on peut pas reserver une carte inexistante
-    if ((cardNumber < 0) or (cardNumber > pyramid.getNumberOfCards(level))){
+    if ((cardNumber < 0) || (cardNumber > pyramid.getNumberOfCards(level))){
         return false;
     }
 
@@ -335,7 +386,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
         return false;
     }
     // ou bien, on peut pas acheter une carte inexistante
-    if ((cardNumber < 0) or (cardNumber > pyramid.getNumberOfCards(level))){
+    if ((cardNumber < 0) || (cardNumber > pyramid.getNumberOfCards(level))){
         return false;
     }
     // on verifie evidemment si le joueur peut acheter la carte
@@ -367,7 +418,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
 
     // On traite la capacite PlayAgain
     // Si la carte ne possede pas la capacite, on change de tour
-    if (!((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) or (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
+    if (((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) || (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
         turn = getOpponent(turn);
     }
 
@@ -409,4 +460,9 @@ bool Game::applyCardSkill(Card &card, Skill skill, CoinColor bonusColor, CoinCol
 
     }
     return true;
+}
+PlayerType Game::toPlayerType(std::string json)
+{
+    if (json == "AI") { return PlayerType::AI; }
+    else return  PlayerType::Human;
 }

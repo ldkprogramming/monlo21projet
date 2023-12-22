@@ -18,7 +18,7 @@ private:
      */
     std::string path;
 public:
-    GameSaver(std::string path = "../jsonFiles/ongoingGame.json") : path(path) {}
+    GameSaver(std::string path = "../../../jsonFiles/ongoingGame.json") : path(path) {}
     bool saveGame(const Game& game) const;
     std::string getPath(){return path;}
 

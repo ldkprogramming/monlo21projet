@@ -7,22 +7,22 @@
 
 CardPyramid::CardPyramid(Pile &pile1, Pile &pile2, Pile &pile3, Pile &royalPile) {
     for (int i = 0; i < maxNumberOfLevel1Cards; i++){
-        if (not (pile1.isEmpty())) {
+        if (!(pile1.isEmpty())) {
             level1Cards.push_back(pile1.distributeCard());
         }
     }
     for (int i = 0; i < maxNumberOfLevel2Cards; i++){
-        if (not (pile2.isEmpty())) {
+        if (! (pile2.isEmpty())) {
             level2Cards.push_back(pile2.distributeCard());
         }
     }
     for (int i = 0; i < maxNumberOfLevel3Cards; i++){
-        if (not (pile3.isEmpty())) {
+        if (! (pile3.isEmpty())) {
             level3Cards.push_back(pile3.distributeCard());
         }
     }
     for (int i = 0; i < maxNumberOfRoyalCards; i++){
-        if (not (royalPile.isEmpty())) {
+        if (! (royalPile.isEmpty())) {
             royalCards.push_back(royalPile.distributeCard());
         }
     }
@@ -102,7 +102,7 @@ std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid){
 
 void CardPyramid::refill(CardLevel level, Pile &pile) {
     int maxCards = getMaxCards(level);
-    while ((getCards(level).size() < maxCards) and (!pile.isEmpty())){
+    while ((getCards(level).size() < maxCards) && (!pile.isEmpty())){
         getCards(level).push_back(pile.distributeCard());
     }
 }

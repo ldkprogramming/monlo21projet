@@ -28,20 +28,13 @@ class gameView : public QMainWindow
     Q_OBJECT
 
 private:
-
-    // TEMP
-    cardPyramidView* cardPyramid;
-    buyCardButtonView* buyCardButton;
-    reserveCardButtonView* reserveCardButton;
-    QHBoxLayout* gameHLayoutRightUpperButtons;
-
-
     //Layout
     QVBoxLayout* gameVLayoutLeftUpper;
     QVBoxLayout* gameVLayoutCenterUpper;
     QVBoxLayout* gameVLayoutRightUpper;
 
     QHBoxLayout* gameHLayoutLeftUpperButtons;
+    QHBoxLayout* gameHLayoutRightUpperButtons;
     //QVBoxLayout* gameVLayoutLower;
 
     QHBoxLayout* gameHLayoutUpper;
@@ -55,6 +48,7 @@ private:
     coinBagView* bagView;
     privileges* privilegeLabel;
     coinBoardView* coinsBoard;
+    cardPyramidView* cardPyramid;
 
     //Joueurs
     playerView* player1View;
@@ -63,15 +57,21 @@ private:
     Player* player2;
     Player* currentPlayer;
 
-    //Boutons
+    //Boutons Jetons
     coinSelectionButtonView* coinSelectionButton;
     usePrivilegeButtonView* usePrivilegeButton;
     cardReservationButtonCoinBoardPartView* cardReservationButtonCoinBoardPart;
+
+    //Boutons Pyramide
+    buyCardButtonView* buyCardButton;
+    reserveCardButtonView* reserveCardButton;
 
 private slots:
     int checkCoinsSelection();
     int fillCoinsBoard();
     int usePrivilege();
+
+    int checkBuyCard();
 
     //Méthode ci-dessous à connecter avec Travail de Jules pour réservation de carte
     int cardReservationCoinBoardPart();
