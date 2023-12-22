@@ -2,101 +2,101 @@
     "coinBag": null,
     "coinBoard": [
         [
-            "Empty",
             "White",
-            "Green",
             "Pearl",
+            "Black",
+            "Gold",
+            "Red"
+        ],
+        [
+            "Blue",
+            "Empty",
+            "Blue",
+            "Red",
+            "Black"
+        ],
+        [
+            "Gold",
+            "Empty",
+            "Green",
+            "Green",
+            "Red"
+        ],
+        [
+            "Gold",
+            "Empty",
+            "Black",
+            "White",
             "Blue"
         ],
         [
-            "Empty",
-            "Green",
-            "Red",
             "Blue",
-            "Black"
-        ],
-        [
-            "Empty",
-            "Red",
-            "Red",
-            "Blue",
-            "Black"
-        ],
-        [
-            "White",
-            "Gold",
-            "White",
-            "White",
-            "Gold"
-        ],
-        [
             "Black",
-            "Pearl",
-            "Green",
-            "Black",
-            "Gold"
+            "White",
+            "White",
+            "Green"
         ]
     ],
     "pile1": [
-        8,
-        5,
-        1,
-        25,
-        0,
-        10,
-        9,
-        23,
-        24,
-        2,
-        7,
-        28,
-        29,
         12,
-        14,
-        3,
-        4,
-        11,
         13,
-        22,
-        26,
-        16,
-        15,
-        20,
-        19,
+        14,
+        7,
         18,
-        17
+        23,
+        20,
+        6,
+        19,
+        25,
+        21,
+        11,
+        16,
+        8,
+        10,
+        26,
+        22,
+        27,
+        9,
+        4,
+        3,
+        24,
+        1,
+        5,
+        29,
+        17,
+        0
     ],
     "pile2": [
         52,
+        32,
+        30,
+        42,
+        41,
+        47,
+        38,
+        48,
+        37,
+        53,
+        51,
+        33,
         34,
         45,
+        36,
+        44,
+        35,
         39,
         40,
-        46,
-        42,
-        38,
-        53,
-        43,
-        48,
-        35,
-        33,
-        32,
-        44,
-        36,
-        49,
-        31,
-        50,
-        30
+        50
     ],
     "pile3": [
-        60,
-        64,
-        65,
-        58,
-        59,
-        54,
+        61,
         55,
-        63
+        58,
+        56,
+        57,
+        66,
+        65,
+        59
     ],
     "player1": {
         "bonusesPerColor": {
@@ -110,11 +110,11 @@
         },
         "coinsPerColor": {
             "Black": 0,
-            "Blue": 1,
+            "Blue": 0,
             "Gold": 0,
-            "Green": 1,
+            "Green": 0,
             "Pearl": 0,
-            "Red": 1,
+            "Red": 0,
             "White": 0
         },
         "hand": null,
@@ -128,7 +128,7 @@
             "Red": 0,
             "White": 0
         },
-        "privileges": 0,
+        "privileges": 1,
         "reservedCards": null,
         "type": 1
     },
@@ -146,9 +146,9 @@
             "Black": 0,
             "Blue": 0,
             "Gold": 0,
-            "Green": 0,
-            "Pearl": 0,
-            "Red": 0,
+            "Green": 1,
+            "Pearl": 1,
+            "Red": 1,
             "White": 0
         },
         "hand": null,
@@ -166,35 +166,35 @@
         "reservedCards": null,
         "type": 0
     },
-    "privileges": 3,
+    "privileges": 2,
     "pyramid": {
         "level1Cards": [
-            27,
-            21,
-            6
+            28,
+            2,
+            15
         ],
         "level2Cards": [
-            37,
-            47,
-            51,
-            41
+            43,
+            46,
+            31,
+            49
         ],
         "level3Cards": [
-            66,
-            57,
+            60,
+            54,
             62,
-            56,
-            61
+            63,
+            64
         ],
         "royalCards": [
-            69,
-            68,
             70,
-            67
+            67,
+            69,
+            68
         ]
     },
     "royalPile": null,
-    "turn": "Player2",
+    "turn": "Player1",
     "winConditions": {
         "pointsInOneColor": 10,
         "totalCrowns": 10,

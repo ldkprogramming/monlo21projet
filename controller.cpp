@@ -83,6 +83,7 @@ bool Controller::ask_player_for_optional_actions(const Player& player)
     int state;
     std::cout << "Voulez-vous effectuer une action optionnelle ? \n 1 pour oui \n 0 pour non" << std::endl;
     std::cin >> state;
+
     if (state) { return true; }
     else { return false; }
 }
