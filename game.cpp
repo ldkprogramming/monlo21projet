@@ -154,6 +154,7 @@ bool Game::playerUsePrivilege(std::pair<int, int> coordinates) {
 
         // on vide le jeton du plateau
         coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+        getActivePlayer().decrementPrivileges();
         return true;
 
 
@@ -198,7 +199,7 @@ bool Game::playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pa
     }
     for (auto c : coordinates){
         // faudra verifier si aucune coordonnee n'est pareil que l'autre
-        if (!playerUsePrivilege(c)) { return false; }
+        if (playerUsePrivilege(c) == false) { return false; }
     }
     return true;
 }
@@ -227,7 +228,7 @@ bool Game::playerTakeCoin(std::pair<int, int> coordinates) {
         return false;
     }
     // on doit verifier si c'est un jeton vide ou or
-    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold)){
+    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)){
         return false;
     }
 
