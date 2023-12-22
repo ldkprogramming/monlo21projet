@@ -1,5 +1,9 @@
 {
     "players": {
+        "0": {
+            "gamesLost": 1,
+            "gamesWon": 1
+        },
         "ha": {
             "gamesLost": 4,
             "gamesWon": 5

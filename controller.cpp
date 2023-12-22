@@ -437,6 +437,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
     }
     if (!checker.compulsory_action_can_be_done(GameControlled.getActivePlayer())) {
         GameControlled.playerFillBoard();
+        GameControlled.getOpponentPlayer().decrementPrivileges();
 
     }
     

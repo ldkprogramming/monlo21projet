@@ -116,6 +116,7 @@ const std::string &Player::getName() const {
 std::ostream& operator<<(std::ostream &f, const Player& p){
     f << "Player \n";
     f << "name : " << p.getName() << "\n";
+    f << "privileges : " << p.getPrivileges() << "\n";
     f << "---- hand ----- \n";
     for (auto card : p.hand){
         f << card;
