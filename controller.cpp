@@ -512,14 +512,14 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             Skill cardskill2 = card_to_buy.getSkill2();
             
             if (cardskill1 == Skill::TakeCoin && cardskill2 == Skill::RobCoin || cardskill1 == Skill::RobCoin && cardskill2 == Skill::TakeCoin) {
-                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
+                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), idtoPosition(card_to_buy.getId()), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
             }
 
             if (cardskill1 == Skill::TakeCoin || cardskill2 == Skill::TakeCoin) {
-                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), CoinColor::Empty, ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
+                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), idtoPosition(card_to_buy.getId()), card_to_buy.getCardColor(), CoinColor::Empty, ask_for_player_solo_token_coordinates(GameControlled.getActivePlayer()));
             }
             if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
-                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
+                GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), idtoPosition(card_to_buy.getId()), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
                   
                 
             }
@@ -591,14 +591,14 @@ void Controller::play_turn_AI(GameMoveVerification& checker)
         Skill cardskill2 = boughtCardAI.getSkill2();
 
         if (cardskill1 == Skill::TakeCoin && cardskill2 == Skill::RobCoin || cardskill1 == Skill::RobCoin && cardskill2 == Skill::TakeCoin) {
-            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), boughtCardAI.getId(), boughtCardAI.getCardColor(), AI_choose_color_to_steal(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())), AI_take_one_coin_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())));
+            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), idtoPosition( boughtCardAI.getId()), boughtCardAI.getCardColor(), AI_choose_color_to_steal(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())), AI_take_one_coin_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())));
         }
 
         if (cardskill1 == Skill::TakeCoin || cardskill2 == Skill::TakeCoin) {
-            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), boughtCardAI.getId(), boughtCardAI.getCardColor(), CoinColor::Empty, AI_take_one_coin_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())));
+            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), idtoPosition(boughtCardAI.getId()), boughtCardAI.getCardColor(), CoinColor::Empty, AI_take_one_coin_by_coordinates(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())));
         }
         if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
-            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), boughtCardAI.getId(), boughtCardAI.getCardColor(), AI_choose_color_to_steal(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())), { 0, 0 });
+            GameControlled.playerBuyCard(piletype_to_cardlevel(boughtCardAI.getPileTypeOfCard(boughtCardAI.getId())), idtoPosition(boughtCardAI.getId()), boughtCardAI.getCardColor(), AI_choose_color_to_steal(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn())), { 0, 0 });
         }
 
         
@@ -1004,6 +1004,37 @@ const Card& Controller::AI_royal_pick(const Player& AI)
 {
     int royalchoice = rand() % get_GameControlled().getPyramid().getRoyalCards().size() + 1;
     return get_GameControlled().getPyramid().getRoyalCards().at(royalchoice);
+}
+
+int Controller::idtoPosition(int cID)
+{
+    int iterator_tracker;
+        iterator_tracker = 0;
+        for (auto c : this->get_GameControlled().getPyramid().getLevel1Cards()) {
+
+            if (c.getId() == cID) {
+                return iterator_tracker;
+            }
+            iterator_tracker++;
+        }
+  
+        iterator_tracker = 0;
+        for (auto d : this->get_GameControlled().getPyramid().getLevel2Cards()) {
+            if (d.getId() == cID) {
+                return iterator_tracker;
+            }
+            iterator_tracker++;
+        }
+   
+        iterator_tracker = 0;
+        for (auto e : this->get_GameControlled().getPyramid().getLevel3Cards())
+            if (e.getId() == cID) {
+                return iterator_tracker;
+            }
+        iterator_tracker++;
+    
+    
+    return 0;
 }
 
 

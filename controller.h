@@ -68,6 +68,7 @@ public:
 	bool AI_optional_or_not(const Player& AI);
 	const Card& AI_royal_pick(const Player& AI);
 	
+	int idtoPosition(int cID);
 	
 	
 
