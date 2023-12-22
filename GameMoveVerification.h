@@ -38,4 +38,5 @@ public:
 
     bool can_royal_card_pick(Player& p);
     bool verify_royal_card_pick(const Player& p, const Card& pickedCard);
+    bool canBuyCard(const Player& p) const;
 }; 

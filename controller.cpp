@@ -98,26 +98,26 @@ bool Controller::ask_player_for_optional_actions(const Player& player)
     CardLevel pileconverted = int_to_cardlevel(pile);
     if (pile == 1) {
         for (auto c : this->get_GameControlled().getPyramid().getLevel1Cards()) {
-            if (c.getId() == id) {
+            if (c.getId() == id && player.canBuy(c)) {
                 return c;
             }
         }
     }
     if (pile == 2) {
         for (auto d : this->get_GameControlled().getPyramid().getLevel2Cards()) {
-            if (d.getId() == id) {
+            if (d.getId() == id && player.canBuy(d)) {
                 return d;
             }
         }
     }
     if (pile == 3) {
         for (auto e : this->get_GameControlled().getPyramid().getLevel1Cards()) {
-            if (e.getId() == id) {
+            if (e.getId() == id && player.canBuy(e)) {
                 return e;
             }
         }
         }
-    std::cout << "Mauvaise pile selectionn�e" << std::endl;
+    std::cout << "Impossible d'acheter cette carte" << std::endl;
     return ask_player_for_card_to_buy(player);
 
 
@@ -302,8 +302,10 @@ CompulsoryActions Controller::ask_for_compulsory_action_type(const Player& p)
     std::cout << "Quelle type d'action obligatoire voulez-vous effectuer ? \n 1 : Acheter une carte \n 2 : R�server une carte \n 3 : Prendre des jetons"  << std::endl;
     std::cin >> choice;
     switch (choice)
+    
     {
     case 1 :
+        
         return CompulsoryActions::BuyCard;
     case 2 :
         return CompulsoryActions::ReserveCard;
@@ -435,6 +437,16 @@ void Controller::play_turn_human(GameMoveVerification& checker)
     }
     
         CompulsoryActions Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
+        if (Compulsory_Action == CompulsoryActions::TakeCoins && checker.canBuyCard(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+            
+            while (Compulsory_Action!=CompulsoryActions::TakeCoins)
+            {
+                std::cout << "Vous ne pouvez pas acheter de cartes " << std::endl;
+                Compulsory_Action = ask_for_compulsory_action_type(GameControlled.getActivePlayer());
+
+            }
+        }
+
         if (Compulsory_Action == CompulsoryActions::TakeCoins) {
             
             std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
@@ -473,12 +485,12 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             GameControlled.playerReserveCard(cardinfos.second, GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first).getId());
             if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {
                 int id = ask_for_royal_card(GameControlled.getActivePlayer());
-                
+
                 if (!checker.verify_royal_card_pick(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()), this->get_GameControlled().get_Card_from_ID(id))) {
-                    
+
                     std::cout << " Erreur de choix \n" << std::endl;
                     id = ask_for_royal_card(GameControlled.getActivePlayer());
-                    
+
                 }
                 GameControlled.getActivePlayer().addCardToHand(get_GameControlled().get_Card_from_ID(id));
             }
@@ -488,6 +500,8 @@ void Controller::play_turn_human(GameMoveVerification& checker)
         }
 
         if (Compulsory_Action == CompulsoryActions::BuyCard) {
+           
+          
             const Card& card_to_buy = ask_player_for_card_to_buy(GameControlled.getActivePlayer());
             Skill cardskill1 = card_to_buy.getSkill1();
             Skill cardskill2 = card_to_buy.getSkill2();
@@ -501,6 +515,8 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             }
             if (cardskill1 == Skill::RobCoin || cardskill2 == Skill::RobCoin) {
                 GameControlled.playerBuyCard(piletype_to_cardlevel(card_to_buy.getPileTypeOfCard(card_to_buy.getId())), card_to_buy.getId(), card_to_buy.getCardColor(), ask_for_color_to_steal(GameControlled.getActivePlayer()), { 0, 0 });
+                  
+                
             }
            
             if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {

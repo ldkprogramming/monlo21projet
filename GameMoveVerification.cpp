@@ -181,3 +181,29 @@ bool GameMoveVerification::verify_royal_card_pick(const Player& p, const Card& p
 	return false;
 }
 
+bool GameMoveVerification::canBuyCard(const Player& p) const {
+	for (auto c : p.getReservedCards() ) {
+		if (p.AIcanBuy(c)) {
+			return true;
+		}
+	}
+	for (auto c : get_game_checked().getPyramid().getLevel3Cards()) {
+		if (p.AIcanBuy(c)) {
+			return true;
+		}
+	}
+
+	for (auto c : get_game_checked().getPyramid().getLevel2Cards()) {
+		if (p.AIcanBuy(c)) {
+			return true;
+		}
+	}
+
+	for (auto c : get_game_checked().getPyramid().getLevel1Cards()) {
+		if (p.AIcanBuy(c)) {
+			return true;
+		}
+	}
+
+
+}
