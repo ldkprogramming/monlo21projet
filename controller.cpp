@@ -920,22 +920,26 @@ const Card& Controller::AI_reserve_card(const Player& AI)
 const Card& Controller::AI_buy_card(const Player& AI)
 {
     for (auto c : AI.getReservedCards()) {
-        if (AI.AIcanBuy(c));
-        return c;
+        if (AI.AIcanBuy(c)) {
+            return c;
+        }
     }
     for (auto c : get_GameControlled().getPyramid().getLevel3Cards()) {
-        if (AI.AIcanBuy(c));
+        if (AI.AIcanBuy(c)){
         return c;
+    }
     }
 
     for (auto c : get_GameControlled().getPyramid().getLevel2Cards()) {
-        if (AI.AIcanBuy(c));
-        return c;
+        if (AI.AIcanBuy(c)) {
+            return c;
+        }
     }
 
     for (auto c : get_GameControlled().getPyramid().getLevel1Cards()) {
-        if (AI.AIcanBuy(c));
-        return c;
+        if (AI.AIcanBuy(c)) {
+            return c;
+        }
     }
 }
 

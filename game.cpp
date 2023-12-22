@@ -198,7 +198,7 @@ bool Game::playerUsePrivileges(int numberOfPrivileges, const std::vector<std::pa
     }
     for (auto c : coordinates){
         // faudra verifier si aucune coordonnee n'est pareil que l'autre
-        playerUsePrivilege(c);
+        if (!playerUsePrivilege(c)) { return false; }
     }
     return true;
 }
@@ -372,8 +372,16 @@ bool Game::playerReserveCard(CardLevel level, int cardNumber) {
         }
 
     }
-    // on passe au tour suivant !
-    turn = getOpponent(turn);
+  
+ 
+    for (int x = 0; x < 5; x++) {
+        for (int y = 0; y < 5; y++) {
+            if (coinBoard.getCoin(x, y).getColor() == CoinColor::Gold) {
+                playerTakeCoin(std::pair<int, int>(x, y));
+            }
+        }
+    }
+
     return true;
 }
 
