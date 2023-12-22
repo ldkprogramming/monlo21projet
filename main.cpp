@@ -67,7 +67,7 @@ int main() {
         std::cin >> winConditions_TotalPointsinOneColor;
 
         WinConditions winSet = WinConditions(winConditions_TotalPoints, winConditions_TotalCrowns, winConditions_TotalPointsinOneColor);
-        Game PlayedGame = Game(Player1Name, Player2Name, Player2Type);
+        Game PlayedGame = Game(Player1Name, Player2Name, Player2Type, winSet);
         GameMoveVerification Checker = GameMoveVerification(PlayedGame);
         Controller CurrentController = Controller(PlayedGame);
 
