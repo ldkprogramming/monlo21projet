@@ -138,27 +138,27 @@ bool Game::playerUsePrivilege(std::pair<int, int> coordinates) {
 
     // faut verifier si les coordonnees sont correctes, valides
     // faudra ajouter un attribut largeur au coinboard, mais pour l'instant ca marche
-    if ((coordinates.first > 4) || (coordinates.first < 0) || (coordinates.second > 4) || (coordinates.second < 0)) {
+    if ((coordinates.first > 4) || (coordinates.first < 0) || (coordinates.second > 4) || (coordinates.second < 0)) {return false;}
+
+    // faut verifier si ce n'est pas un jeton or
+    if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)) {
         return false;
-
-        // faut verifier si ce n'est pas un jeton or
-        if ((coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Gold) || (coinBoard.getCoin(coordinates.first, coordinates.second).getColor() == CoinColor::Empty)) {
-            return false;
-        }
-        // faut verifier que le joueur a qui c le tour possede au moins un privilege
-        if (getPlayer(turn).getPrivileges() < 1) {
-            return false;
-        }
-
-        getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
-
-        // on vide le jeton du plateau
-        coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
-        getActivePlayer().decrementPrivileges();
-        return true;
-
-
     }
+    // faut verifier que le joueur a qui c le tour possede au moins un privilege
+    if (getPlayer(turn).getPrivileges() < 1) {
+        return false;
+    }
+
+    getActivePlayer().addCoin(coinBoard.getCoin(coordinates.first, coordinates.second));
+
+    // on vide le jeton du plateau
+    coinBoard.setCoin(coordinates.first, coordinates.second, CoinColor::Empty);
+
+    getActivePlayer().decrementPrivileges();
+    return true;
+
+
+
 }
 
 PlayerEnum getOpponent(PlayerEnum p){
