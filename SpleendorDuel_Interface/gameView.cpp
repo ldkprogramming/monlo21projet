@@ -52,12 +52,11 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     gameVLayoutCenterUpper->addWidget(privilegeLabel);
 
 
-    ///Zones cartes (à implémenter - Jules)
-
-    // TEMPORAIRE!!!
+    //Cartes
     cardPyramid = new cardPyramidView(this);
     gameVLayoutRightUpper->addWidget(cardPyramid);
 
+        //Initialisation a la main
     cardPyramid->addCard(0);
     cardPyramid->addCard(1);
     cardPyramid->addCard(2);
@@ -429,6 +428,10 @@ int gameView::checkBuyCard(){
     else {
         qDebug() << "Achat de carte impossible: le joueur n'a pas les ressources necessaires";
     }
+
+    qDebug() << "Actualisation des données des joueurs \n";
+    player1View -> updateView();
+    player2View -> updateView();
 
     return 1;
 }

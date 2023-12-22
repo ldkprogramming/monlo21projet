@@ -369,6 +369,12 @@
 			null
 		],
 		[
+			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/menuView.h",
+			"MU",
+			"EWIEGA46WW/moc_menuView.cpp",
+			null
+		],
+		[
 			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/privilegesView.h",
 			"MU",
 			"EWIEGA46WW/moc_privilegesView.cpp",
@@ -518,6 +524,11 @@
 		],
 		[
 			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/main/playerview.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/jules/OneDrive/Bureau/Projet LO21 Final Final/monlo21projet/SpleendorDuel_Interface/menuView.cpp",
 			"MU",
 			null
 		],

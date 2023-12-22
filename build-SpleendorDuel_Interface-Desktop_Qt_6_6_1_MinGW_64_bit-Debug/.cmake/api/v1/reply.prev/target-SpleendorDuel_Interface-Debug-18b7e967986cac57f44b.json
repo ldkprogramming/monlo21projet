@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 88,
+				"line" : 90,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 71,
+				"line" : 73,
 				"parent" : 0
 			},
 			{
@@ -385,11 +385,11 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 0,
-			"id" : "SpleendorDuel_Interface_autogen::@6890427a1f51a3e7e1df"
+			"id" : "SpleendorDuel_Interface_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "SpleendorDuel_Interface_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"backtrace" : 0,
+			"id" : "SpleendorDuel_Interface_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "SpleendorDuel_Interface::@6890427a1f51a3e7e1df",
@@ -536,21 +536,28 @@
 				24,
 				26,
 				29,
-				31
+				31,
+				38
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				32
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				39
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				33
+				40
 			]
 		}
 	],
@@ -732,6 +739,41 @@
 		{
 			"backtrace" : 4,
 			"path" : "main/game.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "main/jsonFiles/ongoingGame.json",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "main/jsonFiles/pile1.json",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "main/jsonFiles/pile2.json",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "main/jsonFiles/pile3.json",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "main/jsonFiles/royalpile.json",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "main/jsonFiles/stats.json",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "menuView.h",
 			"sourceGroupIndex" : 1
 		},
 		{

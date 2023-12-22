@@ -36,31 +36,31 @@ Coin* coinButton::changeColor(Coin* new_coin){
     switch(new_color){
     case CoinColor::White:
         //fillColor = QColor("white");
-        this->setStyleSheet("background-color: white;");
+        this->setStyleSheet("background-color: #FEFEFA;");
         break;
     case CoinColor::Blue:
         //fillColor = QColor("blue");
-        this->setStyleSheet("background-color: blue;");
+        this->setStyleSheet("background-color: #046FA9;");
         break;
     case CoinColor::Black:
         //fillColor = QColor("black");
-        this->setStyleSheet("background-color: black;");
+        this->setStyleSheet("background-color: #202122;");
         break;
     case CoinColor::Gold:
         //fillColor = QColor("yellow");
-        this->setStyleSheet("background-color: yellow;");
+        this->setStyleSheet("background-color: #FFCB46;");
         break;
     case CoinColor::Pearl:
         //fillColor = QColor("pink");
-        this->setStyleSheet("background-color: pink;");
+        this->setStyleSheet("background-color: #EB9BC9;");
         break;
     case CoinColor::Red:
         //fillColor = QColor("red");
-        this->setStyleSheet("background-color: red;");
+        this->setStyleSheet("background-color: #FB4157;");
         break;
     case CoinColor::Green:
         //fillColor = QColor("green");
-        this->setStyleSheet("background-color: green;");
+        this->setStyleSheet("background-color: #0AAC65;");
         break;
     case CoinColor::Empty:
         //fillColor = QColor("purple");

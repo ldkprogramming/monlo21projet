@@ -4,5 +4,6 @@
 #include "EWIEGA46WW/moc_coinBoardView.cpp"
 #include "EWIEGA46WW/moc_gameView.cpp"
 #include "FKWUBUMHKV/moc_playerview.cpp"
+#include "EWIEGA46WW/moc_menuView.cpp"
 #include "EWIEGA46WW/moc_privilegesView.cpp"
 #include "EWIEGA46WW/moc_useprivilegebuttonView.cpp"
