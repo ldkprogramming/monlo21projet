@@ -68,7 +68,7 @@ int Player::getMaxPointsPerColor() {
     }
 }
 
-bool Player::canBuy(const Card &card) {
+bool Player::canBuy(const Card &card) const {
     // ATTENTION faut ajouter la verification sur une carte contenant la capacite bonus
     if ((card.getSkill1() == Skill::Bonus) || (card.getSkill2() == Skill::Bonus)){
         for (auto c : bonusesPerColor){
@@ -81,7 +81,7 @@ bool Player::canBuy(const Card &card) {
 
 
     for (auto cost : card.getCosts()){
-        if ( bonusesPerColor[cost.first] + coinsPerColor[cost.first] < cost.second ){
+        if ( bonusesPerColor.at(cost.first) + coinsPerColor.at(cost.first) < cost.second ){
             return false;
         }
         }
