@@ -25,7 +25,7 @@ std::vector<Coin> Controller::ask_player_for_tokens(Player& Player)
         std::cin >> x;
         std::cout << "Entrez la coordonn�es y du jeton � prendre " << std::endl;
         std::cin >> y;
-        coins.push_back(this->GameControlled.coinBoard.getCoin(x,y));
+        coins.push_back(this->get_GameControlled().getCoinBoard().getCoin(x, y));
     }
     return coins;
 }
@@ -36,14 +36,18 @@ std::vector<std::pair<int, int>> Controller::ask_player_for_tokens_coordinates(P
     int number_of_coins;
     std::cout << "Combien de jetons voulez vous prendre" << std::endl;
     std::cin >> number_of_coins;
+    while (number_of_coins > 3 || number_of_coins < 1) {
+        std::cout << "Nombre invalide \n Réessayez ! " << std::endl;
+        std::cin >> number_of_coins;
+    }
     int x, y;
-    for (int i = 0; number_of_coins; i++) {
+    for (int i = 0; i<number_of_coins; i++) {
         std::cout << "Entrez la coordonn�es x du jeton � prendre " << std::endl;
         std::cin >> x;
         std::cout << "Entrez la coordonn�es y du jeton � prendre " << std::endl;
         std::cin >> y;
         if (x > 4 || x < 0 || y> 4 || y < 0) {
-            throw std::runtime_error("Coordonn�es erronn�es !  ");
+            std::cout << "Erreur : Coordonnées invalides" << std::endl;
             return ask_player_for_tokens_coordinates(player);
         }
       coordinates.push_back(std::pair<int, int>(x, y));
@@ -112,7 +116,7 @@ bool Controller::ask_player_for_optional_actions(Player& player)
             }
         }
         }
-    throw std::runtime_error("Mauvaise pile selectionn�e");
+    std::cout << "Mauvaise pile selectionn�e" << std::endl;
     return ask_player_for_card_to_buy(player);
 
 
@@ -277,9 +281,9 @@ void Controller::change_turn()
 }
 
 bool Controller::verify_win(Player& player){
-    int winTotalPoints = this->GameControlled.getWinConditions().getTotalPoints();
-    int winTotalCrowns = this->GameControlled.getWinConditions().getTotalCrowns();
-    int winPointsInOneColor = this->GameControlled.getWinConditions().getPointsInOneColor();
+    int winTotalPoints = this->get_GameControlled().getWinConditions().getTotalPoints();
+    int winTotalCrowns = this->get_GameControlled().getWinConditions().getTotalCrowns();
+    int winPointsInOneColor = this->get_GameControlled().getWinConditions().getPointsInOneColor();
 
     return ((player.getMaxPointsPerColor() == winPointsInOneColor) || (player.getTotalPoints() == winTotalPoints) || (player.getTotalCrowns() == winTotalCrowns));
 }
@@ -434,7 +438,8 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             
             std::vector<std::pair<int, int>> coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
             while  (!checker.verify_coin_alignment(coordinates) || !checker.verify_coin_colors(coordinates_to_coin(coordinates) )) {
-                throw std::runtime_error (" Erreur de choix \n");
+                std::cout <<" Erreur de choix \n" <<std::endl;
+                std::cout << "Lol" << std::endl;
                 coordinates = ask_player_for_tokens_coordinates(GameControlled.getActivePlayer());
             }
             GameControlled.playerTakeCoins(coordinates);

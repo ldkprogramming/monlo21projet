@@ -273,8 +273,6 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
         }
     }
     // On passe au tour suivant !
-    turn = getOpponent(turn);
-
 
 }
 Game::Game(const std::string& path) : player1(json::parse(std::ifstream(path))["player1"]["name"], toPlayerType(json::parse(std::ifstream(path))["player1"]["type"])), player2(json::parse(std::ifstream(path))["player2"]["name"],toPlayerType(json::parse(std::ifstream(path))["player2"]["type"])) {

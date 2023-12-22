@@ -9,6 +9,38 @@
 using json = nlohmann::json;
 
 #include "card.h"
+
+std::string toStringcard(CoinColor c){
+    switch (c)
+    {
+    case CoinColor::White:
+        return "White";
+        break;
+    case CoinColor::Blue:
+        return "Blue";
+        break;
+    case CoinColor::Black:
+        return "Black";
+        break;
+    case CoinColor::Gold:
+        return "Gold";
+        break;
+    case CoinColor::Pearl:
+        return "Pearl";
+        break;
+    case CoinColor::Red:
+        return "Red";
+        break;
+    case CoinColor::Green:
+        return "Green";
+        break;
+    case CoinColor::Empty:
+        break;
+    default:
+        break;
+    }
+
+}
 std::string toString(Skill s){
     switch (s){
         case Skill::PlayAgain:
@@ -50,8 +82,14 @@ std::ostream& operator<<(std::ostream& f, const Card& c){
     '\n';
     f << "skill1 : " << toString(c.skill1) << '\n';
     f << "skill2 : " << toString(c.skill2) << '\n';
+   
     return f;
 }
+
+/**std::ostream& operator<<(std::ostream& f, const std::map<CoinColor, int> p) {
+    f << toString(p.) << " : " << p << std::endl;
+        return f;
+}*/
 
 CoinColor Card::getCardColor() const {
     CoinColor coinColor = CoinColor::Empty;

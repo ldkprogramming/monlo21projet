@@ -26,9 +26,9 @@ using json = nlohmann::json;
 int main() {
     int menuChoice;
     std::cout << "Menu principal" << std::endl;
-    std::cout << "1 :  Lancer une nouvelle partie " << std::endl << "2 : Charger la partie d�j� existante" << std::endl << "3 : Afficher les scores sauvegard�s" << std::endl << "4 : Quitter ";
+    std::cout << "1 :  Lancer une nouvelle partie " << std::endl << "2 : Charger la partie d�j� existante" << std::endl << "3 : Afficher les scores sauvegard�s" << std::endl << "4 : Quitter " << std::endl;;
     std::cin >> menuChoice;
-    
+
     std::string  Player1Name;
     std::string  Player2Name;
 
@@ -41,8 +41,8 @@ int main() {
     StatSaver statsaver = StatSaver();
 
 
-   
-   
+
+
 
 
     if (menuChoice == 1) {
@@ -71,13 +71,13 @@ int main() {
         GameMoveVerification Checker = GameMoveVerification(PlayedGame);
         Controller CurrentController = Controller(PlayedGame);
 
-        
+
         std::cout << "Lancement du jeu " << std::endl;
         CurrentController.play_game();
 
         std::cout << "Fin du jeu" << std::endl;
     }
-    
+
     if (menuChoice == 2) {
         Game savedGame = Game("../jsonFiles/ongoingGame.json");
         GameMoveVerification savedChecker = GameMoveVerification(savedGame);
@@ -89,20 +89,17 @@ int main() {
         savedController.play_game();
 
         std::cout << "Fin du jeu" << std::endl;
-        
+
     }
 
     if (menuChoice == 3) {
 
         std::cout << "Affichage des donn�es sauvegard�es " << std::endl;
 
-        std::cout << statsaver;
-    }
-    
- 
+
     }
 
 
-
+}
 
 

@@ -3,16 +3,17 @@
 
 bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>> coinchoices)
 {
-	int x1 = coinchoices.at(0).first, x2 = coinchoices.at(1).first, x3 = coinchoices.at(2).first;
-	int y1 = coinchoices.at(0).second, y2 = coinchoices.at(1).second, y3 = coinchoices.at(2).second;
-	switch (coinchoices.size()) {
-	case 2: 
+	if (coinchoices.size() == 1) { return true; }
+	if (coinchoices.size() == 2) {
+		int x1 = coinchoices.at(0).first, x2 = coinchoices.at(1).first;
+		int y1 = coinchoices.at(0).second, y2 = coinchoices.at(1).second;
+
 		if (x1 == x2) {
 			if ((y1 == y2 + 1) || (y1 == y2 - 1)) {
 				return true;
 			}
 		}
-		
+
 		if (y1 == y2) {
 			if ((x1 == y2 + 1) || (x1 == x2 - 1)) {
 				return true;
@@ -20,15 +21,20 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 		}
 		// Diagonales 
 
-		if ((x1 == x2 + 1|| x1 == x2-1) && (y1 == y2 + 1 || y1 == y2 - 1)) {
+		if ((x1 == x2 + 1 || x1 == x2 - 1) && (y1 == y2 + 1 || y1 == y2 - 1)) {
 			return true;
 		}
 
 		return false;
+	}
 
-	case 3 :
+	if (coinchoices.size() == 3) {
+		int x1 = coinchoices.at(0).first, x2 = coinchoices.at(1).first, x3 = coinchoices.at(2).first;;
+		int y1 = coinchoices.at(0).second, y2 = coinchoices.at(1).second, y3 = coinchoices.at(2).second;
 		if (x1 == x2 == x3) {
-			if ((y1 + 1 == y2 ) && (y3 == y2 + 1) || (y1 - 1 == y2) && (y3 == y2 - 1)) {
+				
+
+			if ((y1 + 1 == y2) && (y3 == y2 + 1) || (y1 - 1 == y2) && (y3 == y2 - 1)) {
 				return true;
 			}
 		}
@@ -39,8 +45,8 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 			}
 		}
 
-		if (x2== x1 + 1 && x3 == x2 + 1) { //Diagonales
-			if (y3 == y2 + 1 && y2  == y1 + 1) {
+		if (x2 == x1 + 1 && x3 == x2 + 1) { //Diagonales
+			if (y3 == y2 + 1 && y2 == y1 + 1) {
 				return true;
 			}
 			if (y3 == y2 - 1 && y2 == y1 - 1) {
@@ -56,7 +62,7 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 				return true;
 			}
 		}
-
+	
 	}
 
 }
@@ -131,6 +137,7 @@ bool GameMoveVerification::compulsory_action_can_be_done(Player& p)
 
 bool GameMoveVerification::can_royal_card_pick(Player& p)
 {
+	if (p.getTotalCrowns() < 3) { return false; }
 	if (p.getTotalCrowns() >= 3 && p.getTotalCrowns() < 6) {
 		for (auto hand : p.getHand()) {
 			if (hand.getPileTypeOfCard(hand.getId()) == PileType::Royal) {

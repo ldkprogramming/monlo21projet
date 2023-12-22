@@ -14,16 +14,16 @@ Pile::Pile(PileType type){
     std::ifstream f;
     switch (type){
         case PileType::One:
-            f = std::ifstream ("../jsonFiles/pile1.json");
+            f = std::ifstream ("../../../jsonFiles/pile1.json");
             break;
         case PileType::Two:
-            f = std::ifstream ("../jsonFiles/pile2.json");
+            f = std::ifstream ("../../../jsonFiles/pile2.json");
             break;
         case PileType::Three:
-            f = std::ifstream ("../jsonFiles/pile3.json");
+            f = std::ifstream ("../../../jsonFiles/pile3.json");
             break;
         case PileType::Royal:
-            f = std::ifstream ("../jsonFiles/royalpile.json");
+            f = std::ifstream ("../../../jsonFiles/royalpile.json");
             break;
 
     }

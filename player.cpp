@@ -39,14 +39,14 @@ int Player::getTotalCrowns() {
 }
 
 int Player::getTotalPoints() {
-    int points;
+    int points{0};
     for (auto card : hand){
         points += card.getPoints();
     }
     return points;
 
 
-
+    
 }
 
 

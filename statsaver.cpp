@@ -45,8 +45,9 @@ std::ostream& operator<<(std::ostream f, const StatSaver s)
 
     for (auto c : stats["players"]) {
         f << c << std::endl;
+        
     }
-    
+    return f;
 
 
 
