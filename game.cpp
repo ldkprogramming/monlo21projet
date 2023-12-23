@@ -419,6 +419,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
             int cost = c.second - getActivePlayer().getBonus(c.first);
             while (cost > 0){
                 getActivePlayer().loseCoin(c.first);
+                cost -= 1;
                 std::cout << "LOSECOIN" << std::endl;
             }
         }
