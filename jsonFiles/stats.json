@@ -1,9 +1,20 @@
-{"players": {
-  "ha": {
-    "gamesLost": 4, "gamesWon": 5
-  },
-  "he": {
-    "gamesLost": 0,
-    "gamesWon": 0}
-  }
+{
+    "players": {
+        "ai": {
+            "gamesLost": 0,
+            "gamesWon": 0
+        },
+        "ha": {
+            "gamesLost": 4,
+            "gamesWon": 5
+        },
+        "he": {
+            "gamesLost": 0,
+            "gamesWon": 0
+        },
+        "human": {
+            "gamesLost": 1,
+            "gamesWon": 1
+        }
+    }
 }

@@ -80,7 +80,7 @@ int main() {
     }
 
     if (menuChoice == 2) {
-        Game savedGame = Game("../jsonFiles/ongoingGame.json");
+        Game savedGame = Game("../../../jsonFiles/ongoingGame.json");
         GameMoveVerification savedChecker = GameMoveVerification(savedGame);
         Controller savedController = Controller(savedGame);
 

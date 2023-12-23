@@ -210,7 +210,7 @@ return false;
 
 bool GameMoveVerification::overTen(const Player& p) const
 {
-	int total;
+	int total{0};
 	for (auto c : p.getCoinsPerColor()) {
 		total += c.second;
 	}
