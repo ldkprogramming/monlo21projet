@@ -41,6 +41,7 @@ public:
 	int ask_for_number_of_privileges_to_use(const Player& p);
 	CompulsoryActions ask_for_compulsory_action_type(const Player& p);
 	int ask_for_royal_card(const Player& p);
+	bool askPlayerForCoinsToLose();
 
 	
 	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);
@@ -67,6 +68,7 @@ public:
 	OptionalActions AI_choose_optional_action(const Player& AI);
 	bool AI_optional_or_not(const Player& AI);
 	const Card& AI_royal_pick(const Player& AI);
+	bool AI_lose_coin();
 	
 	int idtoPosition(int cID);
 	

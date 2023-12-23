@@ -254,6 +254,10 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
     }
     const Coin& firstCoin = coinBoard.getCoin(coordinates[0].first, coordinates[0].second);
     for (auto c : coordinates){
+        if (coordinates.size() == 1) {
+            allSameColor = false;
+        }
+
 
         if (firstCoin.getColor() != coinBoard.getCoin(c.first, c.second).getColor()){
             allSameColor = false;
@@ -264,7 +268,7 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
         playerTakeCoin(c);
     }
 
-    if (allSameColor || (numberOfPearlCoins == 2)){
+    if (allSameColor&& coordinates.size()==3 || (numberOfPearlCoins == 2)){
         if (privileges > 0){
             decrementPrivileges();
             getOpponentPlayer().incrementPrivileges();
