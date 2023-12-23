@@ -65,7 +65,7 @@ Card& CardPyramid::distributeCard(CardLevel level, int cardNumber){
      * ajouter les verifs!
      */
     Card result = getCards(level)[cardNumber];
-    getCards(level).erase(getCards(level).begin()+ cardNumber -1);
+    getCards(level).erase(getCards(level).begin()+ cardNumber - 1 );
 
     return result;
 
