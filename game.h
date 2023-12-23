@@ -119,7 +119,9 @@ public:
                        std::pair<int, int> coordinates);
 
 
-    void incrementPrivileges(){
+    void 
+        
+        Privileges(){
         privileges += 1;
     }
     void decrementPrivileges(){
