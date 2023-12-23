@@ -6,97 +6,97 @@
             "Empty",
             "Empty",
             "Empty",
-            "Empty"
+            "White"
         ],
         [
             "Empty",
             "Empty",
-            "Green",
-            "Green",
-            "Pearl"
+            "Pearl",
+            "Black",
+            "Green"
         ],
         [
-            "Empty",
-            "Empty",
-            "Empty",
-            "Gold",
-            "Gold"
-        ],
-        [
-            "Empty",
-            "Empty",
             "Empty",
             "White",
-            "Gold"
+            "Empty",
+            "White",
+            "Green"
         ],
         [
-            "Blue",
-            "Green",
+            "Gold",
             "Empty",
-            "Red",
+            "Empty",
+            "Empty",
             "Blue"
+        ],
+        [
+            "Black",
+            "Gold",
+            "Gold",
+            "White",
+            "Black"
         ]
     ],
     "pile1": [
-        11,
-        23,
-        13,
-        10,
-        26,
-        8,
-        3,
-        1,
-        22,
-        21,
-        16,
-        9,
-        29,
-        2,
-        24,
-        20,
-        27,
-        5,
-        28,
-        17,
-        14,
         12,
-        6,
-        7,
+        10,
+        20,
+        14,
+        21,
+        3,
+        5,
+        8,
+        2,
+        23,
+        18,
+        1,
+        9,
+        24,
         25,
+        6,
+        28,
+        26,
+        17,
+        11,
+        4,
         0,
-        19
+        15,
+        16,
+        7,
+        19,
+        22
     ],
     "pile2": [
-        46,
-        43,
-        38,
+        53,
+        49,
+        44,
+        39,
+        32,
         30,
-        33,
-        35,
-        37,
-        50,
-        51,
+        41,
         48,
+        52,
+        51,
+        34,
+        35,
+        42,
+        33,
         45,
         36,
-        39,
-        49,
-        52,
-        42,
-        53,
-        32,
-        44,
-        31
+        46,
+        47,
+        50,
+        38
     ],
     "pile3": [
-        56,
-        61,
-        63,
         60,
+        64,
+        57,
         54,
-        66,
-        62,
-        65
+        55,
+        59,
+        65,
+        61
     ],
     "player1": {
         "bonusesPerColor": {
@@ -109,13 +109,13 @@
             "White": 0
         },
         "coinsPerColor": {
-            "Black": 2,
+            "Black": 1,
             "Blue": 1,
             "Gold": 0,
             "Green": 1,
             "Pearl": 0,
-            "Red": 1,
-            "White": 1
+            "Red": 3,
+            "White": 0
         },
         "hand": null,
         "name": "human",
@@ -143,13 +143,13 @@
             "White": 0
         },
         "coinsPerColor": {
-            "Black": 2,
-            "Blue": 1,
+            "Black": 0,
+            "Blue": 2,
             "Gold": 0,
-            "Green": 0,
+            "Green": 1,
             "Pearl": 1,
-            "Red": 2,
-            "White": 2
+            "Red": 1,
+            "White": 0
         },
         "hand": null,
         "name": "ai",
@@ -169,34 +169,34 @@
     "privileges": 1,
     "pyramid": {
         "level1Cards": [
-            4,
-            15,
-            18
+            13,
+            27,
+            29
         ],
         "level2Cards": [
+            31,
             40,
-            34,
-            47,
-            41
+            37,
+            43
         ],
         "level3Cards": [
-            55,
-            57,
-            59,
-            64,
-            58
+            56,
+            58,
+            62,
+            63,
+            66
         ],
         "royalCards": [
-            69,
-            68,
+            70,
             67,
-            70
+            69,
+            68
         ]
     },
     "royalPile": null,
     "turn": "Player1",
     "winConditions": {
-        "pointsInOneColor": 5,
+        "pointsInOneColor": 10,
         "totalCrowns": 10,
         "totalPoints": 20
     }

@@ -405,7 +405,8 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
         std::cout << "Canbuy";
         return false;
     }
-
+    
+    std::cout << "Youhou" << std::endl;
 
 
     // On traite la question des jetons
@@ -414,16 +415,17 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
             int cost = c.second - getActivePlayer().getBonus(c.first);
             while (cost > 0){
                 getActivePlayer().loseCoin(c.first);
+                std::cout << "LOSECOIN" << std::endl;
             }
         }
     }
 
 
     Card& card = pyramid.distributeCard(level, cardNumber);
-    std::cout << getPyramid();
+   
     // on applique les capacites
-    applyCardSkill(card, card.getSkill1(), bonusColor, stolenColor, coordinates);
-    applyCardSkill(card, card.getSkill2(), bonusColor, stolenColor, coordinates);
+   //applyCardSkill(card, card.getSkill1(), bonusColor, stolenColor, coordinates);
+    //applyCardSkill(card, card.getSkill2(), bonusColor, stolenColor, coordinates);
 
     // On ajoute la carte a la main du joueur
     getActivePlayer().addCardToHand(card);
