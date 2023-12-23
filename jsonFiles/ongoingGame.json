@@ -4,99 +4,99 @@
         [
             "Empty",
             "White",
-            "Green",
-            "Blue",
+            "Black",
+            "White",
+            "Green"
+        ],
+        [
+            "Empty",
+            "Empty",
+            "White",
+            "Empty",
+            "Blue"
+        ],
+        [
+            "Gold",
+            "Gold",
+            "Empty",
+            "Empty",
             "Red"
         ],
         [
             "Empty",
-            "White",
             "Gold",
-            "White",
-            "Gold"
-        ],
-        [
             "Empty",
-            "Red",
-            "Green",
-            "Pearl",
+            "Empty",
             "Pearl"
         ],
         [
-            "Black",
-            "White",
-            "Black",
-            "Red",
-            "Green"
-        ],
-        [
-            "Green",
-            "Black",
-            "Black",
-            "Red",
-            "Gold"
+            "Empty",
+            "Pearl",
+            "Empty",
+            "Blue",
+            "Blue"
         ]
     ],
     "pile1": [
+        4,
+        2,
+        29,
+        1,
+        8,
+        22,
         14,
         25,
-        16,
-        10,
-        11,
-        22,
-        29,
-        17,
         0,
-        13,
-        4,
-        1,
-        28,
-        24,
-        19,
         21,
-        8,
-        7,
-        26,
         12,
-        2,
+        10,
+        26,
         15,
-        23,
-        5,
+        19,
+        13,
+        18,
         9,
-        27,
-        20
+        6,
+        7,
+        11,
+        23,
+        3,
+        24,
+        5,
+        16,
+        28
     ],
     "pile2": [
-        44,
-        51,
-        39,
-        45,
-        31,
-        48,
-        38,
-        36,
-        50,
-        47,
-        30,
-        52,
-        49,
-        46,
-        33,
-        37,
         42,
-        43,
+        52,
+        33,
+        36,
+        31,
+        47,
+        37,
+        45,
+        48,
+        53,
+        51,
+        50,
+        41,
+        32,
+        49,
         40,
-        32
+        38,
+        44,
+        35,
+        39
     ],
     "pile3": [
-        56,
-        59,
-        60,
-        63,
+        57,
         65,
-        61,
+        58,
+        59,
+        66,
+        56,
         55,
-        64
+        61
     ],
     "player1": {
         "bonusesPerColor": {
@@ -109,12 +109,12 @@
             "White": 0
         },
         "coinsPerColor": {
-            "Black": 0,
+            "Black": 3,
             "Blue": 0,
             "Gold": 0,
             "Green": 0,
             "Pearl": 0,
-            "Red": 0,
+            "Red": 3,
             "White": 0
         },
         "hand": null,
@@ -128,7 +128,7 @@
             "Red": 0,
             "White": 0
         },
-        "privileges": 2,
+        "privileges": 0,
         "reservedCards": null,
         "type": 1
     },
@@ -144,12 +144,12 @@
         },
         "coinsPerColor": {
             "Black": 0,
-            "Blue": 3,
+            "Blue": 1,
             "Gold": 0,
-            "Green": 0,
+            "Green": 3,
             "Pearl": 0,
             "Red": 0,
-            "White": 0
+            "White": 1
         },
         "hand": null,
         "name": "ai",
@@ -166,25 +166,25 @@
         "reservedCards": null,
         "type": 0
     },
-    "privileges": 2,
+    "privileges": 3,
     "pyramid": {
         "level1Cards": [
-            3,
-            6,
-            18
+            17,
+            20,
+            27
         ],
         "level2Cards": [
-            53,
-            35,
-            41,
+            46,
+            30,
+            43,
             34
         ],
         "level3Cards": [
-            54,
+            64,
+            60,
             62,
-            57,
-            66,
-            58
+            63,
+            54
         ],
         "royalCards": [
             68,
