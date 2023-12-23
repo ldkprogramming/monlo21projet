@@ -57,7 +57,7 @@ int Player::getMaxPointsPerColor() {
             pointsPerColor[cardColor] += card.getPoints();
         }
 
-        int max = 0;
+        int max{ 0 };
         for (auto pair : pointsPerColor) {
             if (pair.second > max) {
                 max = pair.second;
