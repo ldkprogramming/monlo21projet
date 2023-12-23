@@ -31,7 +31,7 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 	if (coinchoices.size() == 3) {
 		int x1 = coinchoices.at(0).first, x2 = coinchoices.at(1).first, x3 = coinchoices.at(2).first;;
 		int y1 = coinchoices.at(0).second, y2 = coinchoices.at(1).second, y3 = coinchoices.at(2).second;
-		if (x1 == x2 == x3) {
+		if ((x1 == x2) && (x2 == x3)) {
 				
 
 			if ((y1 + 1 == y2) && (y3 == y2 + 1) || (y1 - 1 == y2) && (y3 == y2 - 1)) {
@@ -39,17 +39,17 @@ bool GameMoveVerification::verify_coin_alignment(std::vector<std::pair<int, int>
 			}
 		}
 
-		if (y1 == y2 == y3) {
-			if ((x1 + 1 == x2) && (x3 == x2 + 1) || (x1 - 1 == x2) && (x3 == x2 - 1)) {
+		if ((y1 == y2)&& (y2 == y3)) {
+			if (((x1 + 1) == x2) && (x3 == (x2 + 1)) || ((x1 - 1) == x2) && (x3 == (x2 - 1))) {
 				return true;
 			}
 		}
 
-		if (x2 == x1 + 1 && x3 == x2 + 1) { //Diagonales
-			if (y3 == y2 + 1 && y2 == y1 + 1) {
+		if ((x2 == x1 + 1) && (x3 == x2 + 1)) { //Diagonales
+			if ((y3 == y2 + 1) && (y2 == y1 + 1)) {
 				return true;
 			}
-			if (y3 == y2 - 1 && y2 == y1 - 1) {
+			if ((y3 == y2 - 1) &&(y2 == y1 - 1)) {
 				return true;
 			}
 		}
