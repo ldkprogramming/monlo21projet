@@ -41,6 +41,7 @@ public:
 	int ask_for_number_of_privileges_to_use(const Player& p);
 	CompulsoryActions ask_for_compulsory_action_type(const Player& p);
 	int ask_for_royal_card(const Player& p);
+	bool askPlayerForCoinsToLose();
 
 	
 	std::vector<Coin> coordinates_to_coin(std::vector<std::pair<int, int>>& coordinates);

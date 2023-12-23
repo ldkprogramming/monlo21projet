@@ -207,3 +207,15 @@ bool GameMoveVerification::canBuyCard(const Player& p) const {
 
 return false;
 }
+
+bool GameMoveVerification::overTen(const Player& p) const
+{
+	int total;
+	for (auto c : p.getCoinsPerColor()) {
+		total += c.second;
+	}
+	if (total > 10) {
+		return true;
+	}
+	return false;
+}
