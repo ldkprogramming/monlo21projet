@@ -36,19 +36,27 @@ void StatSaver::saveGameStats(const Game &game) {
 
     std::ofstream outputFile(path);
     outputFile << std::setw(4) << data <<std::endl;
+    outputFile.close();
 }
 
-std::ostream& operator<<(std::ostream f, const StatSaver s)
+std::ostream& operator<<(std::ostream& f, const StatSaver& s)
 {
     std::string path = s.getPath();
-    json stats = json::parse(path);
+    std::ifstream i(path);
+    json stats = json::parse(i);
+    stats = stats["players"];
 
-    for (auto c : stats["players"]) {
-        f << c << std::endl;
-        
+    for (auto it = stats.begin(); it != stats.end(); ++it)
+    {
+        f << "-------" << "\n";
+        f << "Joueur: " << it.key() << '\n';
+        for (auto jt = stats[it.key()].begin(); jt != stats[it.key()].end(); ++jt)
+        {
+            f << jt.key() << " : "<< jt.value() << std::endl;
+        }
+        f << "-------" << "\n\n";
+
     }
     return f;
-
-
 
 }

@@ -24,6 +24,7 @@ using json = nlohmann::json;
 }*/
 
 int main() {
+
     int menuChoice;
     std::cout << "Menu principal" << std::endl;
     std::cout << "1 :  Lancer une nouvelle partie " << std::endl << "2 : Charger la partie d�j� existante" << std::endl << "3 : Afficher les scores sauvegard�s" << std::endl << "4 : Quitter " << std::endl;;
@@ -95,10 +96,11 @@ int main() {
     if (menuChoice == 3) {
 
         std::cout << "Affichage des donn�es sauvegard�es " << std::endl;
+        StatSaver s;
+        std::cout << s;
 
 
     }
-
 
 }
 
