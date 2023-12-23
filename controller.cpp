@@ -286,7 +286,7 @@ bool Controller::verify_win(Player& player){
     int winTotalCrowns = this->get_GameControlled().getWinConditions().getTotalCrowns();
     int winPointsInOneColor = this->get_GameControlled().getWinConditions().getPointsInOneColor();
 
-    return ((player.getMaxPointsPerColor() == winPointsInOneColor) || (player.getTotalPoints() == winTotalPoints) || (player.getTotalCrowns() == winTotalCrowns));
+    return ((player.getMaxPointsPerColor() >= winPointsInOneColor) || (player.getTotalPoints() >= winTotalPoints) || (player.getTotalCrowns() >= winTotalCrowns));
 }
 
 int Controller::ask_for_number_of_privileges_to_use(const Player &p) {
