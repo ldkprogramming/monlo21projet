@@ -421,20 +421,33 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
     }
 
 
-    Card& card = pyramid.distributeCard(level, cardNumber);
-   
+    pyramid.checkCard(level, cardNumber);
+
     // on applique les capacites
-   //applyCardSkill(card, card.getSkill1(), bonusColor, stolenColor, coordinates);
-    //applyCardSkill(card, card.getSkill2(), bonusColor, stolenColor, coordinates);
+   applyCardSkill(pyramid.checkCard(level, cardNumber), pyramid.checkCard(level, cardNumber).getSkill1(), bonusColor, stolenColor, coordinates);
+    applyCardSkill(pyramid.checkCard(level, cardNumber), pyramid.checkCard(level, cardNumber).getSkill2(), bonusColor, stolenColor, coordinates);
 
     // On ajoute la carte a la main du joueur
-    getActivePlayer().addCardToHand(card);
+    getActivePlayer().addCardToHand(pyramid.checkCard(level, cardNumber));
 
 
     // On traite la capacite PlayAgain
     // Si la carte ne possede pas la capacite, on change de tour
     if (((pyramid.checkCard(level, cardNumber).getSkill1() == Skill::PlayAgain) || (pyramid.checkCard(level, cardNumber).getSkill2() == Skill::PlayAgain))){
         turn = getOpponent(turn);
+    }
+    pyramid.distributeCard(level, cardNumber);
+    // on doit remplir la pyramide
+    switch (level){
+        case CardLevel::One :{
+            pyramid.refill(level, pile1);
+        }
+        case CardLevel::Two :{
+            pyramid.refill(level, pile2);
+        }
+        case CardLevel::Three :{
+            pyramid.refill(level, pile3);
+        }
     }
 
     return true;

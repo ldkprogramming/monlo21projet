@@ -47,7 +47,7 @@ public:
     int getMaxNumberOfRoyalCards() const;
 
     Card& distributeCard(CardLevel level, int cardNumber);
-    const Card& checkCard(CardLevel level, int cardNumber);
+    Card& checkCard(CardLevel level, int cardNumber);
     void refill(CardLevel level, Pile& pile);
     friend std::ostream& operator<<(std::ostream& f, const CardPyramid& cardPyramid);
 

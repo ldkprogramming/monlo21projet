@@ -170,7 +170,7 @@ const int CardPyramid::getNumberOfCards(CardLevel level) const {
     }
 }
 
-const Card &CardPyramid::checkCard(CardLevel level, int cardNumber) {
+Card &CardPyramid::checkCard(CardLevel level, int cardNumber) {
     // faudra ajouter les verifs
     return getCards(level)[cardNumber];
 }
