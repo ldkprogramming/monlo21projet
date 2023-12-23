@@ -39,6 +39,7 @@ private:
     int actionsDone = 0;
 
 public:
+
     Player(std::string name, PlayerType type);
     Player(std::string name, std::vector<Card> hand, std::vector<Card> reservedCards, std::vector<Coin> coins, int privileges, std::map<CoinColor, int> coinsPerColor,  std::map<CoinColor, int> bonusesPerColor,  std::map<CoinColor, int> pointsPerColor, PlayerType type) :
     name(name), hand(hand), reservedCards(reservedCards), coins(coins), privileges(privileges), type(type) {}

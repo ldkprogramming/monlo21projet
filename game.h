@@ -129,7 +129,7 @@ public:
             privileges -= 1;
         }
     }
-    PlayerType toPlayerType(std::string json);
+    PlayerType toPlayerType(int i);
 };
 
 

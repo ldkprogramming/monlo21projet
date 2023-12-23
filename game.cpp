@@ -280,7 +280,8 @@ bool Game::playerTakeCoins(std::vector<std::pair<int, int>> coordinates) {
     // On passe au tour suivant !
 
 }
-Game::Game(const std::string& path) : player1(json::parse(std::ifstream(path))["player1"]["name"], toPlayerType(json::parse(std::ifstream(path))["player1"]["type"])), player2(json::parse(std::ifstream(path))["player2"]["name"],toPlayerType(json::parse(std::ifstream(path))["player2"]["type"])) {
+Game::Game(const std::string& path) : player1(json::parse(std::ifstream(path))["player1"]["name"], json::parse(std::ifstream(path))["player1"]["type"]),
+player2(json::parse(std::ifstream(path))["player2"]["name"],json::parse(std::ifstream(path))["player2"]["type"]) {
     std::ifstream f(path);
     json data = json::parse(f);
 
@@ -494,8 +495,8 @@ bool Game::applyCardSkill(Card &card, Skill skill, CoinColor bonusColor, CoinCol
     }
     return true;
 }
-PlayerType Game::toPlayerType(std::string json)
+PlayerType Game::toPlayerType(int i)
 {
-    if (json == "AI") { return PlayerType::AI; }
+    if (i == 0) { return PlayerType::AI; }
     else return  PlayerType::Human;
 }
