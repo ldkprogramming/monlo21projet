@@ -420,6 +420,7 @@ bool Game::playerBuyCard(CardLevel level, int cardNumber, CoinColor bonusColor =
 
 
     Card& card = pyramid.distributeCard(level, cardNumber);
+    std::cout << getPyramid();
     // on applique les capacites
     applyCardSkill(card, card.getSkill1(), bonusColor, stolenColor, coordinates);
     applyCardSkill(card, card.getSkill2(), bonusColor, stolenColor, coordinates);
