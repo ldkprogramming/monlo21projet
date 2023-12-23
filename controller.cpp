@@ -387,8 +387,9 @@ void Controller::play_game()
     GameMoveVerification checker(this->get_GameControlled());
     GameSaver saver;
     int coin = rand() % 2;
-    if (coin) {this->GameControlled.turn = PlayerEnum::Player2; }
+    if (coin) { this->GameControlled.turn = PlayerEnum::Player2; }
     else { this->GameControlled.turn = PlayerEnum::Player1; }
+    get_GameControlled().getOpponentPlayer().incrementPrivileges();
 
     while (!verify_win(this->GameControlled.getActivePlayer())) {
         if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human)
