@@ -20,7 +20,6 @@ public:
     StatSaver(std::string path = "../../../jsonFiles/stats.json") : path(path){}
     void saveGameStats(const Game& game);
     std::string getPath() const { return path; }
-    void printStats();
     friend std::ostream& operator<<(std::ostream& f, const StatSaver& s);
 };
 
