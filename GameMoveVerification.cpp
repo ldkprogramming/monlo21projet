@@ -205,5 +205,5 @@ bool GameMoveVerification::canBuyCard(const Player& p) const {
 		}
 	}
 
-
+return false;
 }
