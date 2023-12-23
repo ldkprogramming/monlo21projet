@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QBoxLayout>
 #include <QPushButton>
+#include "gameView.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

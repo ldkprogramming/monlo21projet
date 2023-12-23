@@ -92,5 +92,18 @@ public:
 };
 
 
+class takeCoinCapacityButtonView : public QPushButton
+{
+    Q_OBJECT
+public:
+    takeCoinCapacityButtonView(QWidget *parent = nullptr);
+    ~takeCoinCapacityButtonView(){qDebug()<<"Destruction Bouton";}
+
+    void isUsable(){this->setCheckable(true);}
+    void isUnusable(){this->setCheckable(false);}
+};
+
+
+
 // Faire tout ce qui a un rapport avec la sélection des jetons
 #endif // COINBOARDVIEW_H

@@ -27,7 +27,7 @@ coinButton::~coinButton(){
 
 //en modifier en PaintEvent ??? pour qu'il se comporte seul comme un grand ?
 Coin* coinButton::changeColor(Coin* new_coin){
-    qDebug() << "ok \n";
+    // qDebug() << "ok \n";
     Coin* old_coin = new Coin;
     //old_coin = coin;
     CoinColor new_color = new_coin->getColor();
@@ -159,7 +159,10 @@ cardReservationButtonCoinBoardPartView::cardReservationButtonCoinBoardPartView(Q
 }
 
 
-
+takeCoinCapacityButtonView::takeCoinCapacityButtonView(QWidget *parent){
+    setText("Capacité Prendre Jeton");
+    setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+}
 
 
 

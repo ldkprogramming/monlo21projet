@@ -5,10 +5,6 @@
 gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     : QMainWindow(parent), currentPlayer(nullptr){
 
-
-
-
-
     setWindowTitle("Splendor Duel");
 
     mainWidget = new QWidget(this);
@@ -31,26 +27,28 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     coinSelectionButton = new coinSelectionButtonView(mainWidget);
     usePrivilegeButton = new usePrivilegeButtonView(mainWidget);
     cardReservationButtonCoinBoardPart = new cardReservationButtonCoinBoardPartView(mainWidget);
+    takeCoinCapacityButton = new takeCoinCapacityButtonView(mainWidget);
 
     connect(coinSelectionButton, SIGNAL(clicked(bool)), this, SLOT(checkCoinsSelection()));
-    connect(bagView, SIGNAL(clicked(bool)), this, SLOT(fillCoinsBoard())); 
+    connect(bagView, SIGNAL(clicked(bool)), this, SLOT(fillCoinsBoard()));
     connect(usePrivilegeButton, SIGNAL(clicked(bool)), this, SLOT(usePrivilege()));
+    connect(takeCoinCapacityButton, SIGNAL(clicked(bool)), this, SLOT(checkTakeCoinCapacity()));
     //ajouter connect pour cardReservationButtonCoinBoardPart
 
     gameHLayoutLeftUpperButtons->addWidget(coinSelectionButton);
     gameHLayoutLeftUpperButtons->addWidget(usePrivilegeButton);
     gameHLayoutLeftUpperButtons->addWidget(cardReservationButtonCoinBoardPart);
+    gameHLayoutLeftUpperButtons->addWidget(takeCoinCapacityButton);
     cardReservationButtonCoinBoardPart->hide(); //on affichera uniquement le bouton quand nécessaire (automatique)
+    takeCoinCapacityButton->hide(); //on affichera uniquement le bouton quand nécessaire (automatique)
     gameVLayoutLeftUpper->addWidget(coinsBoard);
     gameVLayoutLeftUpper->addLayout(gameHLayoutLeftUpperButtons);
     gameVLayoutCenterUpper->addWidget(bagView);
-
 
     //Privilèges
     privilegeLabel = new privileges(mainWidget);
     privilegeLabel -> setStyleSheet("border: 3px solid black; border-radius: 10px;");
     gameVLayoutCenterUpper->addWidget(privilegeLabel);
-
 
     //Cartes
     cardPyramid = new cardPyramidView(this);
@@ -85,14 +83,13 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     reserveCardButton = new reserveCardButtonView(mainWidget);
     gameHLayoutRightUpperButtons = new QHBoxLayout(this);
 
-    gameVLayoutRightUpper->addLayout(gameHLayoutRightUpperButtons);
+
     gameHLayoutRightUpperButtons->addWidget(buyCardButton);
     gameHLayoutRightUpperButtons->addWidget(reserveCardButton);
 
     connect(buyCardButton, SIGNAL(clicked(bool)), this, SLOT(checkBuyCard()));
+    gameVLayoutRightUpper->addLayout(gameHLayoutRightUpperButtons);
 
-
-    ///
 
     //Joueurs
     //Player player1("Tareq"); //Simple test - remplacer les noms par ceux choisis - à passer en paramètre
@@ -112,6 +109,8 @@ gameView::gameView(string player1Name, string player2Name, QWidget *parent)
     gameHLayoutLower->addWidget(player2View);
 
     //Mise en page
+
+
     gameHLayoutUpper->addLayout(gameVLayoutLeftUpper);
     gameHLayoutUpper->addLayout(gameVLayoutCenterUpper);
     gameHLayoutUpper->addLayout(gameVLayoutRightUpper);
@@ -435,5 +434,84 @@ int gameView::checkBuyCard(){
 
     return 1;
 }
+
+
+
+
+
+
+int gameView::checkTakeCoinCapacity(){
+    int counter = 0;
+    coinButton* selectedButton = nullptr;
+
+    for (int i=0; i<25; i++){
+        if(coinsBoard->getBoard()[i]->isChecked()){
+            counter ++;
+            selectedButton = coinsBoard->getBoard()[i];
+        }
+    }
+
+    if (counter>1 || counter==0){
+        qDebug()<<"Il faut choisir un seul et unique jeton !\n";
+        for (int i=0; i<25; i++) coinsBoard->getBoard()[i]->setChecked(false);
+        execResult = -1;
+        takeCoinCapacityButton->hide();
+        return 0;
+    }
+
+    if(selectedButton->getColor() != execCardColor){
+        qDebug()<<"Il faut choisir jeton de la couleur de la carte !\n";
+        for (int i=0; i<25; i++) coinsBoard->getBoard()[i]->setChecked(false);
+        execResult = -1;
+        takeCoinCapacityButton->hide();
+        return 0;
+    }
+
+    currentPlayer->addCoin(*(selectedButton->getCoin()));
+    Coin c(CoinColor::Empty);
+    selectedButton->changeColor(&c);
+    coinsBoard->substractCoins(counter);
+    player1View->updateView();
+    player2View->updateView();
+    execResult=1;
+    execCardColor = CoinColor::Empty;
+    takeCoinCapacityButton->hide();
+    for (int i=0; i<25; i++){
+        coinsBoard->getBoard()[i]->setCheckable(true);
+    }
+    return 1;
+}
+
+int gameView::takePrivilegeCapacity(){
+    qDebug()<<"Capacité : Prendre Priivilège";
+    Player* opponentPlayer = nullptr;
+    if (currentPlayer == player1) opponentPlayer = player2;
+    else opponentPlayer = player1;
+
+    if (privilegeLabel->getCounter()>0){
+        currentPlayer->incrementPrivileges();
+        privilegeLabel->decrementCounter();
+    }
+    else if((privilegeLabel->getCounter()==0) && (currentPlayer->getPrivileges()>0)){
+        opponentPlayer->decrementPrivileges();
+        currentPlayer->incrementPrivileges();
+    }
+
+    qDebug() << "Actualisation des données des joueurs \n";
+    player1View -> updateView();
+    player2View -> updateView();
+    privilegeLabel ->updateCounter();
+
+    return 1;
+}
+
+int gameView::RobCoinCapacity(){
+    //simple - seulement voir comment donner le choix au joueur ? popup ?
+    return 0;
+}
+
+
+
+
 
 

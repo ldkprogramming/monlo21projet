@@ -62,6 +62,11 @@ private:
     usePrivilegeButtonView* usePrivilegeButton;
     cardReservationButtonCoinBoardPartView* cardReservationButtonCoinBoardPart;
 
+    takeCoinCapacityButtonView* takeCoinCapacityButton;
+
+     int execResult = 0;//utilisé pour voir si les méthodes slots se déroulent bien ou non
+     CoinColor execCardColor = CoinColor::Empty;
+
     //Boutons Pyramide
     buyCardButtonView* buyCardButton;
     reserveCardButtonView* reserveCardButton;
@@ -75,10 +80,17 @@ private slots:
 
     //Méthode ci-dessous à connecter avec Travail de Jules pour réservation de carte
     int cardReservationCoinBoardPart();
+    int checkTakeCoinCapacity();
 
 public:
     gameView(string player1Name, string player2Name, QWidget *parent = nullptr);
     ~gameView();
+
+    //méthodes capacités des cartes
+    int takeCoinCapacity(CoinColor cardColor);
+    int takePrivilegeCapacity();
+
+    int RobCoinCapacity();//non définie
 
 };
 #endif // GAMEVIEW_H

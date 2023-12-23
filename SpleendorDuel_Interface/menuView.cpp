@@ -148,7 +148,7 @@ void MenuWindow::on_pushButtonContinuer_clicked() {
     gameView* w = new gameView(player1, player2);
     w->showMaximized();
 
-    delete this;
+    // delete this;
 }
 
 //Nouvelle Partie
@@ -158,7 +158,7 @@ void MenuWindow::on_pushButtonNouvellePartie_clicked() {
     gameView* w = new gameView(player1, player2);
     w->showMaximized();
 
-    delete this;
+    // delete this;
 }
 
 
