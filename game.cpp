@@ -382,7 +382,7 @@ bool Game::playerReserveCard(CardLevel level, int cardNumber) {
     for (int x = 0; x < 5; x++) {
         for (int y = 0; y < 5; y++) {
             if (coinBoard.getCoin(x, y).getColor() == CoinColor::Gold) {
-                playerTakeCoin(std::pair<int, int>(x, y));
+               return playerTakeCoin(std::pair<int, int>(x, y));
             }
         }
     }

@@ -540,6 +540,7 @@ void Controller::play_turn_human(GameMoveVerification& checker)
 
 
             GameControlled.playerReserveCard(cardinfos.second, GameControlled.pyramid.checkCard(cardinfos.second, cardinfos.first).getId());
+            
             if (checker.can_royal_card_pick(GameControlled.getActivePlayer())) {
                 int id = ask_for_royal_card(GameControlled.getActivePlayer());
 
