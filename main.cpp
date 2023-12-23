@@ -87,7 +87,7 @@ int main() {
 
         std::cout << "Lancement de la partie sauvegard�e !" << std::endl;
 
-        savedController.play_game();
+        savedController.play_saved_game();
 
         std::cout << "Fin du jeu" << std::endl;
 

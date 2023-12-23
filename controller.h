@@ -51,6 +51,7 @@ public:
 	
 	void printGameState();
 	void play_game();
+	void play_saved_game();
 	void play_turn_human(GameMoveVerification& checker);
 	void play_turn_AI(GameMoveVerification& checker);
 	void change_turn();

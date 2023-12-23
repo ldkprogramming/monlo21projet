@@ -448,6 +448,24 @@ void Controller::play_game()
 
 
 }
+void Controller::play_saved_game() {
+    GameMoveVerification checker(this->get_GameControlled());
+    GameSaver saver;
+while (!verify_win(this->GameControlled.getActivePlayer())) {
+    if (this->GameControlled.getActivePlayer().get_type() == PlayerType::Human)
+    {
+        this->play_turn_human(checker);
+    }
+    else {
+        play_turn_AI(checker);
+    }
+    saver.saveGame(this->get_GameControlled());
+}
+StatSaver saverstats;
+saverstats.saveGameStats(get_GameControlled());
+
+
+}
 
 void Controller::play_turn_human(GameMoveVerification& checker)
 {
