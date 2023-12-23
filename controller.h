@@ -68,6 +68,7 @@ public:
 	OptionalActions AI_choose_optional_action(const Player& AI);
 	bool AI_optional_or_not(const Player& AI);
 	const Card& AI_royal_pick(const Player& AI);
+	bool AI_lose_coin();
 	
 	int idtoPosition(int cID);
 	

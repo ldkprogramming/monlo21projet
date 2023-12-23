@@ -361,12 +361,16 @@ bool Controller::askPlayerForCoinsToLose()
         colortolose = CoinColor::Pearl;
     default:
         std::cout << "Mauvaise couleur ! " << std::endl;
-        return askPlayerForCoinsToLose(p);
+        return false;
 
     }
-
+    for (auto c : get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()).getBonusesPerColor()) {
+        if (c.first == colortolose && c.second == 0) {
+            return false;
+        }
+    }
     this->GameControlled.getActivePlayer().loseCoin(colortolose);
-
+    return true;
     
 }
 
@@ -515,7 +519,9 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             if (checker.overTen(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()))) {
                 while (checker.overTen(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()))) {
                     std::cout << "Vous avez trop de jetons ! (plus de 10) \n";
-                    askPlayerForCoinsToLose();
+                    if (askPlayerForCoinsToLose() == false) {
+                        std::cout << "Mauvaise couleur !" << std::endl;
+                    };
                 }
             }
 
@@ -549,7 +555,9 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             if (checker.overTen(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()))) {
                 while (checker.overTen(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()))) {
                     std::cout << "Vous avez trop de jetons ! (plus de 10) \n";
-                    askPlayerForCoinsToLose();
+                    if (askPlayerForCoinsToLose() == false) {
+                        std::cout << "Mauvaise couleur !" << std::endl;
+                    };
                 }
             }
 
@@ -590,7 +598,9 @@ void Controller::play_turn_human(GameMoveVerification& checker)
             if (checker.overTen(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()))) {
                 while (checker.overTen(get_GameControlled().getPlayer(GameControlled.getPlayerTurn()))) {
                     std::cout << "Vous avez trop de jetons ! (plus de 10) \n";
-                    askPlayerForCoinsToLose();
+                    if (askPlayerForCoinsToLose() == false) {
+                        std::cout << "Mauvaise couleur !" << std::endl;
+                    };
                }
             }
 
@@ -666,6 +676,11 @@ void Controller::play_turn_AI(GameMoveVerification& checker)
         const Card& royalpick = AI_royal_pick(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()));
         GameControlled.getActivePlayer().addCardToHand(royalpick);
         printGameState();
+    }
+    if (checker.overTen(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+        while (checker.overTen(get_GameControlled().getPlayer(get_GameControlled().getPlayerTurn()))) {
+            AI_lose_coin();
+        }
     }
     
     change_turn();
@@ -1063,6 +1078,18 @@ const Card& Controller::AI_royal_pick(const Player& AI)
     int royalchoice = rand() % get_GameControlled().getPyramid().getRoyalCards().size() + 1;
     return get_GameControlled().getPyramid().getRoyalCards().at(royalchoice);
 }
+
+bool Controller::AI_lose_coin()
+{
+    std::vector<CoinColor> lose;
+    for (auto c : get_GameControlled().getPlayer(getOpponent(get_GameControlled().getPlayerTurn())).getCoinsPerColor()) {
+        if (c.second > 0) {
+            lose.push_back(c.first);
+        }
+    }
+    this->GameControlled.getActivePlayer().loseCoin(lose .at(rand() % lose.size()));
+}
+
 
 int Controller::idtoPosition(int cID)
 {
